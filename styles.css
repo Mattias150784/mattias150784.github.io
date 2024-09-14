@@ -1,0 +1,110 @@
+/* General Styles */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    color: white;
+}
+
+.container {
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.8);
+    padding: 20px;
+    border-radius: 10px;
+    position: relative;
+}
+
+h1, p {
+    text-align: center;
+}
+
+.btn {
+    padding: 10px 20px;
+    font-size: 18px;
+    border-radius: 5px;
+    color: white;
+    text-decoration: none;
+    margin: 5px;
+}
+
+.btn-primary {
+    background-color: #f16436;
+    border-color: #f16436;
+}
+
+.btn-primary:hover {
+    background-color: #d9534f;
+    border-color: #d9534f;
+}
+
+.btn-secondary {
+    background-color: #6c757d;
+    border-color: #6c757d;
+    margin-top: 20px; /* Adjust this value to move the button down */
+}
+
+.btn-secondary:hover {
+    background-color: #5a6268;
+    border-color: #545b62;
+}
+
+/* Steps Counter */
+.step-counter {
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 20px;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 10px 20px;
+    border-radius: 5px;
+}
+
+/* Game Grid */
+.game-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 100px);
+    grid-gap: 15px;
+    justify-content: center;
+    margin-top: 60px; /* Space for the Steps counter */
+}
+
+.card {
+    width: 100px;
+    height: 100px;
+    cursor: pointer;
+    position: relative;
+    background-image: url('img/pokeball.png');
+    background-size: cover;
+    background-position: center;
+    border-radius: 10px;
+    transition: transform 0.3s;
+}
+
+.card.flipped {
+    background-image: none;
+    transform: rotateY(180deg);
+}
+
+.card img {
+    width: 100%;
+    height: 100%;
+    display: none;
+    border-radius: 10px;
+}
+
+.card.flipped img {
+    display: block;
+}
+
+#result {
+    margin-top: 20px;
+    font-size: 24px;
+    color: #28a745;
+}

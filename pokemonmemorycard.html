@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pokémon Memory Game</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            background-image: url('img/pokemonmemorycardlogo.png');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            height: 100vh;
+            margin: 2;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .container {
+            text-align: center;
+            background-color: rgba(0, 0, 0, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+        }
+        .btn {
+            margin-top: 50px;
+            font-size: px;
+            padding: 10px 50px;
+        }
+        .btn-primary {
+            background-color: #f16436;
+            border-color: #f16436;
+        }
+        .btn-primary:hover {
+            background-color: #d9534f;
+            border-color: #d9534f;
+        }
+        .btn-secondary {
+            margin-top: 80px; /* Adjusts spacing between the "Credits" and "Back" buttons */
+            background-color: #6c757d;
+            border-color: #6c757d;
+        }
+        .btn-secondary:hover {
+            background-color: #5a6268;
+            border-color: #545b62;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Pokémon Memory Game</h1>
+    <p>Choose your game mode:</p>
+    <a href="gen1.html?generation=gen1" class="btn btn-primary">Generation 1</a>
+    <a href="gen2.html?generation=gen2" class="btn btn-primary">Generation 2</a>
+    <a href="gen3.html?generation=gen3" class="btn btn-primary">Generation 3</a>
+    <a href="all-generations.html?generation=all" class="btn btn-primary">All Generations</a>
+
+
+    <button onclick="window.history.back()" class="btn btn-secondary">Back</button>
+    <button onclick="credits.html" class="btn btn-secondary">Credits</button>
+
+</div>
+</body>
+</html>

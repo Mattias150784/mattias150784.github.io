@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generation 3 Pokémon Memory Game</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body.gen3 {
+            background-image: url('img/gamebackground/pokemongen3.png');
+        }
+    </style>
+</head>
+<body>
+<div class="step-counter">Steps: 0</div>
+<div class="container">
+    <h1>Generation 3 Memory Game</h1>
+    <p>Find all matching Pokémon pairs!</p>
+    <div class="game-grid" id="game-grid-gen3">
+        <!-- Pokémon cards will be generated here -->
+    </div>
+    <br>
+    <button onclick="window.history.back()" class="btn btn-secondary">Back</button>
+    <p id="result"></p>
+</div>
+<audio id="gen3-audio" src="audio/gen3-music.mp3" autoplay loop></audio>
+<script src="script.js"></script>
+</body>
+</html>
