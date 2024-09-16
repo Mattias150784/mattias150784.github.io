@@ -11,15 +11,59 @@ const genPokemon = {
         'treecko', 'torchic', 'mudkip', 'ralts',
         'sableye', 'aron', 'swablu', 'absol'
     ],
+      gen4: [
+            'turtwig', 'chimchar', 'piplup', 'lucario',
+            'garchomp', 'glaceon', 'electivire', 'togekiss'
+        ],
+          gen5: [
+                'snivy', 'tepig', 'oshawott', 'zoroark',
+                'excadrill', 'chandelure', 'haxorus', 'hydreigon'
+            ],
+              gen6: [
+                    'chespin', 'fennekin', 'froakie', 'talonflame',
+                    'aegislash', 'goodra', 'greninja', 'sylveon'
+                ],
+                   gen7: [
+                            'rowlet', 'litten', 'popplio', 'incineroar',
+                            'decidueye', 'lycanroc', 'tapukoko', 'mimikyu'
+                        ],
+                          gen8: [
+                                'grookey', 'scorbunny', 'sobble', 'corviknight',
+                                'toxtricity', 'dragapult', 'zacian', 'zamazenta'
+                            ],
+                              gen9: [
+                                    'sprigatito', 'fuecoco', 'quaxly', 'miraidon',
+                                    'koraidon', 'tinkaton', 'baxcalibur', 'palafin'
+                                ],
     all: [
 
         ...[
             'bulbasaur', 'charmander', 'squirtle', 'pikachu',
             'jigglypuff', 'meowth', 'psyduck', 'snorlax',
+
             'chikorita', 'cyndaquil', 'totodile', 'togepi',
             'mareep', 'sudowoodo', 'espeon', 'umbreon',
+
             'treecko', 'torchic', 'mudkip', 'ralts',
-            'sableye', 'aron', 'swablu', 'absol'
+            'sableye', 'aron', 'swablu', 'absol',
+
+            'turtwig', 'chimchar', 'piplup', 'lucario',
+            'garchomp', 'glaceon', 'electivire', 'togekiss',
+
+            'snivy', 'tepig', 'oshawott', 'zoroark',
+            'excadrill', 'chandelure', 'haxorus', 'hydreigon',
+
+            'chespin', 'fennekin', 'froakie', 'talonflame',
+            'aegislash', 'goodra', 'greninja', 'sylveon',
+
+            'rowlet', 'litten', 'popplio', 'incineroar',
+            'decidueye', 'lycanroc', 'tapukoko', 'mimikyu',
+
+            'grookey', 'scorbunny', 'sobble', 'corviknight',
+            'toxtricity', 'dragapult', 'zacian', 'zamazenta',
+
+            'sprigatito', 'fuecoco', 'quaxly', 'miraidon',
+            'koraidon', 'tinkaton', 'baxcalibur', 'palafin'
             // Combine All Here
         ]
     ]

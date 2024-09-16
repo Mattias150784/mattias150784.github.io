@@ -23,10 +23,16 @@
             padding: 20px;
             border-radius: 10px;
         }
+        .btn-group {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr); /* 3 buttons per row */
+            gap: 15px;
+        }
         .btn {
-            margin-top: 50px;
-            font-size: px;
+            margin-top: 20px;
+            font-size: 18px;
             padding: 10px 50px;
+            text-align: center;
         }
         .btn-primary {
             background-color: #f16436;
@@ -37,7 +43,7 @@
             border-color: #d9534f;
         }
         .btn-secondary {
-            margin-top: 80px;
+            margin-top: 40px;
             background-color: #6c757d;
             border-color: #6c757d;
         }
@@ -51,13 +57,20 @@
 <div class="container">
     <h1>Pokémon Memory Game</h1>
     <p>Choose your game mode:</p>
-    <a href="gen1.html?generation=gen1" class="btn btn-primary">Generation 1</a>
-    <a href="gen2.html?generation=gen2" class="btn btn-primary">Generation 2</a>
-    <a href="gen3.html?generation=gen3" class="btn btn-primary">Generation 3</a>
-    <a href="all-generations.html?generation=all" class="btn btn-primary">All Generations</a>
-    <a href="credits.html" class="btn btn-primary">Credits</a>
-
-    <button onclick="window.history.back()" class="btn btn-secondary">Back</button>
+    <div class="btn-group">
+        <a href="gen1.html?generation=gen1" class="btn btn-primary">Generation 1</a>
+        <a href="gen2.html?generation=gen2" class="btn btn-primary">Generation 2</a>
+        <a href="gen3.html?generation=gen3" class="btn btn-primary">Generation 3</a>
+        <a href="gen4.html?generation=gen4" class="btn btn-primary">Generation 4</a>
+        <a href="gen5.html?generation=gen5" class="btn btn-primary">Generation 5</a>
+        <a href="gen6.html?generation=gen6" class="btn btn-primary">Generation 6</a>
+        <a href="gen7.html?generation=gen7" class="btn btn-primary">Generation 7</a>
+        <a href="gen8.html?generation=gen8" class="btn btn-primary">Generation 8</a>
+        <a href="gen9.html?generation=gen9" class="btn btn-primary">Generation 9</a>
+        <a href="all-generations.html?generation=all" class="btn btn-primary">All Generations</a>
+        <a href="credits.html" class="btn btn-primary">Credits</a>
+        <a  onclick="window.history.back()" class="btn btn-secondary">Back</a>
+    </div>
 
 
 </div>

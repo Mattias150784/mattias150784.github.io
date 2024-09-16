@@ -3,20 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Generation 2 Pokémon Memory Game</title>
+    <title>Generation 3 Pokémon Memory Game</title>
     <link rel="stylesheet" href="styles.css">
     <style>
-        body.gen2 {
-            background-image: url('img/gamebackground/pokemongen2.png');
+        body.gen4 {
+            background-image: url('img/gamebackground/pokemongen4.png');
         }
     </style>
 </head>
 <body>
 <div class="step-counter">Steps: 0</div>
 <div class="container">
-    <h1>Generation 2 Memory Game</h1>
+    <h1>Generation 4 Memory Game</h1>
     <p>Find all matching Pokémon pairs!</p>
-    <div class="game-grid" id="game-grid-gen2">
+    <div class="game-grid" id="game-grid-gen4">
 
     </div>
     <br>
@@ -28,12 +28,13 @@
         <input type="range" id="volume-slider" min="0" max="1" step="0.1" value="0.5">
     </div>
 
+
 </div>
-<audio id="gen2-audio" src="audio/gen2-music.mp3" autoplay loop></audio>
+<audio id="gen4-audio" src="audio/gen4-music.mp3" autoplay loop></audio>
 <script src="script.js"></script>
 
 <script>
-    const audio = document.getElementById('gen2-audio');
+    const audio = document.getElementById('gen4-audio');
     const volumeSlider = document.getElementById('volume-slider');
 
     // Set initial volume
