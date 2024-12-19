@@ -4,36 +4,89 @@
     <title>Commissions - Mattias15</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css">
     <style>
+        /* Body Styling */
         body {
-            background-image: url('img/background.png');
+            background-image: url('img/jumbo-background.jpg');
             background-size: cover;
             background-position: center;
             color: white;
-            height: 100vh;
+            min-height: 100vh;
             display: flex;
-            flex-direction: column;
             justify-content: center;
             align-items: center;
             margin: 0;
         }
 
-        .coming-soon {
-            font-size: 3rem;
+        /* Central Container */
+.container {
+    text-align: center;
+    background-color: rgba(74, 74, 74, 0.55); /* Light Gray Background with Adjustable Transparency */
+    padding: 30px 20px;
+    border-radius: 50px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.9);
+}
+
+
+        /* Heading */
+        .heading {
+            font-size: 2.5rem;
             font-weight: bold;
-            text-align: center;
-            margin-bottom: 20px;
+            margin-bottom: 30px;
+            color: white; /* White Text */
+            text-shadow: 2px 2px 0px black, -2px -2px 0px black, 2px -2px 0px black, -2px 0px black; /* Black outline with thickness */
+        }
+
+        /* Buttons */
+        .btn {
+            font-size: 1.2rem;
+            font-weight: bold;
+            padding: 10px 30px;
+            margin: 10px 0;
+            border-radius: 5px;
         }
 
         .btn-primary {
-            background-color: #001f3f;
-            border-color: #001f3f;
+            background-color: #007bff;
+            border-color: #007bff;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #0056b3;
+        }
+
+        .btn-infection {
+            background-color: #28a745;
+            border-color: #28a745;
+            color: white;
+        }
+
+        .btn-infection:hover {
+            background-color: #1e7e34;
+            border-color: #1e7e34;
+        }
+
+        /* Button Wrapper to Stack Buttons Vertically */
+        .btn-wrapper {
+            margin-top: 20px;
+            display: flex;
+            flex-direction: column; /* Stacks buttons vertically */
+            align-items: center; /* Centers buttons horizontally */
+        }
+
+        .btn-wrapper a {
+            margin-bottom: 10px;
         }
     </style>
 </head>
 <body>
-<div class="coming-soon">Coming Soon...</div>
-<div class="container text-center">
-    <a href="index.html" class="btn btn-primary my-2">Back to Home</a>
+<div class="container">
+    <div class="heading">Commissions</div>
+    <div class="btn-wrapper">
+        <a href="infection.html" class="btn btn-infection">Infection Mod Commission</a>
+        <a href="index.html" class="btn btn-primary">Back to Home</a>
+    </div>
 </div>
 </body>
 </html>

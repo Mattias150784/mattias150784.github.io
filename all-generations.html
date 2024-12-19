@@ -22,8 +22,32 @@
     <br>
     <button onclick="window.history.back()" class="btn btn-secondary">Back</button>
     <p id="result"></p>
+
+
 </div>
+
+<div class="volume-control">
+    <label for="volume-slider">Volume:</label>
+    <input type="range" id="volume-slider" min="0" max="1" step="0.1" value="0.5">
+</div>
+
 <audio id="all-gen-audio" src="audio/genall-music.mp3" autoplay loop></audio>
 <script src="script.js"></script>
 </body>
 </html>
+
+<audio id="genall-audio" src="audio/genall-music.mp3" autoplay loop></audio>
+<script src="script.js"></script>
+
+<script>
+    const audio = document.getElementById('gen1-audio');
+    const volumeSlider = document.getElementById('volume-slider');
+
+    // Set initial volume
+    audio.volume = volumeSlider.value;
+
+    // Update audio volume when slider changes
+    volumeSlider.addEventListener('input', (event) => {
+        audio.volume = event.target.value;
+    });
+</script>
