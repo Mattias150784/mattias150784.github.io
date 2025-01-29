@@ -86,30 +86,44 @@
 <body>
 <div class="container">
     <h1>Request a mod you would like made!</h1>
-    <!-- FormSubmit Integration -->
-    <form action="https://formsubmit.co/mattiasayenew@gmail.com" method="POST">
-        <!-- Description -->
+    <form id="commissionForm" action="https://formsubmit.co/mattiasayenew@gmail.com" method="POST">
         <label for="description">Description:</label>
         <textarea id="description" name="Description" rows="5" placeholder="Write details about what the mod is about" required></textarea>
 
-        <!-- Quote -->
         <label for="quote">Quote:</label>
         <input id="quote" name="Quote" type="number" placeholder="Write your budget down. This can be negotiable in the future." required>
 
-        <!-- Contact Information -->
         <label for="contact">Contact Information:</label>
         <textarea id="contact" name="Contact" rows="3" placeholder="Any way to reach you: Discord, CurseForge, Email, PlanetMC." required></textarea>
 
-        <!-- Buttons -->
         <div class="btn-wrapper">
             <a href="index.html" class="btn btn-home">Back to Home</a>
             <button type="submit" class="btn">Submit</button>
         </div>
 
-        <!-- FormSubmit Hidden Fields -->
         <input type="hidden" name="_captcha" value="false">
         <input type="hidden" name="_next" value="https://mattias150784.github.io/thank-you.html">
     </form>
 </div>
+
+<script>
+    document.getElementById("commissionForm").addEventListener("submit", function(event) {
+        event.preventDefault();
+        fetch("https://discord.com/api/webhooks/1334012133918244894/rcCB5Kup-9eA7mGcQd5PkNEQ8K2B7KNR5kZnyTtekEn-XwotV9sB5vXQjMOEYoa1FPUS", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                content: "New Commission: Check Your Email!"
+            })
+        }).then(() => {
+            event.target.submit();
+        }).catch(error => {
+            console.error("Discord webhook error:", error);
+            event.target.submit();
+        });
+    });
+</script>
 </body>
 </html>
