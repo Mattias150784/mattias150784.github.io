@@ -1,77 +1,355 @@
 <!doctype html>
 <html lang="en">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mysti Grecia - Discontinued Mod | Mattias15</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&display=swap" rel="stylesheet" />
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+
     <style>
-        body {
-            background-image: url('img/mods/backgroundmystigrecia.png');
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            background-attachment: fixed;
-            color: white; /* Set text color to white for readability */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html, body {
+            min-height: 100vh;
+            font-family: 'Poppins', sans-serif;
+            color: white;
+            overflow-x: hidden;
         }
 
-        body.dark-mode {
-            background-color: #121212;
-            color: #f8f9fa;
+        body { background: #000; position: relative; }
+
+        .bg-animation {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: linear-gradient(135deg,
+                #000000 0%,
+                #1a0800 15%,
+                #441a00 35%,
+                #662200 50%,
+                #331100 70%,
+                #0d0400 100%
+            );
+            background-size: 400% 400%;
+            animation: emberFlow 20s ease infinite;
+            z-index: -2;
         }
 
-        .btn-secondary {
-            background-color: #6c757d; /* Customize button color if needed */
-            border-color: #6c757d;
+        .bg-animation::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: radial-gradient(circle at 30% 50%, rgba(255, 140, 0, 0.3), transparent 50%),
+                        radial-gradient(circle at 70% 30%, rgba(255, 100, 0, 0.2), transparent 60%);
+            animation: pulseGlow 12s ease-in-out infinite;
         }
 
-        .btn-primary {
-            background-color: #f16436; /* Customize primary button color */
-            border-color: #f16436;
+        @keyframes emberFlow {
+            0%   { background-position: 0% 50%; }
+            50%  { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
 
-        .btn-primary:hover {
-            background-color: #d9534f; /* Change primary button color on hover */
-            border-color: #d9534f;
+        @keyframes pulseGlow {
+            0%, 100% { opacity: 0.6; }
+            50%      { opacity: 1; }
         }
 
-        .container {
-            background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent background for the content */
-            padding: 20px;
-            border-radius: 8px;
+        .particles {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: -1;
+            background-image:
+                radial-gradient(2px 2px at 20% 30%, rgba(255, 140, 0, 0.5), transparent),
+                radial-gradient(3px 3px at 60% 70%, rgba(255, 100, 0, 0.4), transparent),
+                radial-gradient(2px 2px at 90% 10%, rgba(255, 165, 0, 0.5), transparent);
+            background-size: 300% 300%;
+            animation: float 35s linear infinite;
         }
 
-        h2, h4 {
-            color: #f8f9fa; /* Ensure headers are readable */
+        @keyframes float {
+            0%   { transform: translateY(0) translateX(0); }
+            100% { transform: translateY(-100vh) translateX(50px); }
         }
 
-        p {
-            color: #e9ecef; /* Ensure paragraph text is readable */
+        .wiki-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            position: relative;
+            z-index: 1;
+            min-height: 100vh;
         }
 
-        img.img-fluid {
-            border-radius: 8px; /* Add a slight border radius to images */
+        .discontinued-banner {
+            background: linear-gradient(135deg, #ff4500, #cc3300);
+            color: white;
+            text-align: center;
+            padding: 1rem 2rem;
+            font-size: 1.3rem;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            box-shadow: 0 4px 20px rgba(255, 69, 0, 0.5);
+            margin-bottom: 2rem;
+            animation: bannerPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes bannerPulse {
+            0%, 100% { transform: scale(1); }
+            50%      { transform: scale(1.02); }
+        }
+
+        .wiki-content {
+            background: rgba(40, 10, 0, 0.75);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-radius: 20px;
+            padding: 3rem;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
+            border: 1px solid rgba(255, 140, 0, 0.3);
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 1s forwards 0.5s;
+        }
+
+        @keyframes fadeInUp {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .mod-header {
+            display: flex;
+            gap: 2rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .mod-icon {
+            width: 200px;
+            height: 200px;
+            border-radius: 20px;
+            border: 3px solid rgba(255, 140, 0, 0.5);
+            box-shadow: 0 8px 25px rgba(255, 69, 0, 0.4);
+        }
+
+        .mod-title {
+            font-family: 'Orbitron', monospace;
+            font-size: 3rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, #ff9500, #ff6600, #ff4500);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: titleGlow 3s ease-in-out infinite alternate;
+        }
+
+        @keyframes titleGlow {
+            from { filter: drop-shadow(0 0 15px rgba(255, 140, 0, 0.7)); }
+            to   { filter: drop-shadow(0 0 30px rgba(255, 100, 0, 0.9)); }
+        }
+
+        .wiki-section {
+            margin: 2.5rem 0;
+            padding: 1.5rem;
+            background: rgba(60, 20, 0, 0.3);
+            border-radius: 12px;
+            border-left: 4px solid rgba(255, 140, 0, 0.6);
+        }
+
+        .wiki-section h2 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: #ff9500;
+            font-weight: 700;
+        }
+
+        .wiki-section h3 {
+            font-size: 1.4rem;
+            margin: 1.5rem 0 0.8rem;
+            color: #ff7700;
+        }
+
+        .wiki-section p, .wiki-section li {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #ffd4a3;
+            margin-bottom: 1rem;
+        }
+
+        .wiki-section ul {
+            padding-left: 2rem;
+        }
+
+        .wiki-section ul li {
+            margin: 0.8rem 0;
+        }
+
+        .links-section {
+            background: rgba(80, 30, 0, 0.4);
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            margin: 2rem 0;
+        }
+
+        .btn-wiki {
+            background: linear-gradient(135deg, #ff7700, #ff4500);
+            color: white;
+            padding: 0.8rem 2rem;
+            border-radius: 30px;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-block;
+            margin: 0.5rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(255, 69, 0, 0.3);
+        }
+
+        .btn-wiki:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(255, 69, 0, 0.5);
+            background: linear-gradient(135deg, #ff8811, #ff5500);
+        }
+
+        .btn-home {
+            background: rgba(0, 31, 63, 0.8);
+            border: 1px solid rgba(100, 150, 255, 0.3);
+            color: white;
+            padding: 0.8rem 2.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .btn-home:hover {
+            background: rgba(0, 50, 100, 0.9);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(100, 150, 255, 0.3);
+        }
+
+        /* Add more content sections styling */
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .feature-card {
+            background: rgba(100, 40, 0, 0.4);
+            padding: 1.5rem;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 140, 0, 0.3);
+        }
+
+        .feature-card h4 {
+            color: #ff9500;
+            margin-bottom: 0.8rem;
+            font-size: 1.2rem;
+        }
+
+        @media (max-width: 768px) {
+            .mod-title { font-size: 2.2rem; }
+            .wiki-content { padding: 2rem 1.5rem; }
+            .discontinued-banner { font-size: 1.1rem; padding: 0.8rem 1rem; }
+            .mod-icon { width: 150px; height: 150px; }
         }
     </style>
+</head>
 <body>
-<main role="main">
 
+<div class="bg-animation"></div>
+<div class="particles"></div>
 
-    <!-- Mod Info Section -->
-    <div class="container py-5">
-        <img src="img/mods/mystigrecia.png" alt="Mysti Grecia" class="img-fluid mb-4">
-        <p>Mysti Grecia adds real-life Greek mythology and Roman Mythology, it also will add stuff from the Percy Jackson Franchise.</p>
-        <p>The Mysti Grecia Minecraft mod mixes creatures from Percy Jackson and Greek mythology into the game</p>
-        <p>Community members chat, help each other, and show off their creations.</p>
-
-        <h4>Links:</h4>
-        <p>
-            <a target="_blank" href="https://modrinth.com/mod/mysti-grecia" class="btn btn-secondary">Modrinth</a>
-            <a target="_blank" href="https://www.curseforge.com/minecraft/mc-mods/mysti-grecia" class="btn btn-secondary">CurseForge</a>
-            <a target="_blank" href="https://discord.gg/U249FRtdDw" class="btn btn-secondary">Discord</a>
-        </p>
-
-        <div class="text-center">
-            <a href="mods.html" class="btn btn-primary">Back to Mods</a>
-        </div>
+<div class="wiki-container">
+    <div class="discontinued-banner">
+        ⚠️ THIS MOD IS DISCONTINUED ⚠️
     </div>
 
-</main>
+    <div class="wiki-content">
+        <div class="mod-header">
+            <img src="img/mods/mystigrecia.png" alt="Mysti Grecia" class="mod-icon">
+            <h1 class="mod-title">Mysti Grecia</h1>
+        </div>
+
+        <div class="wiki-section">
+            <h2>Overview</h2>
+            <p>
+                <strong>Mysti Grecia</strong> was a Minecraft mod that brought the world of Greek mythology and Roman mythology to life. Getting inspiration from the Percy Jackson franchise, the mod integrated mythical creatures.
+            </p>
+            <p>
+                The mod was designed to create a mythological adventure, allowing players to encounter greek mythology monsters, craft amazing weapons, and even more was planned!
+            </p>
+        </div>
+
+        <div class="wiki-section">
+            <h2>Key Features</h2>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <h4>Mythical Creatures</h4>
+                    <p>Encounter mythical creatures from Greek mythology including Centaurs, Sea Serpents, and Satyrs.</p>
+                </div>
+                <div class="feature-card">
+                    <h4>Celestial Weapons</h4>
+                    <p>Craft unique weapons such as Riptide, Ivlis, Greek Aspis, Backbitter </p>
+                </div>
+                <div class="feature-card">
+                    <h4>Ores</h4>
+                    <p>Ores like Bronze, Silver, Tin, and Celestial Bronze!</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="wiki-section">
+            <h2>Creatures</h2>
+            <ul>
+                <li><strong>Centaur:</strong> Half horse half human hybrid, if hit will shoot arrows at you with it's bow.</li>
+                <li><strong>Satyr:</strong> Half goat half human peaceful and would never attack on death would drop a goat horn and wool. </li>
+                <li><strong>Sea Serpent:</strong> Roamed the oceans and scary to come across if you do slay the Serpent you are rewarded with it's scales to make armor with them.</li>
+                <li><strong>Stymphalian Bird:</strong> Bronze feathered bird would shoot it's feathers at anyone or anything if you could defeat it you could get some of it's feathers to make arrows.</li>
+            </ul>
+        </div>
+
+        <div class="wiki-section">
+            <h2>Community</h2>
+            <p>
+                The Mysti Grecia community was where players regularly shared their ideas, showcased impressive builds, their own artwork and mods, or asking for help with any bugs with the mod!
+            </p>
+        </div>
+
+        <div class="links-section">
+            <h2 style="color: #ff9500; margin-bottom: 1.5rem;">Download & Links</h2>
+            <div>
+                <a target="_blank" href="https://modrinth.com/mod/mysti-grecia" class="btn-wiki">
+                    Modrinth
+                </a>
+                <a target="_blank" href="https://www.curseforge.com/minecraft/mc-mods/mysti-grecia" class="btn-wiki">
+                    CurseForge
+                </a>
+                <a target="_blank" href="https://discord.gg/U249FRtdDw" class="btn-wiki">
+                    Discord Community
+                </a>
+            </div>
+        </div>
+
+        <div class="text-center">
+            <a href="mods.html" class="btn-home">← Back to Mods</a>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

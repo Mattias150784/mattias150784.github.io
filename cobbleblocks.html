@@ -1,78 +1,385 @@
 <!doctype html>
 <html lang="en">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css">
-<style>
-    body {
-    background-image: url('img/mods/backgroundcobbleblocks.png');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    color: white;
-}
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cobble Blocks - Development Paused | Mattias15</title>
 
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&display=swap" rel="stylesheet" />
 
-    body.dark-mode {
-        background-color: #121212;
-        color: #f8f9fa;
-    }
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
 
-    .btn-secondary {
-        background-color: #6c757d; /* Customize button color if needed */
-        border-color: #6c757d;
-    }
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
-    .btn-primary {
-        background-color: #f16436; /* Customize primary button color */
-        border-color: #f16436;
-    }
+        html, body {
+            min-height: 100vh;
+            font-family: 'Poppins', sans-serif;
+            color: white;
+            overflow-x: hidden;
+        }
 
-    .btn-primary:hover {
-        background-color: #d9534f; /* Change primary button color on hover */
-        border-color: #d9534f;
-    }
+        body { background: #000; position: relative; }
 
-    .container {
-        background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent background for the content */
-        padding: 20px;
-        border-radius: 8px;
-    }
+        .bg-animation {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: linear-gradient(135deg,
+                #000000 0%,
+                #160000 15%,
+                #2a0000 30%,
+                #4b0000 50%,
+                #7a0000 70%,
+                #000000 100%
+            );
+            background-size: 400% 400%;
+            animation: emberFlow 20s ease infinite;
+            z-index: -2;
+        }
 
-    h2, h4 {
-        color: #f8f9fa; /* Ensure headers are readable */
-    }
+        .bg-animation::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: radial-gradient(circle at 30% 50%, rgba(180, 40, 40, 0.35), transparent 50%),
+                        radial-gradient(circle at 70% 30%, rgba(140, 20, 20, 0.25), transparent 60%);
+            animation: pulseGlow 12s ease-in-out infinite;
+        }
 
-    p {
-        color: #e9ecef; /* Ensure paragraph text is readable */
-    }
+        @keyframes emberFlow {
+            0%   { background-position: 0% 50%; }
+            50%  { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
 
-    img.img-fluid {
-        border-radius: 8px; /* Add a slight border radius to images */
-    }
-</style>
+        @keyframes pulseGlow {
+            0%, 100% { opacity: 0.6; }
+            50%      { opacity: 1; }
+        }
+
+        .particles {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: -1;
+            background-image:
+                radial-gradient(2px 2px at 20% 30%, rgba(220, 60, 60, 0.6), transparent),
+                radial-gradient(3px 3px at 60% 70%, rgba(200, 40, 40, 0.5), transparent),
+                radial-gradient(2px 2px at 90% 10%, rgba(255, 100, 100, 0.6), transparent);
+            background-size: 300% 300%;
+            animation: float 35s linear infinite;
+        }
+
+        @keyframes float {
+            0%   { transform: translateY(0) translateX(0); }
+            100% { transform: translateY(-100vh) translateX(50px); }
+        }
+
+        .wiki-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            position: relative;
+            z-index: 1;
+            min-height: 100vh;
+        }
+
+        .status-banner {
+            background: linear-gradient(135deg, #b32121, #801010);
+            color: #ffeaea;
+            text-align: center;
+            padding: 1rem 2rem;
+            font-size: 1.3rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            box-shadow: 0 4px 20px rgba(179, 33, 33, 0.6);
+            margin-bottom: 2rem;
+            animation: bannerPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes bannerPulse {
+            0%, 100% { transform: scale(1); }
+            50%      { transform: scale(1.01); }
+        }
+
+        .wiki-content {
+            background: rgba(25, 0, 0, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-radius: 20px;
+            padding: 3rem;
+            box-shadow: 0 10px 45px rgba(0, 0, 0, 0.75);
+            border: 1px solid rgba(200, 60, 60, 0.4);
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 1s forwards 0.5s;
+        }
+
+        @keyframes fadeInUp {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .mod-header {
+            display: flex;
+            gap: 2rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .mod-icon {
+            width: 200px;
+            height: 200px;
+            border-radius: 20px;
+            border: 3px solid rgba(220, 60, 60, 0.7);
+            box-shadow: 0 8px 25px rgba(220, 60, 60, 0.6);
+        }
+
+        .mod-title {
+            font-family: 'Orbitron', monospace;
+            font-size: 3rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, #ff6666, #ff3333, #cc0000);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: titleGlow 3s ease-in-out infinite alternate;
+            text-align: center;
+        }
+
+        @keyframes titleGlow {
+            from { filter: drop-shadow(0 0 16px rgba(255, 80, 80, 0.8)); }
+            to   { filter: drop-shadow(0 0 30px rgba(255, 120, 120, 1)); }
+        }
+
+        .wiki-section {
+            margin: 2.5rem 0;
+            padding: 1.5rem;
+            background: rgba(45, 0, 0, 0.5);
+            border-radius: 12px;
+            border-left: 4px solid rgba(220, 60, 60, 0.7);
+        }
+
+        .wiki-section h2 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: #ff8888;
+            font-weight: 700;
+        }
+
+        .wiki-section h3 {
+            font-size: 1.4rem;
+            margin: 1.5rem 0 0.8rem;
+            color: #ff6666;
+        }
+
+        .wiki-section p, .wiki-section li {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #ffe0e0;
+            margin-bottom: 1rem;
+        }
+
+        .wiki-section ul {
+            padding-left: 2rem;
+        }
+
+        .wiki-section ul li {
+            margin: 0.8rem 0;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .feature-card {
+            background: rgba(70, 0, 0, 0.55);
+            padding: 1.5rem;
+            border-radius: 12px;
+            border: 1px solid rgba(220, 60, 60, 0.5);
+        }
+
+        .feature-card h4 {
+            color: #ff8888;
+            margin-bottom: 0.8rem;
+            font-size: 1.2rem;
+        }
+
+        .links-section {
+            background: rgba(60, 0, 0, 0.55);
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            margin: 2rem 0;
+        }
+
+        .btn-wiki {
+            background: linear-gradient(135deg, #ff4444, #cc0000);
+            color: white;
+            padding: 0.8rem 2rem;
+            border-radius: 30px;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-block;
+            margin: 0.5rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(220, 60, 60, 0.5);
+        }
+
+        .btn-wiki:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(220, 60, 60, 0.7);
+            background: linear-gradient(135deg, #ff6666, #e60000);
+        }
+
+        .btn-home {
+            background: rgba(0, 31, 63, 0.85);
+            border: 1px solid rgba(100, 150, 255, 0.3);
+            color: white;
+            padding: 0.8rem 2.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .btn-home:hover {
+            background: rgba(0, 50, 100, 0.95);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(100, 150, 255, 0.3);
+        }
+
+        @media (max-width: 768px) {
+            .mod-title { font-size: 2.2rem; }
+            .wiki-content { padding: 2rem 1.5rem; }
+            .status-banner { font-size: 1.1rem; padding: 0.8rem 1rem; }
+            .mod-icon { width: 150px; height: 150px; }
+        }
+    </style>
+</head>
 <body>
-<main role="main">
 
+<div class="bg-animation"></div>
+<div class="particles"></div>
 
-    <!-- Mod Info Section -->
-    <div class="container py-5">
-        <img src="img/mods/cobbleblocks.png" alt="Cobble Blocks" class="img-fluid mb-4">
-        <p>Ever wanted to play Cobblemon with a lucky block twist?</p>
-        <p>Now you can with Cobble Blocks! Break the Cobble Block and a random Cobblemon will spawn anything from common Cobblemon to legendaries and mythicals!</p>
-        <p>Add some excitement and surprise to your adventure. Have fun and see which Cobblemon you get!</p>
-
-        <h4>Links:</h4>
-        <p>
-            <a target="_blank" href="https://modrinth.com/mod/cobble-blocks" class="btn btn-secondary">Modrinth</a>
-            <a target="_blank" href="https://www.curseforge.com/minecraft/mc-mods/cobble-blocks" class="btn btn-secondary">CurseForge</a>
-            <a target="_blank" href="https://discord.gg/9XY62bv7AY" class="btn btn-secondary">Discord</a>
-        </p>
-
-        <div class="text-center">
-            <a href="mods.html" class="btn btn-primary">Back to Mods</a>
-        </div>
+<div class="wiki-container">
+    <div class="status-banner">
+        ⏸️ DEVELOPMENT PAUSED ⏸️
     </div>
 
-</main>
+    <div class="wiki-content">
+        <div class="mod-header">
+            <img src="img/mods/cobbleblocks.png" alt="Cobble Blocks" class="mod-icon">
+            <h1 class="mod-title">Cobble Blocks</h1>
+        </div>
+
+        <div class="wiki-section">
+            <h2>Overview</h2>
+            <p>
+                <strong>Cobble Blocks</strong> is a Cobblemon-themed lucky block style mod that lets you spawn random
+                Cobblemon by breaking a special block: the <strong>Cobble Block</strong>.
+            </p>
+            <p>
+                From common Cobblemon to rare legendaries and mythicals, every break adds suspense and chaos to your
+                adventure. It’s great for challenge worlds, arenas, or just spicing up normal Cobblemon gameplay.
+            </p>
+            <p>
+                While development is currently <strong>paused</strong>, existing versions can still be used on the
+                Minecraft / Cobblemon versions they were built for.
+            </p>
+        </div>
+
+        <div class="wiki-section">
+            <h2>How It Works</h2>
+            <h3>Basic Mechanics</h3>
+            <ul>
+                <li>Craft or obtain a <strong>Cobble Block</strong>.</li>
+                <li>Place it anywhere in the world.</li>
+                <li>Break the block like a normal block.</li>
+                <li>A random Cobblemon will spawn at the block’s location.</li>
+                <li>Spawns can range from starter tier to powerful legendaries and mythicals.</li>
+            </ul>
+
+            <h3>Integration with Cobblemon</h3>
+            <p>
+                The mod integrates with the <strong>Cobblemon</strong> mod, pulling from the Cobblemon registry
+                to select random Cobblemon so it can create a lucky block style experience.
+            </p>
+        </div>
+
+        <div class="wiki-section">
+            <h2>Key Features</h2>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <h4>🎲 Lucky Block Style Gameplay</h4>
+                    <p>Every Cobble Block break triggers a random Cobblemon spawn, making every use unpredictable.</p>
+                </div>
+                <div class="feature-card">
+                    <h4>⭐ Full Rarity Range</h4>
+                    <p>Spawns include common, rare, legendary, and mythical Cobblemon.</p>
+                </div>
+                <div class="feature-card">
+                    <h4>⚔️ Challenge & Event Friendly</h4>
+                    <p>Perfect for custom challenges, event arenas, battle towers, or YouTube content.</p>
+                </div>
+                <div class="feature-card">
+                    <h4>🎮 Simple to Use</h4>
+                    <p>No complicated setup just place and break blocks to start the chaos.</p>
+                </div>
+            </div>
+        </div>
+
+        </div>
+
+        <div class="wiki-section">
+            <h2>Development Status</h2>
+            <p>
+                Cobble Blocks is currently in a <strong>development paused</strong> state. This means:
+            </p>
+            <ul>
+                <li>No active updates are being worked on at the moment.</li>
+                <li>Existing versions may still function on supported game/Cobblemon versions.</li>
+                <li>Compatibility with future versions of Cobblemon is not guaranteed.</li>
+                <li>Feedback and ideas may still be collected via Discord for potential future work.</li>
+            </ul>
+            <p>
+                You’re encouraged to follow the Discord or Modrinth/CurseForge pages for any future announcements.
+            </p>
+        </div>
+
+        <div class="links-section">
+            <h2 style="color: #ff8888; margin-bottom: 1.5rem;">Download & Links</h2>
+            <div>
+                <a target="_blank" href="https://modrinth.com/mod/cobble-blocks" class="btn-wiki">
+                    Modrinth
+                </a>
+                <a target="_blank" href="https://www.curseforge.com/minecraft/mc-mods/cobble-blocks" class="btn-wiki">
+                    CurseForge
+                </a>
+                <a target="_blank" href="https://discord.gg/9XY62bv7AY" class="btn-wiki">
+                    Discord
+                </a>
+            </div>
+        </div>
+
+        <!-- Back Button -->
+        <div class="text-center">
+            <a href="mods.html" class="btn-home">← Back to Mods</a>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

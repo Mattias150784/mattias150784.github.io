@@ -1,195 +1,433 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Matt's Mods - Minecraft Creations</title>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&display=swap" rel="stylesheet" />
+
+    <!-- Bootstrap 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+
     <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html, body {
+            height: 100%;
+            font-family: 'Poppins', sans-serif;
+            color: white;
+            overflow-x: hidden;
+        }
+
+        /* ——— MOVING DARK RED / BLACK BACKGROUND ——— */
         body {
-          background-image: url('img/modsbackground.png');
-          background-size: cover;
-          background-position: center;
-          color: white;
+            background: #000;
+            position: relative;
         }
 
-        .title {
-          font-family: 'Press Start 2P', cursive;
-          text-align: center;
-          font-size: 2rem;
-          margin: 30px 0 10px;
-          text-shadow: 2px 2px #000;
+        .bg-animation {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg,
+                #0f0000 0%,
+                #1a0000 15%,
+                #2d0000 30%,
+                #1c0000 50%,
+                #0a0000 70%,
+                #000000 100%
+            );
+            background-size: 400% 400%;
+            animation: lavaFlow 18s ease infinite;
+            z-index: -2;
         }
 
-        /* restore card background */
-        .card {
-          background-color: rgba(0, 0, 0, 0.7);
-          color: white;
+        /* Extra deep red glow layer */
+        .bg-animation::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: radial-gradient(circle at 30% 50%, rgba(139,0,0,0.4), transparent 50%),
+                        radial-gradient(circle at 70% 30%, rgba(100,0,0,0.3), transparent 60%);
+            animation: pulseGlow 12s ease-in-out infinite;
         }
 
-        .btn-primary {
-          background-color: #f16436;
-          border-color: #f16436;
-        }
-        .btn-primary:hover {
-          background-color: #d9534f;
-          border-color: #d9534f;
+        @keyframes lavaFlow {
+            0%   { background-position: 0% 50%; }
+            50%  { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
 
-        /* ——— Scroller “Board” */
-        .image-scroller-container {
-          position: relative;
-          overflow: hidden;
-          background: rgba(0,0,0,0.5);
-          border-radius: 8px;
-          padding: 10px 0;
-          margin: 20px auto;
-          max-width: 100%;
-        }
-        .image-scroller {
-          display: inline-block;
-          white-space: nowrap;
-          animation: scroll-left 20s linear infinite;
-        }
-        .image-scroller img {
-          height: 150px;
-          margin: 0 30px;
-          vertical-align: middle;
-          transition: transform .3s;
-        }
-        .image-scroller img:hover {
-          transform: scale(1.1);
-        }
-        @keyframes scroll-left {
-          0%   { transform: translateX(100%); }
-          100% { transform: translateX(-100%); }
+        @keyframes pulseGlow {
+            0%, 100% { opacity: 0.6; }
+            50%      { opacity: 1; }
         }
 
-        /* push cards down */
-        .album {
-          padding-top: 40px;
+        /* Floating dark red embers */
+        .particles {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: -1;
+            background-image:
+                radial-gradient(2px 2px at 20% 30%, rgba(180,0,0,0.5), transparent),
+                radial-gradient(3px 3px at 60% 70%, rgba(139,0,0,0.4), transparent),
+                radial-gradient(2px 2px at 90% 10%, rgba(160,0,0,0.5), transparent),
+                radial-gradient(1px 1px at 40% 80%, rgba(120,0,0,0.3), transparent);
+            background-size: 300% 300%;
+            animation: float 35s linear infinite;
+        }
+
+        @keyframes float {
+            0%   { transform: translateY(0) translateX(0); }
+            100% { transform: translateY(-100vh) translateX(50px); }
+        }
+
+        /* ——— Rest of your beautiful design (unchanged but improved visibility) ——— */
+        .main-title {
+            font-family: 'Orbitron', monospace;
+            font-size: 4.5rem;
+            font-weight: 900;
+            text-align: center;
+            margin: 3rem 0 2rem;
+            background: linear-gradient(135deg, #b30000, #8b0000, #cc0000);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            animation: titleGlow 3s ease-in-out infinite alternate;
+            position: relative;
+            z-index: 10;
+        }
+
+        @keyframes titleGlow {
+            from { filter: drop-shadow(0 0 15px rgba(179,0,0,0.7)); }
+            to   { filter: drop-shadow(0 0 30px rgba(204,0,0,0.9)); }
+        }
+
+        /* Scroller */
+        .showcase-container {
+            overflow: hidden;
+            background: rgba(15,0,0,0.85);
+            backdrop-filter: blur(12px);
+            border: 2px solid rgba(139,0,0,0.5);
+            border-left: none;
+            border-right: none;
+            padding: 25px 0;
+            margin: 2rem 0;
+            position: relative;
+        }
+
+        .showcase-track {
+            display: flex;
+            animation: scrollShowcase 32s linear infinite;
+        }
+
+        .showcase-track img {
+            height: 180px;
+            margin: 0 25px;
+            border-radius: 14px;
+            border: 2px solid transparent;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.6);
+            transition: all 0.4s ease;
+        }
+
+        .showcase-track img:hover {
+            transform: scale(1.15) translateY(-12px);
+            border-color: #8b0000;
+            box-shadow: 0 15px 40px rgba(139,0,0,0.7);
+        }
+
+        @keyframes scrollShowcase {
+            0%   { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        /* ——— BIGGER CARD STYLES ——— */
+        .mod-card {
+            background: rgba(20,0,0,0.85);
+            backdrop-filter: blur(12px);
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid rgba(139,0,0,0.4);
+            transition: all 0.4s ease;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .mod-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            border-color: #8b0000;
+            box-shadow: 0 25px 60px rgba(139,0,0,0.5);
+        }
+
+        .mod-card-img-container {
+            height: 320px; /* Increased from 260px */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0,0,0,0.4);
+            padding: 20px;
+            border-bottom: 2px solid rgba(139,0,0,0.4);
+        }
+
+        .mod-card img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            transition: transform 0.4s ease;
+        }
+
+        .mod-card:hover img {
+            transform: scale(1.12);
+        }
+
+        .mod-card-body {
+            padding: 2rem; /* Increased padding */
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .mod-card-title {
+            color: #ff6666;
+            font-weight: 700;
+            font-size: 1.6rem; /* Increased from 1.4rem */
+            margin-bottom: 1rem;
+        }
+
+        .mod-card-text {
+            color: #e0e0e0;
+            font-size: 1.05rem; /* Increased from default */
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+        }
+
+        .btn-mod {
+            background: linear-gradient(135deg, #8b0000, #660000);
+            color: white;
+            padding: 0.8rem 2.2rem; /* Bigger button */
+            border-radius: 30px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.95rem;
+            transition: all 0.3s;
+            border: none;
+            text-decoration: none;
+            display: inline-block;
+            align-self: flex-start;
+        }
+
+        .btn-mod:hover {
+            background: linear-gradient(135deg, #a00000, #8b0000);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(139,0,0,0.5);
+            color: white;
+        }
+
+        .btn-home {
+            background: rgba(0,30,60,0.9);
+            border: 1px solid rgba(100,150,255,0.4);
+            padding: 1rem 3.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+            color: white;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-home:hover {
+            background: rgba(0,50,100,0.95);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 30px rgba(100,150,255,0.3);
+            color: white;
+        }
+
+        /* Entrance animations */
+        .fade-in-up {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.8s forwards;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in-up:nth-child(1) { animation-delay: 0.1s; }
+        .fade-in-up:nth-child(2) { animation-delay: 0.2s; }
+        .fade-in-up:nth-child(3) { animation-delay: 0.3s; }
+        .fade-in-up:nth-child(4) { animation-delay: 0.4s; }
+        .fade-in-up:nth-child(5) { animation-delay: 0.5s; }
+        .fade-in-up:nth-child(6) { animation-delay: 0.6s; }
+        .fade-in-up:nth-child(7) { animation-delay: 0.7s; }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .main-title { font-size: 2.8rem; }
+            .showcase-track img { height: 120px; margin: 0 15px; }
+            .mod-card-img-container { height: 240px; }
+            .mod-card-title { font-size: 1.4rem; }
+        }
+
+        @media (min-width: 1400px) {
+            .container { max-width: 1320px; }
         }
     </style>
 </head>
 <body>
-<main role="main">
 
+<!-- Moving Background Layers -->
+<div class="bg-animation"></div>
+<div class="particles"></div>
 
-    <div class="title">Matt's Mods</div>
+<main class="container-fluid py-5" style="position: relative; z-index: 1;">
+    <h1 class="main-title">Matt's Mods</h1>
 
-    <!-- Image Scroller “Board” -->
-    <div class="image-scroller-container">
-        <div class="image-scroller">
+    <!-- Scroller -->
+    <div class="showcase-container">
+        <div class="showcase-track">
             <img src="img/mods/mystigrecia.png" alt="Mysti Grecia">
             <img src="img/mods/minersdreamed.png" alt="Miners Dream">
             <img src="img/mods/colorexpansion.png" alt="Color Expansion">
             <img src="img/mods/randomitems.png" alt="Random Items">
             <img src="img/mods/pedestals.png" alt="Pedestals">
-            <img src="img/mods/pixelblock.png" alt="Pixel Blocks}">
-            <img src="img/mods/cobbleblocks.png" alt="Cobble Blocks}">
+            <img src="img/mods/pixelblock.png" alt="Pixel Blocks">
+            <img src="img/mods/cobbleblocks.png" alt="Cobble Blocks">
+            <!-- Duplicate for seamless loop -->
+            <img src="img/mods/mystigrecia.png" alt="Mysti Grecia">
+            <img src="img/mods/minersdreamed.png" alt="Miners Dream">
+            <img src="img/mods/colorexpansion.png" alt="Color Expansion">
+            <img src="img/mods/randomitems.png" alt="Random Items">
+            <img src="img/mods/pedestals.png" alt="Pedestals">
+            <img src="img/mods/pixelblock.png" alt="Pixel Blocks">
+            <img src="img/mods/cobbleblocks.png" alt="Cobble Blocks">
         </div>
     </div>
 
-    <!-- Mod Cards Section -->
-    <div class="album py-5 mt-4">
-        <div class="container">
-            <div class="row">
-                <!-- Mysti Grecia Mod Card -->
-                <div class="col-md-4">
-                    <div class="card mb-4 box-shadow">
-                        <img src="img/mods/mystigrecia.png" alt="Mysti Grecia" class="card-img-top">
-                        <div class="card-body">
-                            <p class="card-text">Greek Mythology and Percy Jackson Inspired Mod!</p>
-                            <p>
-                                <a href="mystigrecia.html" class="btn btn-primary">More Info</a>
-                            </p>
-                        </div>
+    <!-- Mod Cards - BIGGER GRID -->
+    <div class="container py-4">
+        <div class="row g-4">
+            <!-- Mysti Grecia -->
+            <div class="col-xl-4 col-lg-6 fade-in-up">
+                <div class="mod-card">
+                    <div class="mod-card-img-container">
+                        <img src="img/mods/mystigrecia.png" alt="Mysti Grecia">
+                    </div>
+                    <div class="mod-card-body">
+                        <h3 class="mod-card-title">Mysti Grecia</h3>
+                        <p class="mod-card-text">Dive into Greek Mythology with this Percy Jacksoninspired adventure mod!</p>
+                        <a href="mystigrecia.html" class="btn-mod">Explore More</a>
                     </div>
                 </div>
-                <!-- Miners Dream Mod Card -->
-                <div class="col-md-4">
-                    <div class="card mb-4 box-shadow">
-                        <img src="img/mods/minersdreamed.png" alt="Miners Dreamed" class="card-img-top">
-                        <div class="card-body">
-                            <p class="card-text">Orespawn Miners Dream In New Versions!</p>
-                            <p>
-                                <a href="minersdream.html" class="btn btn-primary">More Info</a>
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <!-- Color Expansion Mod Card -->
-                <div class="col-md-4">
-                    <div class="card mb-4 box-shadow">
-                        <img src="img/mods/colorexpansion.png" alt="Color Expansion" class="card-img-top">
-                        <div class="card-body">
-                            <p class="card-text">More Block Variants!</p>
-                            <p>
-                                <a href="colorexpansion.html" class="btn btn-primary">More Info</a>
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <!-- Random Items Mod Card -->
-                <div class="col-md-4">
-                    <div class="card mb-4 box-shadow">
-                        <img src="img/mods/randomitems.png" alt="Random Items" class="card-img-top">
-                        <div class="card-body">
-                            <p class="card-text">Random Items every X amount of time!</p>
-                            <p>
-                                <a href="randomitems.html" class="btn btn-primary">More Info</a>
-                            </p>
-                        </div>
-                    </div>
-                </div>
+            </div>
 
-                <!-- Pedestals Mod Card -->
-                <div class="col-md-4">
-                    <div class="card mb-4 box-shadow">
-                        <img src="img/mods/pedestals.png" alt="Pedestals" class="card-img-top">
-                        <div class="card-body">
-                            <p class="card-text">Display your precious items on Pedestals!</p>
-                            <p>
-                                <a href="pedestals.html" class="btn btn-primary">More Info</a>
-                            </p>
-                        </div>
+            <!-- Miners Dream -->
+            <div class="col-xl-4 col-lg-6 fade-in-up">
+                <div class="mod-card">
+                    <div class="mod-card-img-container">
+                        <img src="img/mods/minersdreamed.png" alt="Miners Dream">
+                    </div>
+                    <div class="mod-card-body">
+                        <h3 class="mod-card-title">Miners Dream</h3>
+                        <p class="mod-card-text">Experience the legendary OreSpawn Miners Dream in modern Minecraft versions!</p>
+                        <a href="minersdream.html" class="btn-mod">Explore More</a>
                     </div>
                 </div>
+            </div>
 
-                <!-- Pixel Blocks Mod Card -->
-                <div class="col-md-4">
-                    <div class="card mb-4 box-shadow">
-                        <img src="img/mods/pixelblock.png" alt="Pixel Block" class="card-img-top">
-                        <div class="card-body">
-                            <p class="card-text">Pokemon Lucky Block! When mining the pixel block a random pokemon spawns.</p>
-                            <p>
-                                <a href="pixelblock.html" class="btn btn-primary">More Info</a>
-                            </p>
-                        </div>
+            <!-- Color Expansion -->
+            <div class="col-xl-4 col-lg-6 fade-in-up">
+                <div class="mod-card">
+                    <div class="mod-card-img-container">
+                        <img src="img/mods/colorexpansion.png" alt="Color Expansion">
+                    </div>
+                    <div class="mod-card-body">
+                        <h3 class="mod-card-title">Color Expansion</h3>
+                        <p class="mod-card-text">Expand your building palette with countless new block variants and colors!</p>
+                        <a href="colorexpansion.html" class="btn-mod">Explore More</a>
                     </div>
                 </div>
+            </div>
 
-                <!-- Cobble Blocks Mod Card -->
-                <div class="col-md-4">
-                    <div class="card mb-4 box-shadow">
-                        <img src="img/mods/cobbleblocks.png" alt="Cobble Block" class="card-img-top">
-                        <div class="card-body">
-                            <p class="card-text">Cobblemon Lucky Block! When mining the pixel block a random cobblemon spawns.</p>
-                            <p>
-                                <a href="cobbleblocks.html" class="btn btn-primary">More Info</a>
-                            </p>
-                        </div>
+            <!-- Random Items -->
+            <div class="col-xl-4 col-lg-6 fade-in-up">
+                <div class="mod-card">
+                    <div class="mod-card-img-container">
+                        <img src="img/mods/randomitems.png" alt="Random Items">
+                    </div>
+                    <div class="mod-card-body">
+                        <h3 class="mod-card-title">Random Items</h3>
+                        <p class="mod-card-text">Receive random items at timed intervals for endless surprises!</p>
+                        <a href="randomitems.html" class="btn-mod">Explore More</a>
                     </div>
                 </div>
+            </div>
 
+            <!-- Pedestals -->
+            <div class="col-xl-4 col-lg-6 fade-in-up">
+                <div class="mod-card">
+                    <div class="mod-card-img-container">
+                        <img src="img/mods/pedestals.png" alt="Pedestals">
+                    </div>
+                    <div class="mod-card-body">
+                        <h3 class="mod-card-title">Pedestals</h3>
+                        <p class="mod-card-text">Showcase your most precious items on elegant display pedestals!</p>
+                        <a href="pedestals.html" class="btn-mod">Explore More</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pixel Blocks -->
+            <div class="col-xl-4 col-lg-6 fade-in-up">
+                <div class="mod-card">
+                    <div class="mod-card-img-container">
+                        <img src="img/mods/pixelblock.png" alt="Pixel Block">
+                    </div>
+                    <div class="mod-card-body">
+                        <h3 class="mod-card-title">Pixel Blocks</h3>
+                        <p class="mod-card-text">Pokemon Lucky Blocks! Mine to spawn random Pokemon in your world!</p>
+                        <a href="pixelblock.html" class="btn-mod">Explore More</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Cobble Blocks -->
+            <div class="col-xl-4 col-lg-6 fade-in-up">
+                <div class="mod-card">
+                    <div class="mod-card-img-container">
+                        <img src="img/mods/cobbleblocks.png" alt="Cobble Blocks">
+                    </div>
+                    <div class="mod-card-body">
+                        <h3 class="mod-card-title">Cobble Blocks</h3>
+                        <p class="mod-card-text">Cobblemon Lucky Blocks! Mine to discover random Cobblemon spawns!</p>
+                        <a href="cobbleblocks.html" class="btn-mod">Explore More</a>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 
-
-    <div class="container text-center">
-        <a href="index.html" class="btn btn-primary my-2" style="background-color:#001f3f; border-color:#001f3f;">
-            Back to Home
-        </a>
+    <div class="text-center mt-5">
+        <a href="index.html" class="btn-home">← Back to Home</a>
     </div>
 </main>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

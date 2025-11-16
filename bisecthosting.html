@@ -1,81 +1,299 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <meta charset="utf-8">
-    <title>Bisect Hosting</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BisectHosting Partner - Mattias15</title>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&display=swap" rel="stylesheet" />
+
+    <!-- Bootstrap 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+
     <style>
-        body {
-            background-image: url('img/jumbo-background.jpg');
-            background-size: cover;
-            background-position: center;
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html, body {
+            min-height: 100vh;
+            font-family: 'Poppins', sans-serif;
             color: white;
+            overflow-x: hidden;
+        }
+
+        /* ——— BLACK + LIGHT BLUE ANIMATED BACKGROUND ——— */
+        body { background: #000; position: relative; }
+
+        .bg-animation {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: linear-gradient(135deg,
+                #000428 0%,
+                #001122 15%,
+                #002a55 35%,
+                #003366 60%,
+                #001f3f 80%,
+                #000000 100%
+            );
+            background-size: 400% 400%;
+            animation: cyberFlow 20s ease infinite;
+            z-index: -2;
+        }
+
+        .bg-animation::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: radial-gradient(circle at 30% 50%, rgba(0, 191, 255, 0.3), transparent 50%),
+                        radial-gradient(circle at 70% 30%, rgba(0, 172, 230, 0.25), transparent 60%);
+            animation: pulseGlow 12s ease-in-out infinite;
+        }
+
+        @keyframes cyberFlow {
+            0%   { background-position: 0% 50%; }
+            50%  { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        @keyframes pulseGlow {
+            0%, 100% { opacity: 0.6; }
+            50%      { opacity: 1; }
+        }
+
+        .particles {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: -1;
+            background-image:
+                radial-gradient(2px 2px at 20% 30%, rgba(100, 200, 255, 0.6), transparent),
+                radial-gradient(3px 3px at 60% 70%, rgba(0, 191, 255, 0.5), transparent),
+                radial-gradient(2px 2px at 90% 10%, rgba(0, 230, 255, 0.6), transparent);
+            background-size: 300% 300%;
+            animation: float 40s linear infinite;
+        }
+
+        @keyframes float {
+            0%   { transform: translateY(0) translateX(0); }
+            100% { transform: translateY(-100vh) translateX(60px); }
+        }
+
+        .page-container {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .content-card {
+            background: rgba(0, 15, 40, 0.75);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border-radius: 28px;
+            padding: 3rem 2.5rem;
+            max-width: 900px;
+            width: 100%;
+            box-shadow: 0 12px 50px rgba(0, 0, 0, 0.6);
+            border: 1px solid rgba(0, 191, 255, 0.3);
             text-align: center;
-            padding-top: 0px;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 1s forwards;
+        }
+
+        @keyframes fadeInUp {
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .logo {
-            width: 250px;
-            height: 250px;
-            margin: 0 auto 30px;
+            width: 180px;
+            height: auto;
+            margin-bottom: 1.5rem;
+            filter: drop-shadow(0 0 15px rgba(0, 191, 255, 0.6));
         }
 
-        .content {
-            background-color: rgba(0, 0, 0, 0);
-            padding: -100px;
-            border-radius: 10px;
-            max-width: 800px;
-            margin: auto;
+        .main-title {
+            font-family: 'Orbitron', monospace;
+            font-size: 3.8rem;
+            font-weight: 900;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #00ccff, #0099ff, #0066cc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: titleGlow 3s ease-in-out infinite alternate;
         }
 
-        a.bisect-link {
-            color: #FFD700;
+        @keyframes titleGlow {
+            from { filter: drop-shadow(0 0 12px rgba(0, 204, 255, 0.7)); }
+            to   { filter: drop-shadow(0 0 25px rgba(0, 204, 255, 1)); }
+        }
+
+        .subtitle {
+            font-size: 1.3rem;
+            color: #a8e6ff;
+            margin: 1.5rem 0;
+        }
+
+        .highlight {
+            background: rgba(0, 191, 255, 0.15);
+            padding: 12px 20px;
+            border-radius: 12px;
+            font-weight: 600;
+            color: #00ffff;
+            display: inline-block;
+            margin: 1rem 0;
+            border: 1px solid rgba(0, 191, 255, 0.4);
+        }
+
+        .promo-code {
+            font-size: 1.8rem;
             font-weight: bold;
+            color: #00ffff;
+            letter-spacing: 3px;
+            margin: 1.5rem 0;
+        }
+
+        .bisect-link {
+            color: #00ffff;
+            font-size: 1.3rem;
+            font-weight: 600;
+            text-decoration: none;
+            border-bottom: 2px dashed rgba(0, 255, 255, 0.5);
+            transition: all 0.3s;
+        }
+
+        .bisect-link:hover {
+            color: #66ffff;
+            border-bottom: 2px solid #00ffff;
+        }
+
+        .ram-list {
+            text-align: left;
+            max-width: 600px;
+            margin: 2rem auto;
+            background: rgba(0, 30, 60, 0.4);
+            padding: 1.5rem;
+            border-radius: 16px;
+            border: 1px solid rgba(0, 191, 255, 0.3);
+        }
+
+        .ram-list li {
+            margin: 0.8rem 0;
+            font-size: 1.1rem;
+        }
+
+        .ram-list strong {
+            color: #00ffff;
         }
 
         .btn-primary {
-            background-color: #D0312D;
-            border-color: #D0312D;
+            background: linear-gradient(135deg, #00bfff, #0088cc);
+            border: none;
+            color: white;
+            padding: 1rem 3rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.2rem;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 2rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 25px rgba(0, 191, 255, 0.4);
         }
 
         .btn-primary:hover {
-            background-color: #b32825;
+            transform: translateY(-4px);
+            box-shadow: 0 15px 35px rgba(0, 191, 255, 0.6);
+            background: linear-gradient(135deg, #00d4ff, #0099e6);
+        }
+
+        .btn-home {
+            background: rgba(0, 31, 63, 0.8);
+            border: 1px solid rgba(100, 150, 255, 0.3);
+            color: white;
+            padding: 0.8rem 2.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .btn-home:hover {
+            background: rgba(0, 50, 100, 0.9);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(100, 150, 255, 0.3);
+        }
+
+        @media (max-width: 768px) {
+            .main-title { font-size: 2.8rem; }
+            .content-card { padding: 2.5rem 1.5rem; }
+            .logo { width: 140px; }
+            .promo-code { font-size: 1.5rem; }
         }
     </style>
 </head>
 <body>
-<img src="img/bisecthostinglogo.png" alt="Bisect Hosting Logo" class="logo">
 
-<div class="content">
-    <h2>Bisect Hosting Partnership</h2>
-    <p>Bisect Hosting is our official server hosting partner, which offers a great service, allowing you to make use of a lot of locations so you can play in perfect conditions.</p>
-    <p><strong>Any new users get 25% off for your first month!</strong></p>
+<!-- Animated Background -->
+<div class="bg-animation"></div>
+<div class="particles"></div>
 
-    <p>
-        Click on the following link and use the code <strong>"Mattias15"</strong> to get 25% off your first month on any of Bisect Hosting Gaming Servers:
-    </p>
-    <p>
-        <a class="bisect-link" href="https://bisecthosting.com/Mattias15" target="_blank">
-            https://bisecthosting.com/Mattias15
+<div class="page-container">
+    <div class="content-card">
+
+        <img src="img/bisecthostinglogo.png" alt="BisectHosting Logo" class="logo">
+
+        <h1 class="main-title">BisectHosting Partner</h1>
+
+        <p class="subtitle">
+            Official server hosting partner fast, reliable, and worldwide locations.
+        </p>
+
+        <div class="highlight">
+            New users get <strong>25% OFF</strong> their first month!
+        </div>
+
+        <p>Use code: <span class="promo-code">Mattias15</span></p>
+
+        <p>
+            <a class="bisect-link" href="https://bisecthosting.com/Mattias15" target="_blank">
+                https://bisecthosting.com/Mattias15
+            </a>
+        </p>
+
+        <h4 class="mt-5 mb-3" style="color: #00ccff;">Recommended RAM</h4>
+        <ul class="ram-list">
+            <li>If you are <strong>2 players</strong> with a modpack: <strong>minimum 6GB</strong></li>
+            <li>If you are <strong>4 players</strong>: <strong>minimum 7GB</strong></li>
+            <li>If you are <strong>6 players</strong>: <strong>minimum 9GB</strong></li>
+            <li>If you are <strong>8+ players</strong>: <strong>minimum 11GB</strong></li>
+        </ul>
+
+        <p class="mt-4" style="color: #a8e6ff;">
+            Every server purchased through our link supports the channel and helps keep the mods coming!
+        </p>
+
+        <p><strong>Enjoy lag free modded gameplay with your friends!</strong></p>
+
+        <a href="https://bisecthosting.com/Mattias15" target="_blank" class="btn-primary">
+            Get 25% Off Now!
         </a>
-    </p>
 
-    <h4 class="mt-4">Recommended RAM</h4>
-    <p>6GB Recommended if you have 1–3 Players</p>
-    <p>I suggest 1GB per additional player but you usually don't want to have less than 4 GB when playing with modpacks.</p>
-
-    <ul class="text-left d-inline-block">
-        <li>If you are 2 players with a modpack: <strong>minimum 6GB</strong></li>
-        <li>If you are 4 players with a modpack: <strong>minimum 7GB</strong></li>
-        <li>If you are 6 players with a modpack: <strong>minimum 9GB</strong></li>
-        <li>If you are 8 players with a modpack: <strong>minimum 11GB</strong></li>
-    </ul>
-
-    <p class="mt-4">Each server purchased through our link not only provides you with an exceptional hosting service, but also supports us through a commission.</p>
-    <p>By using our link and code you will receive a 25% discount!</p>
-    <p><strong>Enjoy playing with your friends on the servers 👋</strong></p>
-
-    <a href="index.html" class="btn btn-primary mt-3">Back to Home</a>
+        <br>
+        <a href="index.html" class="btn-home">Back to Home</a>
+    </div>
 </div>
+
 </body>
 </html>
