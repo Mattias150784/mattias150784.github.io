@@ -5,11 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Matt's Mods - Minecraft Creations</title>
 
-    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&display=swap" rel="stylesheet" />
 
-    <!-- Bootstrap 5 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
 
     <style>
@@ -22,7 +20,6 @@
             overflow-x: hidden;
         }
 
-        /* ——— MOVING DARK RED / BLACK BACKGROUND ——— */
         body {
             background: #000;
             position: relative;
@@ -46,7 +43,6 @@
             z-index: -2;
         }
 
-        /* Extra deep red glow layer */
         .bg-animation::before {
             content: "";
             position: absolute;
@@ -68,7 +64,6 @@
             50%      { opacity: 1; }
         }
 
-        /* Floating dark red embers */
         .particles {
             position: fixed;
             top: 0; left: 0;
@@ -89,7 +84,6 @@
             100% { transform: translateY(-100vh) translateX(50px); }
         }
 
-        /* ——— Rest of your beautiful design (unchanged but improved visibility) ——— */
         .main-title {
             font-family: 'Orbitron', monospace;
             font-size: 4.5rem;
@@ -112,7 +106,6 @@
             to   { filter: drop-shadow(0 0 30px rgba(204,0,0,0.9)); }
         }
 
-        /* Scroller */
         .showcase-container {
             overflow: hidden;
             background: rgba(15,0,0,0.85);
@@ -150,7 +143,6 @@
             100% { transform: translateX(-50%); }
         }
 
-        /* ——— BIGGER CARD STYLES ——— */
         .mod-card {
             background: rgba(20,0,0,0.85);
             backdrop-filter: blur(12px);
@@ -191,7 +183,7 @@
         }
 
         .mod-card-body {
-            padding: 2rem; /* Increased padding */
+            padding: 2rem;
             flex-grow: 1;
             display: flex;
             flex-direction: column;
@@ -201,13 +193,13 @@
         .mod-card-title {
             color: #ff6666;
             font-weight: 700;
-            font-size: 1.6rem; /* Increased from 1.4rem */
+            font-size: 1.6rem;
             margin-bottom: 1rem;
         }
 
         .mod-card-text {
             color: #e0e0e0;
-            font-size: 1.05rem; /* Increased from default */
+            font-size: 1.05rem;
             line-height: 1.7;
             margin-bottom: 1.5rem;
         }
@@ -215,7 +207,7 @@
         .btn-mod {
             background: linear-gradient(135deg, #8b0000, #660000);
             color: white;
-            padding: 0.8rem 2.2rem; /* Bigger button */
+            padding: 0.8rem 2.2rem;
             border-radius: 30px;
             font-weight: 600;
             text-transform: uppercase;
@@ -255,7 +247,6 @@
             color: white;
         }
 
-        /* Entrance animations */
         .fade-in-up {
             opacity: 0;
             transform: translateY(30px);
@@ -277,7 +268,6 @@
         .fade-in-up:nth-child(6) { animation-delay: 0.6s; }
         .fade-in-up:nth-child(7) { animation-delay: 0.7s; }
 
-        /* Responsive */
         @media (max-width: 768px) {
             .main-title { font-size: 2.8rem; }
             .showcase-track img { height: 120px; margin: 0 15px; }
@@ -292,14 +282,12 @@
 </head>
 <body>
 
-<!-- Moving Background Layers -->
 <div class="bg-animation"></div>
 <div class="particles"></div>
 
 <main class="container-fluid py-5" style="position: relative; z-index: 1;">
     <h1 class="main-title">Matt's Mods</h1>
 
-    <!-- Scroller -->
     <div class="showcase-container">
         <div class="showcase-track">
             <img src="img/mods/mystigrecia.png" alt="Mysti Grecia">
@@ -309,7 +297,8 @@
             <img src="img/mods/pedestals.png" alt="Pedestals">
             <img src="img/mods/pixelblock.png" alt="Pixel Blocks">
             <img src="img/mods/cobbleblocks.png" alt="Cobble Blocks">
-            <!-- Duplicate for seamless loop -->
+            <img src="img/mods/scorchingdesert.png" alt="Scorching Desert">
+
             <img src="img/mods/mystigrecia.png" alt="Mysti Grecia">
             <img src="img/mods/minersdreamed.png" alt="Miners Dream">
             <img src="img/mods/colorexpansion.png" alt="Color Expansion">
@@ -317,10 +306,10 @@
             <img src="img/mods/pedestals.png" alt="Pedestals">
             <img src="img/mods/pixelblock.png" alt="Pixel Blocks">
             <img src="img/mods/cobbleblocks.png" alt="Cobble Blocks">
+            <img src="img/mods/scorchingdesert.png" alt="Scorching Desert">
         </div>
     </div>
 
-    <!-- Mod Cards - BIGGER GRID -->
     <div class="container py-4">
         <div class="row g-4">
             <!-- Mysti Grecia -->
@@ -417,6 +406,20 @@
                         <h3 class="mod-card-title">Cobble Blocks</h3>
                         <p class="mod-card-text">Cobblemon Lucky Blocks! Mine to discover random Cobblemon spawns!</p>
                         <a href="cobbleblocks.html" class="btn-mod">Explore More</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Scorching Desert -->
+            <div class="col-xl-4 col-lg-6 fade-in-up">
+                <div class="mod-card">
+                    <div class="mod-card-img-container">
+                        <img src="img/mods/scorchingdesert.png" alt="Scorching Desert">
+                    </div>
+                    <div class="mod-card-body">
+                        <h3 class="mod-card-title">Scorching Desert</h3>
+                        <p class="mod-card-text">Scorching Desert expands on the vanilla desert, adding new mobs, blocks, structures, and biomes!</p>
+                        <a href="scorchingdesert/scorchingdesert.html" class="btn-mod">Explore More</a>
                     </div>
                 </div>
             </div>

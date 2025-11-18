@@ -1,0 +1,934 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Scorching Desert - Minecraft Mod Wiki | Mattias15</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&display=swap" rel="stylesheet" />
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html, body {
+            min-height: 100vh;
+            font-family: 'Poppins', sans-serif;
+            color: #fdfdfd;
+            overflow-x: hidden;
+        }
+
+        body {
+            background: #000;
+            position: relative;
+        }
+
+        .bg-animation {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: linear-gradient(135deg,
+                #000000 0%,
+                #140800 15%,
+                #261300 30%,
+                #4b2600 50%,
+                #ff8c00 70%,
+                #000000 100%
+            );
+            background-size: 400% 400%;
+            animation: desertFlow 22s ease infinite;
+            z-index: -2;
+        }
+
+        .bg-animation::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background:
+                radial-gradient(circle at 20% 30%, rgba(255, 165, 0, 0.35), transparent 55%),
+                radial-gradient(circle at 80% 60%, rgba(255, 215, 0, 0.25), transparent 60%);
+            animation: heatGlow 14s ease-in-out infinite;
+        }
+
+        @keyframes desertFlow {
+            0%   { background-position: 0% 50%; }
+            50%  { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        @keyframes heatGlow {
+            0%, 100% { opacity: 0.6; }
+            50%      { opacity: 1; }
+        }
+
+        .particles {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: -1;
+            background-image:
+                radial-gradient(2px 2px at 20% 30%, rgba(255, 200, 80, 0.5), transparent),
+                radial-gradient(3px 3px at 60% 70%, rgba(255, 140, 0, 0.4), transparent),
+                radial-gradient(2px 2px at 90% 15%, rgba(255, 215, 0, 0.5), transparent);
+            background-size: 300% 300%;
+            animation: sandFloat 40s linear infinite;
+        }
+
+        @keyframes sandFloat {
+            0%   { transform: translateY(0px) translateX(0px); }
+            100% { transform: translateY(-100vh) translateX(60px); }
+        }
+
+        .wiki-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem;
+            position: relative;
+            z-index: 1;
+            min-height: 100vh;
+        }
+
+        .page-header {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .mod-logo {
+            width: 140px;
+            height: 140px;
+            border-radius: 18px;
+            object-fit: cover;
+            border: 3px solid rgba(255, 165, 0, 0.7);
+            box-shadow: 0 8px 25px rgba(255, 140, 0, 0.6);
+            background: rgba(0, 0, 0, 0.4);
+        }
+
+        .title-block {
+            flex: 1;
+            min-width: 220px;
+        }
+
+        .mod-title {
+            font-family: 'Orbitron', monospace;
+            font-size: 2.6rem;
+            font-weight: 900;
+            margin-bottom: 0.3rem;
+            background: linear-gradient(135deg, #ffd700, #ffb347, #ff8c00);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
+        }
+
+        .mod-subtitle {
+            font-size: 1rem;
+            color: #ffe9b3;
+        }
+
+        .wiki-content-wrapper {
+            display: grid;
+            grid-template-columns: minmax(0, 2.2fr) minmax(260px, 0.9fr);
+            gap: 1.5rem;
+        }
+
+        @media (max-width: 992px) {
+            .wiki-content-wrapper {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .wiki-main {
+            background: rgba(20, 10, 0, 0.85);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border-radius: 16px;
+            padding: 1.5rem 1.5rem 2rem;
+            border: 1px solid rgba(255, 165, 0, 0.35);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.75);
+        }
+
+        .infobox {
+            background: rgba(25, 12, 0, 0.9);
+            border-radius: 12px;
+            border: 1px solid rgba(255, 200, 120, 0.4);
+            padding: 1rem 1.2rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.7);
+            font-size: 0.95rem;
+        }
+
+        .infobox-title {
+            text-align: center;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: #ffd700;
+        }
+
+        .infobox img {
+            width: 100%;
+            border-radius: 8px;
+            margin-bottom: 0.5rem;
+            border: 1px solid rgba(255, 200, 120, 0.4);
+        }
+
+        .infobox-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .infobox-table tr td {
+            padding: 0.25rem 0;
+            vertical-align: top;
+        }
+
+        .infobox-label {
+            font-weight: 600;
+            color: #ffe6a3;
+            width: 40%;
+        }
+
+        .infobox-value {
+            color: #fbe9c6;
+            width: 60%;
+        }
+
+        .infobox-separator {
+            margin: 0.4rem 0;
+            border-bottom: 1px solid rgba(255, 200, 120, 0.25);
+        }
+
+        .wiki-tabs {
+            border-bottom: 1px solid rgba(255, 200, 120, 0.3);
+            margin-bottom: 1rem;
+        }
+
+        .wiki-tabs .nav-link {
+            color: #ffe9b3;
+            font-weight: 500;
+            border-radius: 0;
+            border: none;
+            border-bottom: 3px solid transparent;
+            margin-right: 0.5rem;
+        }
+
+        .wiki-tabs .nav-link:hover {
+            color: #ffffff;
+            background: rgba(255, 200, 120, 0.08);
+        }
+
+        .wiki-tabs .nav-link.active {
+            color: #fff5d6;
+            border-bottom-color: #ffb347;
+            background: rgba(255, 200, 120, 0.15);
+        }
+
+        .wiki-section h2 {
+            font-size: 1.5rem;
+            margin-bottom: 0.75rem;
+            color: #ffd37b;
+        }
+
+        .wiki-section h3 {
+            font-size: 1.2rem;
+            margin: 1.25rem 0 0.5rem;
+            color: #ffc258;
+        }
+
+        .wiki-section p, .wiki-section li {
+            font-size: 0.98rem;
+            line-height: 1.7;
+            color: #ffe9c6;
+        }
+
+        .wiki-section ul {
+            padding-left: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .wiki-section ul li {
+            margin: 0.25rem 0;
+        }
+
+        .section-note {
+            font-size: 0.9rem;
+            color: #ffdd99;
+            opacity: 0.8;
+        }
+
+        .category-list {
+            background: rgba(40, 20, 0, 0.7);
+            border-radius: 8px;
+            border: 1px solid rgba(255, 200, 120, 0.3);
+            padding: 0.75rem 0.9rem;
+            margin-top: 0.75rem;
+            font-size: 0.9rem;
+        }
+
+        .category-list-title {
+            font-weight: 600;
+            color: #ffd37b;
+            margin-bottom: 0.4rem;
+        }
+
+        .category-list ul {
+            list-style: none;
+            padding-left: 0;
+            margin: 0;
+        }
+
+        .category-list li::before {
+            content: "• ";
+            color: #ffb347;
+        }
+
+        .btn-home {
+            background: rgba(0, 31, 63, 0.9);
+            border: 1px solid rgba(100, 150, 255, 0.4);
+            color: white;
+            padding: 0.6rem 2rem;
+            border-radius: 40px;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+            font-size: 0.95rem;
+            margin-top: 1.5rem;
+        }
+
+        .btn-home:hover {
+            background: rgba(0, 50, 100, 0.95);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(100, 150, 255, 0.3);
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+<div class="bg-animation"></div>
+<div class="particles"></div>
+
+<div class="wiki-container">
+    <div class="page-header">
+        <img src="../img/mods/scorchingdesert.png" alt="Scorching Desert Logo" class="mod-logo">
+        <div class="title-block">
+            <h1 class="mod-title">Scorching Desert</h1>
+            <div class="mod-subtitle">
+                A Minecraft mod focused on expanding on Minecraft's boring Desert Biome and bringing life to it!
+            </div>
+        </div>
+    </div>
+
+    <div class="wiki-content-wrapper">
+
+        <div class="wiki-main">
+            <ul class="nav nav-tabs wiki-tabs" id="wikiTabs" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="overview-tab" data-bs-toggle="tab"
+                            data-bs-target="#overview" type="button" role="tab">
+                        Overview
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="mobs-tab" data-bs-toggle="tab"
+                            data-bs-target="#mobs" type="button" role="tab">
+                        Mobs
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="blocks-tab" data-bs-toggle="tab"
+                            data-bs-target="#blocks" type="button" role="tab">
+                        Blocks
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="items-tab" data-bs-toggle="tab"
+                            data-bs-target="#items" type="button" role="tab">
+                        Items
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="tools-tab" data-bs-toggle="tab"
+                            data-bs-target="#tools" type="button" role="tab">
+                        Tools & Gear
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="structures-tab" data-bs-toggle="tab"
+                            data-bs-target="#structures" type="button" role="tab">
+                        Structures
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="features-tab" data-bs-toggle="tab"
+                            data-bs-target="#features" type="button" role="tab">
+                        Features
+                    </button>
+                </li>
+            </ul>
+
+            <div class="tab-content" id="wikiTabsContent">
+                <div class="tab-pane fade show active" id="overview" role="tabpanel">
+                    <div class="wiki-section">
+                        <h2>Overview</h2>
+                        <p>
+                            <strong>Scorching Desert</strong> is a Minecraft mod focused on expanding on the vanilla desert, adding new mobs, blocks, structures, and biomes!
+
+                        </p>
+                        <p>
+                            This page is the official Scorching Desert Wiki. Search around for anything you are looking we even have
+                            specific categories such as <em>Mobs</em>, <em>Blocks</em>, <em>Items</em>, <em>Tools &amp; Gear</em>,
+                            <em>Structures</em>, and <em>Features</em>.
+                        </p>
+                    </div>
+
+                    <div class="wiki-section">
+                        <h2>Getting Started</h2>
+                        <h3>Scorching Desert</h3>
+                        <p>
+                            Start up your Minecraft world and find a Desert or Mesa! You might notice there may be some new type of wildlife living in there.
+                            But be careful because not all the animals are peaceful.
+                        </p>
+                        <p class="section-note">
+
+                        </p>
+                    </div>
+
+                    <div class="wiki-section">
+                        <h2>Contents</h2>
+                        <p>This wiki is split into several main categories:</p>
+
+                        <div class="category-list">
+                            <div class="category-list-title">Main categories</div>
+                            <ul>
+                                <li><strong>Mobs:</strong> All hostile, neutral, and passive creatures.</li>
+                                <li><strong>Blocks:</strong> Decorative, functional, and natural blocks.</li>
+                                <li><strong>Items:</strong> Consumables, crafting components, and loot.</li>
+                                <li><strong>Tools &amp; Gear:</strong> Weapons, armor, and tools.</li>
+                                <li><strong>Structures:</strong> Temples, ruins, dungeons, and other generated buildings.</li>
+                                <li><strong>Features:</strong> Biome mechanics, events, and more.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="text-end">
+                        <a href="../mods.html" class="btn-home">← Back to Mods</a>
+                    </div>
+                </div>
+
+                <div class="tab-pane fade" id="mobs" role="tabpanel">
+                    <div class="wiki-section">
+                        <h2>Mobs</h2>
+                        <p>
+                            This section lists all mobs introduced by Scorching Desert.
+                        </p>
+
+                        <h3>Coyote</h3>
+
+                        <div style="width: 291px; height: 248px; margin-bottom:1rem; border:1px solid rgba(255,200,120,0.4); border-radius:10px; overflow:hidden;">
+                            <img id="coyote-rotating-img" src="../img/scorchingdesert/mobs/coyote_run_1.png"
+                                 style="width:100%; height:100%; object-fit:cover; transition:opacity 0.4s;"  alt="Coyote"/>
+                        </div>
+
+                        <div style="margin-bottom:1rem;">
+                            <p><strong>Listen to Coyote Howl</strong></p>
+                            <audio controls style="width:100%;">
+                                <source src="../img/scorchingdesert/sounds/coyote_howl.ogg" type="audio/ogg" />
+                                Your browser does not support the audio element.
+                            </audio>
+                        </div>
+
+                        <script>
+                            const coyoteImages = [
+                                "../img/scorchingdesert/mobs/coyote_run_1.png",
+                                "../img/scorchingdesert/mobs/coyote_run_2.png",
+                                "../img/scorchingdesert/mobs/coyote_run_3.png"
+                            ];
+
+                            let coyoteIndex = 0;
+                            const coyoteImgElement = document.getElementById("coyote-rotating-img");
+
+                            setInterval(() => {
+                                coyoteIndex = (coyoteIndex + 1) % coyoteImages.length;
+                                coyoteImgElement.style.opacity = 0;
+                                setTimeout(() => {
+                                    coyoteImgElement.src = coyoteImages[coyoteIndex];
+                                    coyoteImgElement.style.opacity = 1;
+                                }, 300);
+                            }, 5000);
+                        </script>
+
+                        <p>Passive during the day (unless hit), Hostile when nighttime, </p>
+                        <ul>
+                            <li><strong>Type:</strong> Hostile</li>
+                            <li><strong>Spawn Biomes:</strong> Desert, Mesa</li>
+                            <li><strong>Health:</strong> 8 hearts</li>
+                            <li><strong>Attack:</strong> 3 Attack Damage</li>
+                            <li><strong>Drops:</strong> Coyote Dagger</li>
+                        </ul>
+
+                        <h3>Road Runner</h3>
+
+                        <div style="width: 269px; height: 275px; margin-bottom:1rem; border:1px solid rgba(255,200,120,0.4); border-radius:10px; overflow:hidden;">
+                            <img src="../img/scorchingdesert/mobs/roadrunner.png"
+                                 style="width:100%; height:100%; object-fit:cover;"  alt="Road Runner"/>
+                        </div>
+
+                        <p>Passive, always runs away from almost everything, really fast</p>
+                        <ul>
+                            <li><strong>Type:</strong> Passive</li>
+                            <li><strong>Spawn Biomes:</strong> Desert, Mesa</li>
+                            <li><strong>Health:</strong> 4 hearts</li>
+                            <li><strong>Attack:</strong> 0 Attack Damage</li>
+                            <li><strong>Drops:</strong> Road Runner Meat, Road Runner Feather</li>
+                        </ul>
+                    </div>
+                </div>
+
+
+                <div class="tab-pane fade" id="blocks" role="tabpanel">
+                    <div class="wiki-section">
+                        <h2>Blocks</h2>
+                        <p>This section lists all blocks introduced by Scorching Desert.</p>
+
+                        <style>
+                            .block-entry {
+                              display: flex;
+                              align-items: center;
+                              gap: 15px;
+                              margin-bottom: 12px;
+                            }
+                            .block-entry img {
+                              width: 256px;
+                              height: 256px;
+                              object-fit: cover;
+                              border-radius: 6px;
+                            }
+                        </style>
+
+                        <h3>Natural Blocks</h3>
+                        <ul>
+                            <li class="block-entry">
+                                <img src="../img/scorchingdesert/block/quicksand.png" alt="Quicksand">
+                                <strong>Quicksand</strong> – If stepped on will start sinking and suffocate.
+                            </li>
+
+                            <li class="block-entry">
+                                <img src="../img/scorchingdesert/block/red_quicksand.png" alt="Red Quicksand">
+                                <strong>Red Quicksand</strong> – If stepped on will start sinking and suffocate.
+                            </li>
+                        </ul>
+
+                        <h3>Decorative Blocks</h3>
+                        <ul>
+
+                            <li class="block-entry">
+                                <img src="../img/scorchingdesert/block/painted_story_ancient.png" alt="Painted Story Ancient Sandstone">
+                                <strong>Painted Story Ancient Sandstone</strong> – Ancient Painting found in structures
+                            </li>
+
+                            <li class="block-entry">
+                                <img src="../img/scorchingdesert/block/painted_story_massacre.png" alt="Painted Story Massacre Sandstone">
+                                <strong>Painted Story Massacre Sandstone</strong> – Ancient Painting found in structures
+                            </li>
+
+                            <li class="block-entry">
+                                <img src="../img/scorchingdesert/block/painted_story_creeper.png" alt="Painted Story Creeper Sandstone">
+                                <strong>Painted Story Creeper Sandstone</strong> – Ancient Painting found in structures
+                            </li>
+
+                            <li class="block-entry">
+                                <img src="../img/scorchingdesert/block/painted_village_story.png" alt="Painted Story Village Sandstone">
+                                <strong>Painted Story Village Sandstone</strong> – Ancient Painting found in structures
+                            </li>
+
+                            <li class="block-entry">
+                                <img src="../img/scorchingdesert/block/painted_story_golem.png" alt="Painted Story Golem Sandstone">
+                                <strong>Painted Story Golem Sandstone</strong> – Ancient Painting found in structures
+                            </li>
+
+                            <li class="block-entry">
+                                <img src="../img/scorchingdesert/block/painted_story_wither_red.png" alt="Painted Story Wither Red Sandstone">
+                                <strong>Painted Story Wither Red Sandstone</strong> – Ancient Painting found in structures
+                            </li>
+
+                            <li class="block-entry">
+                                <img src="../img/scorchingdesert/block/painted_story_death_red.png" alt="Painted Story Death Red Sandstone">
+                                <strong>Painted Story Death Red Sandstone</strong> – Ancient Painting found in structures
+                            </li>
+
+                            <li class="block-entry">
+                                <img src="../img/scorchingdesert/block/painted_story_soul_red.png" alt="Painted Story Soul Red Sandstone">
+                                <strong>Painted Story Soul Red Sandstone</strong> – Ancient Painting found in structures
+                            </li>
+
+                            <li class="block-entry">
+                                <img src="../img/scorchingdesert/block/painted_story_temple_red.png" alt="Painted Story Temple Red Sandstone">
+                                <strong>Painted Story Temple Red Sandstone</strong> – Ancient Painting found in structures
+                            </li>
+
+                            <li class="block-entry">
+                                <img src="../img/scorchingdesert/block/painted_story_mummies_red.png" alt="Painted Story Mummies Red Sandstone">
+                                <strong>Painted Story Mummies Red Sandstone</strong> – Ancient Painting found in structures
+                            </li>
+
+                        </ul>
+
+<!--                        <h3>Functional Blocks</h3>-->
+<!--                        <ul>-->
+<!--                            <li class="block-entry">-->
+<!--                                <img src="../img/scorchingdesert/block/heat_vent.png" alt="Heat Vent">-->
+<!--                                <strong>Heat Vent</strong> – description, redstone behavior, interactions.-->
+<!--                            </li>-->
+<!--                        </ul>-->
+                    </div>
+                </div>
+
+
+                <!-- ITEMS TAB -->
+                <div class="tab-pane fade" id="items" role="tabpanel">
+                    <div class="wiki-section">
+                        <h2>Items</h2>
+                        <p>
+                            This section lists all items introduced by Scorching Desert.
+                        </p>
+
+                        <h3>Consumables</h3>
+                        <ul>
+                            <li>
+                                <img src="../img/scorchingdesert/item/road_runner_meat.png" alt="Road Runner Meat" width="32" height="32">
+                                <strong>[Road Runner Meat]</strong> – restores as much hunger as chicken
+                            </li>
+                            <li>
+                                <img src="../img/scorchingdesert/item/cooked_road_runner_meat.png" alt="Road Runner Cooked Meat" width="32" height="32">
+                                <strong>[Road Runner Cooked Meat]</strong> – restores as much hunger as cooked chicken
+                            </li>
+                        </ul>
+
+                        <!--
+                        <h3>Crafting Materials</h3>
+                        <ul>
+                            <li><strong>[Sun Shard]</strong> – dropped from certain mobs / structures; used for crafting gear.</li>
+                        </ul>
+                        -->
+
+                        <h3>Miscellaneous Items</h3>
+                        <ul>
+                            <li>
+                                <img src="../img/scorchingdesert/item/road_runner_egg.png" alt="Road Runner Egg" width="32" height="32">
+                                <strong>[Road Runner Egg]</strong> – randomly popped out from the Road Runner
+                            </li>
+                            <li>
+                                <img src="../img/scorchingdesert/item/road_runner_feather.png" alt="Road Runner Feather" width="32" height="32">
+                                <strong>[Road Runner Feather]</strong> – upon death Road Runner has a chance to drop
+                            </li>
+                            <li>
+                                <img src="../img/scorchingdesert/item/coyote_fang.png" alt="Coyote Fang" width="32" height="32">
+                                <strong>[Coyote Fang]</strong> – upon death Coyote has a chance to drop
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- TOOLS & GEAR TAB -->
+                <div class="tab-pane fade" id="tools" role="tabpanel">
+                    <div class="wiki-section">
+                        <h2>Tools &amp; Gear</h2>
+                        <p>
+                            This section lists all tools &amp; gear introduced by Scorching Desert.
+                        </p>
+
+                        <style>
+                            .item-entry {
+                                display: flex;
+                                align-items: center;
+                                gap: 15px;
+                                margin-bottom: 12px;
+                            }
+                            .item-entry img {
+                                width: 256px;
+                                height: 256px;
+                                object-fit: cover;
+                                border-radius: 6px;
+                            }
+                        </style>
+
+                        <div class="item-entry">
+                            <img src="../img/scorchingdesert/item/wooden_dagger.png" alt="Wooden Dagger">
+                            <div>
+                                <h3>Wooden Dagger</h3>
+                                <ul>
+                                    <li>2 <strong>Attack Damage</strong></li>
+                                    <li>2 <strong>Attack Speed</strong></li>
+                                    <li>59 <strong>Durability</strong></li>
+                                    <li><strong>Enchantments:</strong> Unbreaking, Mending, Looting, Knockback, Fire Aspect, Loyalty, Curse of Vanishing, Bane of Arthropods, Smite, Stabbing</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="item-entry">
+                            <img src="../img/scorchingdesert/item/stone_dagger.png" alt="Stone Dagger">
+                            <div>
+                                <h3>Stone Dagger</h3>
+                                <ul>
+                                    <li>3 <strong>Attack Damage</strong></li>
+                                    <li>2 <strong>Attack Speed</strong></li>
+                                    <li>131 <strong>Durability</strong></li>
+                                    <li><strong>Enchantments:</strong> Unbreaking, Mending, Looting, Knockback, Fire Aspect, Loyalty, Curse of Vanishing, Bane of Arthropods, Smite, Stabbing</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="item-entry">
+                            <img src="../img/scorchingdesert/item/golden_dagger.png" alt="Golden Dagger">
+                            <div>
+                                <h3>Golden Dagger</h3>
+                                <ul>
+                                    <li>3 <strong>Attack Damage</strong></li>
+                                    <li>2 <strong>Attack Speed</strong></li>
+                                    <li>32 <strong>Durability</strong></li>
+                                    <li><strong>Enchantments:</strong> Unbreaking, Mending, Looting, Knockback, Fire Aspect, Loyalty, Curse of Vanishing, Bane of Arthropods, Smite, Stabbing</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="item-entry">
+                            <img src="../img/scorchingdesert/item/iron_dagger.png" alt="Iron Dagger">
+                            <div>
+                                <h3>Iron Dagger</h3>
+                                <ul>
+                                    <li>4 <strong>Attack Damage</strong></li>
+                                    <li>2 <strong>Attack Speed</strong></li>
+                                    <li>250 <strong>Durability</strong></li>
+                                    <li><strong>Enchantments:</strong> Unbreaking, Mending, Looting, Knockback, Fire Aspect, Loyalty, Curse of Vanishing, Bane of Arthropods, Smite, Stabbing</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="item-entry">
+                            <img src="../img/scorchingdesert/item/diamond_dagger.png" alt="Diamond Dagger">
+                            <div>
+                                <h3>Diamond Dagger</h3>
+                                <ul>
+                                    <li>5 <strong>Attack Damage</strong></li>
+                                    <li>2 <strong>Attack Speed</strong></li>
+                                    <li>1561 <strong>Durability</strong></li>
+                                    <li><strong>Enchantments:</strong> Unbreaking, Mending, Looting, Knockback, Fire Aspect, Loyalty, Curse of Vanishing, Bane of Arthropods, Smite, Stabbing</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="item-entry">
+                            <img src="../img/scorchingdesert/item/netherite_dagger.png" alt="Netherite Dagger">
+                            <div>
+                                <h3>Netherite Dagger</h3>
+                                <ul>
+                                    <li>6 <strong>Attack Damage</strong></li>
+                                    <li>2 <strong>Attack Speed</strong></li>
+                                    <li>2031 <strong>Durability</strong></li>
+                                    <li><strong>Enchantments:</strong> Unbreaking, Mending, Looting, Knockback, Fire Aspect, Loyalty, Curse of Vanishing, Bane of Arthropods, Smite, Stabbing</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="item-entry">
+                            <img src="../img/scorchingdesert/item/stabbing_book.png" alt="Stabbing Enchantment">
+                            <div>
+                                <h3>Stabbing Enchantment</h3>
+                                <ul>
+                                    <li>The Stabbing Enchantment can be put on any dagger it has a 25% to deal more damage it should deal an additional 6 damage based on what tier the dagger is (wooden, stone, iron, etc)</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- STRUCTURES TAB -->
+                <div class="tab-pane fade" id="structures" role="tabpanel">
+                    <div class="wiki-section">
+                        <h2>Structures</h2>
+                        <p>
+                            This section lists all structures introduced by Scorching Desert.
+                        </p>
+
+                        <div style="display: flex; gap: 20px; align-items: flex-start; flex-wrap: wrap;">
+                            <div id="temple-slideshow" style="flex: 1 1 400px; max-width: 600px; height: 400px; position: relative; overflow: hidden;">
+                                <img src="../img/scorchingdesert/structure/temple_entrance.png" class="temple-slide" style="width:100%; display:block; position:absolute; opacity:1;">
+                                <img src="../img/scorchingdesert/structure/temple_trap.png" class="temple-slide" style="width:100%; display:block; position:absolute; opacity:0;">
+                                <img src="../img/scorchingdesert/structure/temple_trap_2.png" class="temple-slide" style="width:100%; display:block; position:absolute; opacity:0;">
+                                <img src="../img/scorchingdesert/structure/temple_room.png" class="temple-slide" style="width:100%; display:block; position:absolute; opacity:0;">
+                            </div>
+
+                            <div style="flex: 1 1 300px;">
+                                <h3>[Sunken Temple]</h3>
+                                <ul>
+                                    <li><strong>Location:</strong> Below the sand in the Desert.</li>
+                                    <li><strong>Loot:</strong> Ancient Dagger</li>
+                                    <li><strong>Traps:</strong> Place any blocks in the parkour, TNT will ignite and dripstone will fall, making you die.</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div style="display: flex; gap: 20px; align-items: flex-start; flex-wrap: wrap; margin-top: 40px;">
+                            <div id="red-temple-slideshow" style="flex: 1 1 400px; max-width: 600px; height: 400px; position: relative; overflow: hidden;">
+                                <img src="../img/scorchingdesert/structure/red_temple_entrance.png" class="red-temple-slide" style="width:100%; display:block; position:absolute; opacity:1;">
+                                <img src="../img/scorchingdesert/structure/red_temple_trap.png" class="red-temple-slide" style="width:100%; display:block; position:absolute; opacity:0;">
+                                <img src="../img/scorchingdesert/structure/red_temple_trap_2.png" class="red-temple-slide" style="width:100%; display:block; position:absolute; opacity:0;">
+                                <img src="../img/scorchingdesert/structure/red_temple_room.png" class="red-temple-slide" style="width:100%; display:block; position:absolute; opacity:0;">
+                            </div>
+
+                            <div style="flex: 1 1 300px;">
+                                <h3>[Sunken Red Temple]</h3>
+                                <ul>
+                                    <li><strong>Location:</strong> Below the red sand in the Red Desert.</li>
+                                    <li><strong>Loot:</strong> Ancient Dagger</li>
+                                    <li><strong>Traps:</strong> Place any blocks in the parkour, TNT will ignite and dripstone will fall, making you die.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <script>
+                    const templeSlides = document.querySelectorAll('#temple-slideshow .temple-slide');
+                    let templeCurrent = 0;
+
+                    setInterval(() => {
+                        templeSlides[templeCurrent].style.transition = 'opacity 1s';
+                        templeSlides[templeCurrent].style.opacity = 0;
+
+                        templeCurrent = (templeCurrent + 1) % templeSlides.length;
+
+                        templeSlides[templeCurrent].style.transition = 'opacity 1s';
+                        templeSlides[templeCurrent].style.opacity = 1;
+                    }, 3000);
+
+                    const redTempleSlides = document.querySelectorAll('#red-temple-slideshow .red-temple-slide');
+                    let redTempleCurrent = 0;
+
+                    setInterval(() => {
+                        redTempleSlides[redTempleCurrent].style.transition = 'opacity 1s';
+                        redTempleSlides[redTempleCurrent].style.opacity = 0;
+
+                        redTempleCurrent = (redTempleCurrent + 1) % redTempleSlides.length;
+
+                        redTempleSlides[redTempleCurrent].style.transition = 'opacity 1s';
+                        redTempleSlides[redTempleCurrent].style.opacity = 1;
+                    }, 3000);
+                </script>
+
+
+
+                <!-- FEATURES TAB -->
+                <div class="tab-pane fade" id="features" role="tabpanel">
+                    <div class="wiki-section">
+                        <h2>Features & Mechanics</h2>
+                        <p>
+                            This section lists all features introduced by Scorching Desert.
+                        </p>
+
+                        <style>
+                            .feature-entry {
+                                display: flex;
+                                align-items: center;
+                                gap: 15px;
+                                margin-bottom: 12px;
+                            }
+                            .feature-entry img {
+                                width: 256px;
+                                height: 256px;
+                                object-fit: cover;
+                                border-radius: 6px;
+                            }
+                        </style>
+
+                        <div class="feature-entry">
+                            <img src="../img/scorchingdesert/feature/quicksand_lake.png" alt="Quicksand Lake">
+                            <div>
+                                <h3>Quicksand Lake</h3>
+                                <ul>
+                                    <li>Watch your step in the Deserts! You may step in a Quicksand Lake</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="feature-entry">
+                            <img src="../img/scorchingdesert/feature/red_quicksand_lake.png" alt="Red Quicksand Lake">
+                            <div>
+                                <h3>Red Quicksand Lake</h3>
+                                <ul>
+                                    <li>Watch your step in the Badlands! You may step in a Red Quicksand Lake</li>
+                                </ul>
+                            </div>
+                        </div>
+
+<!--                        <h3>Events & Weather</h3>-->
+<!--                        <ul>-->
+<!--                            <li><strong>Sandstorms:</strong> If present, explain visibility changes, mob behavior, and bonuses.</li>-->
+<!--                            <li><strong>Heat Waves:</strong> Temporary increase in heat damage or mob spawns.</li>-->
+<!--                        </ul>-->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- INFOBOX (RIGHT) -->
+        <aside class="infobox">
+            <div class="infobox-title">Scorching Desert</div>
+            <img src="../img/mods/scorchingdesert.png" alt="Scorching Desert Logo">
+
+            <div class="infobox-separator"></div>
+            <table class="infobox-table">
+                <tr>
+                    <td class="infobox-label">Author</td>
+                    <td class="infobox-value">Mattias15, Funado</td>
+                </tr>
+                <tr>
+                    <td class="infobox-label">Type</td>
+                    <td class="infobox-value">Biomes, Mobs, Worldgen &amp; Structures</td>
+                </tr>
+                <tr>
+                    <td class="infobox-label">Focus</td>
+                    <td class="infobox-value">Expanding Minecraft's Desert Biome</td>
+                </tr>
+                <tr>
+                    <td class="infobox-label">Latest Version</td>
+                    <td class="infobox-value">1.20.1</td>
+                </tr>
+            </table>
+
+            <div class="infobox-separator"></div>
+            <table class="infobox-table">
+                <tr>
+                    <td class="infobox-label">Modrinth</td>
+                    <td class="infobox-value">
+                        <a href="https://modrinth.com/mod/scorching-desert" target="_blank" style="color:#ffd37b;">W.I.P</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="infobox-label">CurseForge</td>
+                    <td class="infobox-value">
+                        <a href="https://www.curseforge.com/minecraft/mc-mods/scorching-desert" target="_blank" style="color:#ffd37b;">W.I.P</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="infobox-label">Discord</td>
+                    <td class="infobox-value">
+                        <a href="https://discord.gg/9XY62bv7AY" target="_blank" style="color:#ffd37b;">Community</a>
+                    </td>
+                </tr>
+            </table>
+        </aside>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
