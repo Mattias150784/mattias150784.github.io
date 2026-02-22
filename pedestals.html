@@ -3,417 +3,167 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Pedestals - Minecraft Mod | Mattias15</title>
-
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&display=swap" rel="stylesheet" />
-
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
-
+    <title>Pedestals - Mattias15</title>
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet" />
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
 
-        html, body {
-            min-height: 100vh;
-            font-family: 'Poppins', sans-serif;
-            color: white;
-            overflow-x: hidden;
+        :root {
+          --bg: #0a0b0f; --bg2: #0f1118; --bg3: #161923;
+          --border: rgba(255,255,255,0.07);
+          --text: #e8ecf4; --muted: #7a8499;
+          --mc: #5bdb8a; --mc-dim: rgba(91,219,138,0.12);
         }
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { background: var(--bg); color: var(--text); font-family: 'DM Sans', sans-serif; font-weight: 300; line-height: 1.6; min-height: 100vh; }
+        body::before { content: ''; position: fixed; inset: 0; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E"); pointer-events: none; z-index: 999; opacity: 0.4; }
+        .wrapper { max-width: 1100px; margin: 0 auto; padding: 0 2rem; }
+        header { border-bottom: 1px solid var(--border); position: sticky; top: 0; background: rgba(10,11,15,0.92); backdrop-filter: blur(16px); z-index: 100; }
+        .topbar { display: flex; align-items: center; justify-content: space-between; height: 60px; }
+        .logo { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.1rem; letter-spacing: -0.02em; color: var(--text); text-decoration: none; }
+        .logo span { color: var(--mc); }
+        nav { display: flex; gap: 2rem; align-items: center; }
+        nav a { font-size: 0.85rem; font-weight: 400; color: var(--muted); text-decoration: none; letter-spacing: 0.03em; transition: color 0.2s; }
+        nav a:hover { color: var(--text); }
 
-        body { background: #000; position: relative; }
 
-        .bg-animation {
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            background: linear-gradient(135deg,
-                #000000 0%,
-                #111111 15%,
-                #222222 35%,
-                #333333 50%,
-                #1a1a1a 70%,
-                #000000 100%
-            );
-            background-size: 400% 400%;
-            animation: shadowFlow 20s ease infinite;
-            z-index: -2;
-        }
+        :root { --a: #8b9ab5; --ad: rgba(139,154,181,0.12); --ab: rgba(139,154,181,0.2); }
 
-        .bg-animation::before {
-            content: "";
-            position: absolute;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            background: radial-gradient(circle at 30% 50%, rgba(100, 100, 100, 0.2), transparent 50%),
-                        radial-gradient(circle at 70% 30%, rgba(80, 80, 80, 0.15), transparent 60%);
-            animation: pulseGlow 12s ease-in-out infinite;
-        }
+        .mod-hero { display: grid; grid-template-columns: 1fr 300px; border-bottom: 1px solid var(--border); animation: fadeUp 0.7s ease both; }
+        .hero-left { padding: 4rem 3rem 4rem 0; border-right: 1px solid var(--border); }
+        .breadcrumb { display: flex; align-items: center; gap: 0.5rem; font-size: 0.75rem; color: var(--muted); margin-bottom: 1.5rem; }
+        .breadcrumb a { color: var(--muted); text-decoration: none; transition: color 0.2s; } .breadcrumb a:hover { color: var(--text); }
+        .breadcrumb span { opacity: 0.4; }
+        .mod-status { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.3rem 0.8rem; border-radius: 4px; font-size: 0.7rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; background: rgba(244,185,66,0.12); color: #f4b942; border: 1px solid rgba(244,185,66,0.2); margin-bottom: 1rem; }
+        .status-dot { width: 6px; height: 6px; border-radius: 50%; background: #f4b942; }
+        h1 { font-family: 'Syne', sans-serif; font-weight: 800; font-size: clamp(2.2rem, 5vw, 3.4rem); line-height: 1.05; letter-spacing: -0.03em; margin-bottom: 0.6rem; }
+        .hero-tagline { font-size: 0.92rem; color: var(--muted); line-height: 1.7; max-width: 440px; margin-bottom: 1.5rem; }
+        .meta-tags { display: flex; gap: 0.4rem; flex-wrap: wrap; margin-bottom: 1.5rem; }
+        .meta-tag { padding: 0.25rem 0.65rem; border: 1px solid var(--border); border-radius: 4px; font-size: 0.72rem; font-weight: 500; color: var(--muted); }
+        .dl-btns { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+        .dl-btn { display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.6rem 1.2rem; border-radius: 6px; font-size: 0.84rem; font-weight: 500; text-decoration: none; transition: all 0.2s; font-family: 'DM Sans', sans-serif; }
+        .btn-mod { background: var(--a); color: #fff; } .btn-mod:hover { opacity: 0.88; transform: translateY(-1px); }
+        .btn-ghost-mod { background: transparent; color: var(--text); border: 1px solid var(--border); } .btn-ghost-mod:hover { border-color: rgba(255,255,255,0.18); background: rgba(255,255,255,0.04); }
 
-        @keyframes shadowFlow {
-            0%   { background-position: 0% 50%; }
-            50%  { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
+        .hero-right { padding: 3rem 0 3rem 2.5rem; display: flex; flex-direction: column; }
+        .mod-icon { width: 120px; height: 120px; border-radius: 16px; border: 1px solid var(--ab); background: var(--bg2); object-fit: contain; padding: 0.5rem; margin-bottom: 1.5rem; }
+        .stat-row { display: flex; justify-content: space-between; align-items: center; padding: 0.65rem 0; border-bottom: 1px solid var(--border); font-size: 0.82rem; }
+        .stat-row:first-of-type { border-top: 1px solid var(--border); }
+        .stat-key { color: var(--muted); }
+        .stat-val { color: var(--text); font-weight: 500; font-family: 'Syne', sans-serif; font-size: 0.82rem; }
 
-        @keyframes pulseGlow {
-            0%, 100% { opacity: 0.6; }
-            50%      { opacity: 1; }
-        }
+        .status-bar { padding: 0.85rem 1.5rem; border-radius: 8px; font-size: 0.84rem; margin: 2.5rem 0 0; line-height: 1.6; }
 
-        .particles {
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            pointer-events: none;
-            z-index: -1;
-            background-image:
-                radial-gradient(2px 2px at 20% 30%, rgba(150, 150, 150, 0.4), transparent),
-                radial-gradient(3px 3px at 60% 70%, rgba(120, 120, 120, 0.3), transparent),
-                radial-gradient(2px 2px at 90% 10%, rgba(180, 180, 180, 0.4), transparent);
-            background-size: 300% 300%;
-            animation: float 35s linear infinite;
-        }
+        .wiki-body { padding: 3rem 0 5rem; }
+        .wiki-section { margin-bottom: 2.5rem; padding-bottom: 2.5rem; border-bottom: 1px solid var(--border); animation: fadeUp 0.5s ease both; opacity: 0; }
+        .wiki-section:last-child { border-bottom: none; }
+        .wiki-section:nth-child(1) { animation-delay: 0.05s; }
+        .wiki-section:nth-child(2) { animation-delay: 0.1s; }
+        .wiki-section:nth-child(3) { animation-delay: 0.15s; }
+        .wiki-section:nth-child(4) { animation-delay: 0.2s; }
+        .wiki-section h2 { font-family: 'Syne', sans-serif; font-size: 1rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--a); margin-bottom: 1.2rem; display: flex; align-items: center; gap: 0.6rem; }
+        .wiki-section h2::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+        .wiki-section p { font-size: 0.9rem; color: var(--muted); line-height: 1.8; margin-bottom: 0.75rem; }
+        .wiki-section ul { padding-left: 1.2rem; }
+        .wiki-section ul li { font-size: 0.88rem; color: var(--muted); line-height: 1.75; margin-bottom: 0.4rem; }
+        .wiki-section ul li strong { color: var(--text); font-weight: 500; }
 
-        @keyframes float {
-            0%   { transform: translateY(0) translateX(0); }
-            100% { transform: translateY(-100vh) translateX(50px); }
-        }
+        .feat-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.75rem; }
+        .feat-card { background: var(--bg2); border: 1px solid var(--border); border-radius: 10px; padding: 1.25rem; position: relative; overflow: hidden; transition: border-color 0.2s; }
+        .feat-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: var(--a); opacity: 0; transition: opacity 0.2s; }
+        .feat-card:hover { border-color: var(--ab); } .feat-card:hover::before { opacity: 1; }
+        .feat-card span { font-size: 1.3rem; display: block; margin-bottom: 0.5rem; }
+        .feat-card h4 { font-family: 'Syne', sans-serif; font-size: 0.85rem; font-weight: 700; margin-bottom: 0.35rem; color: var(--text); }
+        .feat-card p { font-size: 0.8rem; color: var(--muted); line-height: 1.6; margin: 0; }
+        .feat-card code { font-size: 0.78rem; background: rgba(255,255,255,0.06); padding: 0.1rem 0.3rem; border-radius: 3px; color: var(--a); }
 
-        .wiki-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 2rem;
-            position: relative;
-            z-index: 1;
-            min-height: 100vh;
-        }
+        .steps { display: flex; flex-direction: column; gap: 0.5rem; }
+        .step-item { display: flex; gap: 1.2rem; align-items: flex-start; padding: 1rem; background: var(--bg2); border: 1px solid var(--border); border-radius: 8px; }
+        .step-num { font-family: 'Syne', sans-serif; font-size: 1.1rem; font-weight: 800; color: var(--a); opacity: 0.5; flex-shrink: 0; width: 28px; }
+        .step-item h4 { font-family: 'Syne', sans-serif; font-size: 0.85rem; font-weight: 700; margin-bottom: 0.2rem; color: var(--text); }
+        .step-item p { font-size: 0.8rem; color: var(--muted); line-height: 1.6; margin: 0; }
 
-        .status-banner {
-            background: linear-gradient(135deg, #666666, #444444);
-            color: white;
-            text-align: center;
-            padding: 1rem 2rem;
-            font-size: 1.3rem;
-            font-weight: 700;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            box-shadow: 0 4px 20px rgba(100, 100, 100, 0.5);
-            margin-bottom: 2rem;
-            animation: bannerPulse 2s ease-in-out infinite;
-        }
+        .tag-cloud { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+        .tag { padding: 0.3rem 0.7rem; background: var(--ad); border: 1px solid var(--ab); border-radius: 4px; font-size: 0.75rem; font-weight: 500; color: var(--a); }
 
-        @keyframes bannerPulse {
-            0%, 100% { transform: scale(1); }
-            50%      { transform: scale(1.01); }
-        }
+        .code-block { background: var(--bg3); border: 1px solid var(--border); border-radius: 6px; padding: 0.75rem 1rem; font-family: 'Courier New', monospace; font-size: 0.84rem; color: var(--a); margin: 0.75rem 0; }
 
-        .wiki-content {
-            background: rgba(20, 20, 20, 0.8);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border-radius: 20px;
-            padding: 3rem;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
-            border: 1px solid rgba(150, 150, 150, 0.2);
-            opacity: 0;
-            transform: translateY(20px);
-            animation: fadeInUp 1s forwards 0.5s;
-        }
+        footer { border-top: 1px solid var(--border); padding: 2rem 0; display: flex; justify-content: space-between; align-items: center; }
+        footer p { font-size: 0.8rem; color: var(--muted); }
 
-        @keyframes fadeInUp {
-            to { opacity: 1; transform: translateY(0); }
-        }
+        @keyframes fadeUp { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
 
-        .mod-header {
-            display: flex;
-            gap: 2rem;
-            margin-bottom: 2rem;
-            flex-wrap: wrap;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .mod-icon {
-            width: 200px;
-            height: 200px;
-            border-radius: 20px;
-            border: 3px solid rgba(150, 150, 150, 0.5);
-            box-shadow: 0 8px 25px rgba(100, 100, 100, 0.4);
-        }
-
-        .mod-title {
-            font-family: 'Orbitron', monospace;
-            font-size: 3rem;
-            font-weight: 900;
-            background: linear-gradient(135deg, #cccccc, #aaaaaa, #888888);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            animation: titleGlow 3s ease-in-out infinite alternate;
-        }
-
-        @keyframes titleGlow {
-            from { filter: drop-shadow(0 0 15px rgba(200, 200, 200, 0.7)); }
-            to   { filter: drop-shadow(0 0 30px rgba(220, 220, 220, 0.9)); }
-        }
-
-        .wiki-section {
-            margin: 2.5rem 0;
-            padding: 1.5rem;
-            background: rgba(40, 40, 40, 0.5);
-            border-radius: 12px;
-            border-left: 4px solid rgba(150, 150, 150, 0.6);
-        }
-
-        .wiki-section h2 {
-            font-size: 1.8rem;
-            margin-bottom: 1rem;
-            color: #cccccc;
-            font-weight: 700;
-        }
-
-        .wiki-section h3 {
-            font-size: 1.4rem;
-            margin: 1.5rem 0 0.8rem;
-            color: #aaaaaa;
-        }
-
-        .wiki-section p, .wiki-section li {
-            font-size: 1.1rem;
-            line-height: 1.8;
-            color: #dddddd;
-            margin-bottom: 1rem;
-        }
-
-        .wiki-section ul {
-            padding-left: 2rem;
-        }
-
-        .wiki-section ul li {
-            margin: 0.8rem 0;
-        }
-
-        .pedestal-showcase {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1.5rem;
-            margin: 2rem 0;
-        }
-
-        .pedestal-card {
-            background: rgba(50, 50, 50, 0.6);
-            padding: 1.5rem;
-            border-radius: 12px;
-            border: 1px solid rgba(150, 150, 150, 0.3);
-            text-align: center;
-        }
-
-        .pedestal-card h4 {
-            color: #cccccc;
-            margin-bottom: 0.8rem;
-            font-size: 1.2rem;
-        }
-
-        .pedestal-card img {
-            width: 100%;
-            height: 120px;
-            object-fit: contain;
-            border-radius: 8px;
-            margin-bottom: 1rem;
-        }
-
-        .crafting-preview {
-            background: rgba(30, 30, 30, 0.7);
-            padding: 1.5rem;
-            border-radius: 12px;
-            border: 1px solid rgba(150, 150, 150, 0.3);
-            margin: 2rem 0;
-        }
-
-        .crafting-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 1rem;
-            margin: 1rem 0;
-            background: rgba(0, 0, 0, 0.3);
-            padding: 1rem;
-            border-radius: 8px;
-        }
-
-        .crafting-slot {
-            width: 50px;
-            height: 50px;
-            background: rgba(100, 100, 100, 0.3);
-            border: 2px solid rgba(150, 150, 150, 0.5);
-            border-radius: 4px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto;
-        }
-
-        .crafting-result {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-top: 1rem;
-            font-weight: bold;
-            color: #cccccc;
-        }
-
-        .links-section {
-            background: rgba(50, 50, 50, 0.5);
-            padding: 2rem;
-            border-radius: 15px;
-            text-align: center;
-            margin: 2rem 0;
-        }
-
-        .btn-wiki {
-            background: linear-gradient(135deg, #888888, #666666);
-            color: white;
-            padding: 0.8rem 2rem;
-            border-radius: 30px;
-            font-weight: 600;
-            text-decoration: none;
-            display: inline-block;
-            margin: 0.5rem;
-            transition: all 0.3s ease;
-            box-shadow: 0 5px 15px rgba(100, 100, 100, 0.3);
-        }
-
-        .btn-wiki:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(100, 100, 100, 0.5);
-            background: linear-gradient(135deg, #aaaaaa, #888888);
-        }
-
-        .btn-home {
-            background: rgba(0, 31, 63, 0.8);
-            border: 1px solid rgba(100, 150, 255, 0.3);
-            color: white;
-            padding: 0.8rem 2.5rem;
-            border-radius: 50px;
-            font-weight: 600;
-            text-decoration: none;
-            display: inline-block;
-            margin-top: 1rem;
-            transition: all 0.3s ease;
-        }
-
-        .btn-home:hover {
-            background: rgba(0, 50, 100, 0.9);
-            transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(100, 150, 255, 0.3);
-        }
-
-        @media (max-width: 768px) {
-            .mod-title { font-size: 2.2rem; }
-            .wiki-content { padding: 2rem 1.5rem; }
-            .status-banner { font-size: 1.1rem; padding: 0.8rem 1rem; }
-            .mod-icon { width: 150px; height: 150px; }
+        @media (max-width: 800px) {
+          .mod-hero { grid-template-columns: 1fr; }
+          .hero-left { border-right: none; border-bottom: 1px solid var(--border); padding: 3rem 0; }
+          .hero-right { padding: 2rem 0; flex-direction: row; flex-wrap: wrap; gap: 1.5rem; align-items: flex-start; }
+          .feat-grid { grid-template-columns: 1fr; }
+          nav { display: none; }
+          footer { flex-direction: column; gap: 0.5rem; text-align: center; }
         }
     </style>
 </head>
 <body>
+<header>
+    <div class="wrapper">
+        <div class="topbar">
+            <a href="index.html" class="logo">Mattias<span>15</span></a>
+            <nav>
+                <a href="mods.html" class="active">Mods</a>
+                <a href="commissions.html">Commissions</a>
+                <a href="bisecthosting.html">Server Hosting</a>
+                <a href="https://discord.gg/9XY62bv7AY" target="_blank" style="color:var(--text);border:1px solid var(--border);padding:0.4rem 0.9rem;border-radius:5px;font-size:0.82rem;">Discord ↗</a>
+            </nav>
+        </div>
+    </div>
+</header>
 
-<div class="bg-animation"></div>
-<div class="particles"></div>
-
-<div class="wiki-container">
-    <div class="status-banner">
-        ⏸️ DEVELOPMENT PAUSED ⏸️
+<div class="wrapper">
+    <div class="mod-hero">
+        <div class="hero-left">
+            <div class="breadcrumb">
+                <a href="mods.html">Mods</a>
+                <span>/</span>
+                <span>Pedestals</span>
+            </div>
+            <div class="mod-status"><span class="status-dot"></span>Dev Paused</div>
+            <h1>Pedestals</h1>
+            <p class="hero-tagline">Display your items in fashion by placing them in pedestals to showcase to your friends in museums or trophy rooms.</p>
+            <div class="meta-tags"><span class="meta-tag">Fabric & NeoForge & Forge</span> <span class="meta-tag">Decorative</span> <span class="meta-tag">Display</span></div>
+            <div class="dl-btns"><a href="https://modrinth.com/mod/pedestal" target="_blank" class="dl-btn btn-mod">Modrinth ↗</a><a href="https://www.curseforge.com/minecraft/mc-mods/pedestal" target="_blank" class="dl-btn btn-ghost-mod">CurseForge ↗</a><a href="https://discord.gg/9XY62bv7AY" target="_blank" class="dl-btn btn-ghost-mod">Discord ↗</a></div>
+        </div>
+        <div class="hero-right">
+            <img src="img/mods/pedestals.png" alt="Pedestals" class="mod-icon" />
+            <div class="stat-row"><span class="stat-key">Type</span><span class="stat-val">Decorative</span></div><div class="stat-row"><span class="stat-key">Animation</span><span class="stat-val">Float + Rotate</span></div><div class="stat-row"><span class="stat-key">Mod Items</span><span class="stat-val">Supported</span></div><div class="stat-row"><span class="stat-key">Status</span><span class="stat-val">Dev Paused</span></div>
+            <div class="status-bar" style="background:rgba(244,185,66,0.12);border:1px solid rgba(244,185,66,0.2);color:#f4b942;">⏸ Development on this mod is currently <strong>paused</strong> existing versions still work on supported game versions. (With some bugs)</div>
+        </div>
     </div>
 
-    <div class="wiki-content">
-        <div class="mod-header">
-            <img src="img/mods/pedestals.png" alt="Pedestals" class="mod-icon">
-            <h1 class="mod-title">Pedestals</h1>
-        </div>
+    <div class="wiki-body">
 
         <div class="wiki-section">
             <h2>Overview</h2>
-            <p>
-                <strong>Pedestals</strong> is a decorative mod that adds functional and visually appealing pedestals to Minecraft. These pedestals allow players to display their items in style, with smooth animations that bring your treasures to life.
-            </p>
-            <p>
-                Perfect for museums, trophy rooms, or any build where you want to showcase your rare finds, Pedestals transforms ordinary item storage into an elegant display solution. Items gently float and rotate above the pedestal, creating a magical effect that enhances any room.
-            </p>
+            <p>Pedestals is a decorative mod that adds functional display pedestals to Minecraft. Items will hover and rotate above the pedestal, Creating a cool effect that you goes good for displaying rare and unique items!.</p>
         </div>
-
         <div class="wiki-section">
-            <h2>Key Features</h2>
-            <ul>
-                <li><strong>🎨 Beautiful Displays:</strong> Items hover and rotate above pedestals with smooth animations</li>
-                <li><strong>🧱 Multiple Variants:</strong> Different pedestal designs to match your build style</li>
-                <li><strong>🔄 Easy to Use:</strong> Simply place an item on a pedestal to display it</li>
-                <li><strong>📦 Item Storage:</strong> Pedestals can store items when not in display mode</li>
-                <li><strong>🎮 Multiplayer Friendly:</strong> Works seamlessly on servers</li>
-                <li><strong>🔌 Mod Compatible:</strong> Displays items from any mod</li>
-            </ul>
-        </div>
-
-        <div class="wiki-section">
-            <h2>Usage Guide</h2>
-            <h3>Basic Usage</h3>
-            <ol>
-                <li>Craft a pedestal using the recipes shown in game</li>
-                <li>Place the pedestal in your world</li>
-                <li>Right-click the pedestal with any item to display it</li>
-                <li>Right-click again to retrieve the item</li>
-            </ol>
-
-            <h3>Display Tips</h3>
-            <ul>
-                <li>Use pedestals to create museum exhibits</li>
-                <li>Display rare items in your trophy room</li>
-                <li>Create themed collections (e.g., all ores, all tools)</li>
-                <li>Use different pedestal types to match your build style</li>
-                <li>Combine with item frames for more complex displays</li>
-            </ul>
-        </div>
-
-        <div class="wiki-section">
-            <h2>Building Ideas</h2>
-            <p>Here are some creative ways to use Pedestals in your builds:</p>
-
-            <h3>🏛️ Museum Exhibit</h3>
-            <p>Create a dedicated museum building with different rooms for various item categories. Use pedestals to display rare mob drops, ores, tools, and decorative items.</p>
-
-            <h3>🏆 Trophy Room</h3>
-            <p>Design a personal trophy room to showcase your greatest achievements. Display rare items like dragon eggs, nether stars, and enchanted gear on pedestals.</p>
-
-            <h3>🛍️ Shop Displays</h3>
-            <p>Use pedestals in your shops to display items for sale. The floating animation draws attention to your merchandise.</p>
-
-            <h3>🎨 Art Gallery</h3>
-            <p>Create an art gallery using item frames and pedestals. Display paintings, heads, and decorative blocks in an elegant setting.</p>
-
-            <h3>🏰 Throne Room</h3>
-            <p>Enhance your throne room with pedestals displaying royal treasures and artifacts around your throne.</p>
-        </div>
-
-        <div class="links-section">
-            <h2 style="color: #cccccc; margin-bottom: 1.5rem;">Download & Links</h2>
-            <div>
-                <a target="_blank" href="https://modrinth.com/mod/pedestal" class="btn-wiki">
-                    Modrinth
-                </a>
-                <a target="_blank" href="https://www.curseforge.com/minecraft/mc-mods/pedestal" class="btn-wiki">
-                    CurseForge
-                </a>
-                <a target="_blank" href="https://discord.gg/9XY62bv7AY" class="btn-wiki">
-                    Discord
-                </a>
+            <h2>How to Use</h2>
+            <div class="steps">
+                <div class="step-item"><div class="step-num">01</div><div><h4>Craft a Pedestal</h4><p>Use the in game recipe book or JEI/REI to find the crafting recipe.</p></div></div>
+                <div class="step-item"><div class="step-num">02</div><div><h4>Place It</h4><p>Place the pedestal wherever you want to display something.</p></div></div>
+                <div class="step-item"><div class="step-num">03</div><div><h4>Right Click with an Item</h4><p>The item will appear floating above the pedestal with a smooth animation.</p></div></div>
+                <div class="step-item"><div class="step-num">04</div><div><h4>Right Click to Retrieve</h4><p>Right click the pedestal again to take the item back.</p></div></div>
             </div>
         </div>
-
-        <div class="text-center">
-            <a href="mods.html" class="btn-home">← Back to Mods</a>
-        </div>
     </div>
-</div>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <footer>
+        <p>© 2025 Mattias15. All rights reserved. (pls don't steal my website 🥹🫰)</p>
+        <p>
+            <a href="https://www.curseforge.com/members/mattiasay68/projects" target="_blank" style="color:var(--muted);text-decoration:none;margin-right:1.2rem;">CurseForge</a>
+            <a href="https://modrinth.com/user/mattias15" target="_blank" style="color:var(--muted);text-decoration:none;margin-right:1.2rem;">Modrinth</a>
+            <a href="https://discord.gg/9XY62bv7AY" target="_blank" style="color:var(--muted);text-decoration:none;">Discord</a>
+        </p>
+    </footer>
+</div>
 </body>
 </html>

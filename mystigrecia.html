@@ -3,353 +3,174 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Mysti Grecia - Discontinued Mod | Mattias15</title>
-
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&display=swap" rel="stylesheet" />
-
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
-
+    <title>Mysti Grecia - Mattias15</title>
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet" />
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
 
-        html, body {
-            min-height: 100vh;
-            font-family: 'Poppins', sans-serif;
-            color: white;
-            overflow-x: hidden;
+        :root {
+          --bg: #0a0b0f; --bg2: #0f1118; --bg3: #161923;
+          --border: rgba(255,255,255,0.07);
+          --text: #e8ecf4; --muted: #7a8499;
+          --mc: #5bdb8a; --mc-dim: rgba(91,219,138,0.12);
         }
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { background: var(--bg); color: var(--text); font-family: 'DM Sans', sans-serif; font-weight: 300; line-height: 1.6; min-height: 100vh; }
+        body::before { content: ''; position: fixed; inset: 0; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E"); pointer-events: none; z-index: 999; opacity: 0.4; }
+        .wrapper { max-width: 1100px; margin: 0 auto; padding: 0 2rem; }
+        header { border-bottom: 1px solid var(--border); position: sticky; top: 0; background: rgba(10,11,15,0.92); backdrop-filter: blur(16px); z-index: 100; }
+        .topbar { display: flex; align-items: center; justify-content: space-between; height: 60px; }
+        .logo { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.1rem; letter-spacing: -0.02em; color: var(--text); text-decoration: none; }
+        .logo span { color: var(--mc); }
+        nav { display: flex; gap: 2rem; align-items: center; }
+        nav a { font-size: 0.85rem; font-weight: 400; color: var(--muted); text-decoration: none; letter-spacing: 0.03em; transition: color 0.2s; }
+        nav a:hover { color: var(--text); }
 
-        body { background: #000; position: relative; }
 
-        .bg-animation {
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            background: linear-gradient(135deg,
-                #000000 0%,
-                #1a0800 15%,
-                #441a00 35%,
-                #662200 50%,
-                #331100 70%,
-                #0d0400 100%
-            );
-            background-size: 400% 400%;
-            animation: emberFlow 20s ease infinite;
-            z-index: -2;
-        }
+        :root { --a: #e8613c; --ad: rgba(232,97,60,0.12); --ab: rgba(232,97,60,0.2); }
 
-        .bg-animation::before {
-            content: "";
-            position: absolute;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            background: radial-gradient(circle at 30% 50%, rgba(255, 140, 0, 0.3), transparent 50%),
-                        radial-gradient(circle at 70% 30%, rgba(255, 100, 0, 0.2), transparent 60%);
-            animation: pulseGlow 12s ease-in-out infinite;
-        }
+        .mod-hero { display: grid; grid-template-columns: 1fr 300px; border-bottom: 1px solid var(--border); animation: fadeUp 0.7s ease both; }
+        .hero-left { padding: 4rem 3rem 4rem 0; border-right: 1px solid var(--border); }
+        .breadcrumb { display: flex; align-items: center; gap: 0.5rem; font-size: 0.75rem; color: var(--muted); margin-bottom: 1.5rem; }
+        .breadcrumb a { color: var(--muted); text-decoration: none; transition: color 0.2s; } .breadcrumb a:hover { color: var(--text); }
+        .breadcrumb span { opacity: 0.4; }
+        .mod-status { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.3rem 0.8rem; border-radius: 4px; font-size: 0.7rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; background: rgba(232,92,92,0.12); color: #e85c5c; border: 1px solid rgba(232,92,92,0.2); margin-bottom: 1rem; }
+        .status-dot { width: 6px; height: 6px; border-radius: 50%; background: #e85c5c; }
+        h1 { font-family: 'Syne', sans-serif; font-weight: 800; font-size: clamp(2.2rem, 5vw, 3.4rem); line-height: 1.05; letter-spacing: -0.03em; margin-bottom: 0.6rem; }
+        .hero-tagline { font-size: 0.92rem; color: var(--muted); line-height: 1.7; max-width: 440px; margin-bottom: 1.5rem; }
+        .meta-tags { display: flex; gap: 0.4rem; flex-wrap: wrap; margin-bottom: 1.5rem; }
+        .meta-tag { padding: 0.25rem 0.65rem; border: 1px solid var(--border); border-radius: 4px; font-size: 0.72rem; font-weight: 500; color: var(--muted); }
+        .dl-btns { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+        .dl-btn { display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.6rem 1.2rem; border-radius: 6px; font-size: 0.84rem; font-weight: 500; text-decoration: none; transition: all 0.2s; font-family: 'DM Sans', sans-serif; }
+        .btn-mod { background: var(--a); color: #fff; } .btn-mod:hover { opacity: 0.88; transform: translateY(-1px); }
+        .btn-ghost-mod { background: transparent; color: var(--text); border: 1px solid var(--border); } .btn-ghost-mod:hover { border-color: rgba(255,255,255,0.18); background: rgba(255,255,255,0.04); }
 
-        @keyframes emberFlow {
-            0%   { background-position: 0% 50%; }
-            50%  { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
+        .hero-right { padding: 3rem 0 3rem 2.5rem; display: flex; flex-direction: column; }
+        .mod-icon { width: 120px; height: 120px; border-radius: 16px; border: 1px solid var(--ab); background: var(--bg2); object-fit: contain; padding: 0.5rem; margin-bottom: 1.5rem; }
+        .stat-row { display: flex; justify-content: space-between; align-items: center; padding: 0.65rem 0; border-bottom: 1px solid var(--border); font-size: 0.82rem; }
+        .stat-row:first-of-type { border-top: 1px solid var(--border); }
+        .stat-key { color: var(--muted); }
+        .stat-val { color: var(--text); font-weight: 500; font-family: 'Syne', sans-serif; font-size: 0.82rem; }
 
-        @keyframes pulseGlow {
-            0%, 100% { opacity: 0.6; }
-            50%      { opacity: 1; }
-        }
+        .status-bar { padding: 0.85rem 1.5rem; border-radius: 8px; font-size: 0.84rem; margin: 2.5rem 0 0; line-height: 1.6; }
 
-        .particles {
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            pointer-events: none;
-            z-index: -1;
-            background-image:
-                radial-gradient(2px 2px at 20% 30%, rgba(255, 140, 0, 0.5), transparent),
-                radial-gradient(3px 3px at 60% 70%, rgba(255, 100, 0, 0.4), transparent),
-                radial-gradient(2px 2px at 90% 10%, rgba(255, 165, 0, 0.5), transparent);
-            background-size: 300% 300%;
-            animation: float 35s linear infinite;
-        }
+        .wiki-body { padding: 3rem 0 5rem; }
+        .wiki-section { margin-bottom: 2.5rem; padding-bottom: 2.5rem; border-bottom: 1px solid var(--border); animation: fadeUp 0.5s ease both; opacity: 0; }
+        .wiki-section:last-child { border-bottom: none; }
+        .wiki-section:nth-child(1) { animation-delay: 0.05s; }
+        .wiki-section:nth-child(2) { animation-delay: 0.1s; }
+        .wiki-section:nth-child(3) { animation-delay: 0.15s; }
+        .wiki-section:nth-child(4) { animation-delay: 0.2s; }
+        .wiki-section h2 { font-family: 'Syne', sans-serif; font-size: 1rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--a); margin-bottom: 1.2rem; display: flex; align-items: center; gap: 0.6rem; }
+        .wiki-section h2::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+        .wiki-section p { font-size: 0.9rem; color: var(--muted); line-height: 1.8; margin-bottom: 0.75rem; }
+        .wiki-section ul { padding-left: 1.2rem; }
+        .wiki-section ul li { font-size: 0.88rem; color: var(--muted); line-height: 1.75; margin-bottom: 0.4rem; }
+        .wiki-section ul li strong { color: var(--text); font-weight: 500; }
 
-        @keyframes float {
-            0%   { transform: translateY(0) translateX(0); }
-            100% { transform: translateY(-100vh) translateX(50px); }
-        }
+        .feat-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.75rem; }
+        .feat-card { background: var(--bg2); border: 1px solid var(--border); border-radius: 10px; padding: 1.25rem; position: relative; overflow: hidden; transition: border-color 0.2s; }
+        .feat-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: var(--a); opacity: 0; transition: opacity 0.2s; }
+        .feat-card:hover { border-color: var(--ab); } .feat-card:hover::before { opacity: 1; }
+        .feat-card span { font-size: 1.3rem; display: block; margin-bottom: 0.5rem; }
+        .feat-card h4 { font-family: 'Syne', sans-serif; font-size: 0.85rem; font-weight: 700; margin-bottom: 0.35rem; color: var(--text); }
+        .feat-card p { font-size: 0.8rem; color: var(--muted); line-height: 1.6; margin: 0; }
+        .feat-card code { font-size: 0.78rem; background: rgba(255,255,255,0.06); padding: 0.1rem 0.3rem; border-radius: 3px; color: var(--a); }
 
-        .wiki-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 2rem;
-            position: relative;
-            z-index: 1;
-            min-height: 100vh;
-        }
+        .steps { display: flex; flex-direction: column; gap: 0.5rem; }
+        .step-item { display: flex; gap: 1.2rem; align-items: flex-start; padding: 1rem; background: var(--bg2); border: 1px solid var(--border); border-radius: 8px; }
+        .step-num { font-family: 'Syne', sans-serif; font-size: 1.1rem; font-weight: 800; color: var(--a); opacity: 0.5; flex-shrink: 0; width: 28px; }
+        .step-item h4 { font-family: 'Syne', sans-serif; font-size: 0.85rem; font-weight: 700; margin-bottom: 0.2rem; color: var(--text); }
+        .step-item p { font-size: 0.8rem; color: var(--muted); line-height: 1.6; margin: 0; }
 
-        .discontinued-banner {
-            background: linear-gradient(135deg, #ff4500, #cc3300);
-            color: white;
-            text-align: center;
-            padding: 1rem 2rem;
-            font-size: 1.3rem;
-            font-weight: 700;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            box-shadow: 0 4px 20px rgba(255, 69, 0, 0.5);
-            margin-bottom: 2rem;
-            animation: bannerPulse 2s ease-in-out infinite;
-        }
+        .tag-cloud { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+        .tag { padding: 0.3rem 0.7rem; background: var(--ad); border: 1px solid var(--ab); border-radius: 4px; font-size: 0.75rem; font-weight: 500; color: var(--a); }
 
-        @keyframes bannerPulse {
-            0%, 100% { transform: scale(1); }
-            50%      { transform: scale(1.02); }
-        }
+        .code-block { background: var(--bg3); border: 1px solid var(--border); border-radius: 6px; padding: 0.75rem 1rem; font-family: 'Courier New', monospace; font-size: 0.84rem; color: var(--a); margin: 0.75rem 0; }
 
-        .wiki-content {
-            background: rgba(40, 10, 0, 0.75);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border-radius: 20px;
-            padding: 3rem;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
-            border: 1px solid rgba(255, 140, 0, 0.3);
-            opacity: 0;
-            transform: translateY(20px);
-            animation: fadeInUp 1s forwards 0.5s;
-        }
+        footer { border-top: 1px solid var(--border); padding: 2rem 0; display: flex; justify-content: space-between; align-items: center; }
+        footer p { font-size: 0.8rem; color: var(--muted); }
 
-        @keyframes fadeInUp {
-            to { opacity: 1; transform: translateY(0); }
-        }
+        @keyframes fadeUp { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
 
-        .mod-header {
-            display: flex;
-            gap: 2rem;
-            margin-bottom: 2rem;
-            flex-wrap: wrap;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .mod-icon {
-            width: 200px;
-            height: 200px;
-            border-radius: 20px;
-            border: 3px solid rgba(255, 140, 0, 0.5);
-            box-shadow: 0 8px 25px rgba(255, 69, 0, 0.4);
-        }
-
-        .mod-title {
-            font-family: 'Orbitron', monospace;
-            font-size: 3rem;
-            font-weight: 900;
-            background: linear-gradient(135deg, #ff9500, #ff6600, #ff4500);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            animation: titleGlow 3s ease-in-out infinite alternate;
-        }
-
-        @keyframes titleGlow {
-            from { filter: drop-shadow(0 0 15px rgba(255, 140, 0, 0.7)); }
-            to   { filter: drop-shadow(0 0 30px rgba(255, 100, 0, 0.9)); }
-        }
-
-        .wiki-section {
-            margin: 2.5rem 0;
-            padding: 1.5rem;
-            background: rgba(60, 20, 0, 0.3);
-            border-radius: 12px;
-            border-left: 4px solid rgba(255, 140, 0, 0.6);
-        }
-
-        .wiki-section h2 {
-            font-size: 1.8rem;
-            margin-bottom: 1rem;
-            color: #ff9500;
-            font-weight: 700;
-        }
-
-        .wiki-section h3 {
-            font-size: 1.4rem;
-            margin: 1.5rem 0 0.8rem;
-            color: #ff7700;
-        }
-
-        .wiki-section p, .wiki-section li {
-            font-size: 1.1rem;
-            line-height: 1.8;
-            color: #ffd4a3;
-            margin-bottom: 1rem;
-        }
-
-        .wiki-section ul {
-            padding-left: 2rem;
-        }
-
-        .wiki-section ul li {
-            margin: 0.8rem 0;
-        }
-
-        .links-section {
-            background: rgba(80, 30, 0, 0.4);
-            padding: 2rem;
-            border-radius: 15px;
-            text-align: center;
-            margin: 2rem 0;
-        }
-
-        .btn-wiki {
-            background: linear-gradient(135deg, #ff7700, #ff4500);
-            color: white;
-            padding: 0.8rem 2rem;
-            border-radius: 30px;
-            font-weight: 600;
-            text-decoration: none;
-            display: inline-block;
-            margin: 0.5rem;
-            transition: all 0.3s ease;
-            box-shadow: 0 5px 15px rgba(255, 69, 0, 0.3);
-        }
-
-        .btn-wiki:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(255, 69, 0, 0.5);
-            background: linear-gradient(135deg, #ff8811, #ff5500);
-        }
-
-        .btn-home {
-            background: rgba(0, 31, 63, 0.8);
-            border: 1px solid rgba(100, 150, 255, 0.3);
-            color: white;
-            padding: 0.8rem 2.5rem;
-            border-radius: 50px;
-            font-weight: 600;
-            text-decoration: none;
-            display: inline-block;
-            margin-top: 1rem;
-            transition: all 0.3s ease;
-        }
-
-        .btn-home:hover {
-            background: rgba(0, 50, 100, 0.9);
-            transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(100, 150, 255, 0.3);
-        }
-
-        /* Add more content sections styling */
-        .feature-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1.5rem;
-            margin: 2rem 0;
-        }
-
-        .feature-card {
-            background: rgba(100, 40, 0, 0.4);
-            padding: 1.5rem;
-            border-radius: 12px;
-            border: 1px solid rgba(255, 140, 0, 0.3);
-        }
-
-        .feature-card h4 {
-            color: #ff9500;
-            margin-bottom: 0.8rem;
-            font-size: 1.2rem;
-        }
-
-        @media (max-width: 768px) {
-            .mod-title { font-size: 2.2rem; }
-            .wiki-content { padding: 2rem 1.5rem; }
-            .discontinued-banner { font-size: 1.1rem; padding: 0.8rem 1rem; }
-            .mod-icon { width: 150px; height: 150px; }
+        @media (max-width: 800px) {
+          .mod-hero { grid-template-columns: 1fr; }
+          .hero-left { border-right: none; border-bottom: 1px solid var(--border); padding: 3rem 0; }
+          .hero-right { padding: 2rem 0; flex-direction: row; flex-wrap: wrap; gap: 1.5rem; align-items: flex-start; }
+          .feat-grid { grid-template-columns: 1fr; }
+          nav { display: none; }
+          footer { flex-direction: column; gap: 0.5rem; text-align: center; }
         }
     </style>
 </head>
 <body>
+<header>
+    <div class="wrapper">
+        <div class="topbar">
+            <a href="index.html" class="logo">Mattias<span>15</span></a>
+            <nav>
+                <a href="mods.html" class="active">Mods</a>
+                <a href="commissions.html">Commissions</a>
+                <a href="bisecthosting.html">Server Hosting</a>
+                <a href="https://discord.gg/9XY62bv7AY" target="_blank" style="color:var(--text);border:1px solid var(--border);padding:0.4rem 0.9rem;border-radius:5px;font-size:0.82rem;">Discord ↗</a>
+            </nav>
+        </div>
+    </div>
+</header>
 
-<div class="bg-animation"></div>
-<div class="particles"></div>
-
-<div class="wiki-container">
-    <div class="discontinued-banner">
-        ⚠️ THIS MOD IS DISCONTINUED ⚠️
+<div class="wrapper">
+    <div class="mod-hero">
+        <div class="hero-left">
+            <div class="breadcrumb">
+                <a href="mods.html">Mods</a>
+                <span>/</span>
+                <span>Mysti Grecia</span>
+            </div>
+            <div class="mod-status"><span class="status-dot"></span>Discontinued</div>
+            <h1>Mysti Grecia</h1>
+            <p class="hero-tagline">Greek and Roman mythology comes to Minecraft creatures, weapons, and ores inspired by the Percy Jackson Franchise.</p>
+            <div class="meta-tags"><span class="meta-tag">Forge</span> <span class="meta-tag">Adventure</span> <span class="meta-tag">Mobs</span> <span class="meta-tag">Mythology</span></div>
+            <div class="dl-btns"><a href="https://modrinth.com/mod/mysti-grecia" target="_blank" class="dl-btn btn-mod">Modrinth ↗</a><a href="https://www.curseforge.com/minecraft/mc-mods/mysti-grecia" target="_blank" class="dl-btn btn-ghost-mod">CurseForge ↗</a><a href="https://discord.gg/U249FRtdDw" target="_blank" class="dl-btn btn-ghost-mod">Discord ↗</a></div>
+        </div>
+        <div class="hero-right">
+            <img src="img/mods/mystigrecia.png" alt="Mysti Grecia" class="mod-icon" />
+            <div class="stat-row"><span class="stat-key">Theme</span><span class="stat-val">Greek/Roman Myth</span></div><div class="stat-row"><span class="stat-key">Creatures</span><span class="stat-val">4+</span></div><div class="stat-row"><span class="stat-key">Weapons</span><span class="stat-val">Riptide, Ivlis, + more</span></div><div class="stat-row"><span class="stat-key">Status</span><span class="stat-val">Discontinued</span></div>
+            <div class="status-bar" style="background:rgba(232,92,92,0.12);border:1px solid rgba(232,92,92,0.2);color:#e85c5c;">⚠ This mod is <strong>discontinued</strong> and will not receive further updates.</div>
+        </div>
     </div>
 
-    <div class="wiki-content">
-        <div class="mod-header">
-            <img src="img/mods/mystigrecia.png" alt="Mysti Grecia" class="mod-icon">
-            <h1 class="mod-title">Mysti Grecia</h1>
-        </div>
+    <div class="wiki-body">
 
         <div class="wiki-section">
             <h2>Overview</h2>
-            <p>
-                <strong>Mysti Grecia</strong> was a Minecraft mod that brought the world of Greek mythology and Roman mythology to life. Getting inspiration from the Percy Jackson franchise, the mod integrated mythical creatures.
-            </p>
-            <p>
-                The mod was designed to create a mythological adventure, allowing players to encounter greek mythology monsters, craft amazing weapons, and even more was planned!
-            </p>
+            <p>Mysti Grecia brought the world of Greek and Roman mythology to Minecraft, getting inspiration from the Percy Jackson franchise. Players could encounter mythical creates from greek mythology, craft weapons from Percy Jackson, and mine unique ore, more was planned before development ended.</p>
         </div>
-
-        <div class="wiki-section">
-            <h2>Key Features</h2>
-            <div class="feature-grid">
-                <div class="feature-card">
-                    <h4>Mythical Creatures</h4>
-                    <p>Encounter mythical creatures from Greek mythology including Centaurs, Sea Serpents, and Satyrs.</p>
-                </div>
-                <div class="feature-card">
-                    <h4>Celestial Weapons</h4>
-                    <p>Craft unique weapons such as Riptide, Ivlis, Greek Aspis, Backbitter </p>
-                </div>
-                <div class="feature-card">
-                    <h4>Ores</h4>
-                    <p>Ores like Bronze, Silver, Tin, and Celestial Bronze!</p>
-                </div>
-            </div>
-        </div>
-
         <div class="wiki-section">
             <h2>Creatures</h2>
-            <ul>
-                <li><strong>Centaur:</strong> Half horse half human hybrid, if hit will shoot arrows at you with it's bow.</li>
-                <li><strong>Satyr:</strong> Half goat half human peaceful and would never attack on death would drop a goat horn and wool. </li>
-                <li><strong>Sea Serpent:</strong> Roamed the oceans and scary to come across if you do slay the Serpent you are rewarded with it's scales to make armor with them.</li>
-                <li><strong>Stymphalian Bird:</strong> Bronze feathered bird would shoot it's feathers at anyone or anything if you could defeat it you could get some of it's feathers to make arrows.</li>
-            </ul>
-        </div>
-
-        <div class="wiki-section">
-            <h2>Community</h2>
-            <p>
-                The Mysti Grecia community was where players regularly shared their ideas, showcased impressive builds, their own artwork and mods, or asking for help with any bugs with the mod!
-            </p>
-        </div>
-
-        <div class="links-section">
-            <h2 style="color: #ff9500; margin-bottom: 1.5rem;">Download & Links</h2>
-            <div>
-                <a target="_blank" href="https://modrinth.com/mod/mysti-grecia" class="btn-wiki">
-                    Modrinth
-                </a>
-                <a target="_blank" href="https://www.curseforge.com/minecraft/mc-mods/mysti-grecia" class="btn-wiki">
-                    CurseForge
-                </a>
-                <a target="_blank" href="https://discord.gg/U249FRtdDw" class="btn-wiki">
-                    Discord Community
-                </a>
+            <div class="feat-grid">
+                <div class="feat-card"><span>🏹</span><h4>Centaur</h4><p>Half horse, half human. If attacked, it retaliates with bow shots.</p></div>
+                <div class="feat-card"><span>🐐</span><h4>Satyr</h4><p>Half goat, half human peaceful and passive. Drops a goat horn and wool on death.</p></div>
+                <div class="feat-card"><span>🌊</span><h4>Sea Serpent</h4><p>Roams the oceans. Defeat it to collect scales for powerful armor.</p></div>
+                <div class="feat-card"><span>🪶</span><h4>Stymphalian Bird</h4><p>Bronze feathered bird that shoots its feathers. Its feathers can be used to craft arrows.</p></div>
             </div>
         </div>
+        <div class="wiki-section">
+            <h2>Weapons & Ores</h2>
+            <p>The mod added several unique items:</p>
+            <ul>
+                <li><strong>Weapons:</strong> Riptide, Ivlis, Greek Aspis, Backbitter</li>
+                <li><strong>Ores:</strong> Bronze, Silver, Tin, Celestial Bronze</li>
+            </ul>
 
-        <div class="text-center">
-            <a href="mods.html" class="btn-home">← Back to Mods</a>
-        </div>
-    </div>
+    <footer>
+        <p>© 2025 Mattias15. All rights reserved. (pls don't steal my website 🥹🫰)</p>
+        <p>
+            <a href="https://www.curseforge.com/members/mattiasay68/projects" target="_blank" style="color:var(--muted);text-decoration:none;margin-right:1.2rem;">CurseForge</a>
+            <a href="https://modrinth.com/user/mattias15" target="_blank" style="color:var(--muted);text-decoration:none;margin-right:1.2rem;">Modrinth</a>
+            <a href="https://discord.gg/9XY62bv7AY" target="_blank" style="color:var(--muted);text-decoration:none;">Discord</a>
+        </p>
+    </footer>
 </div>
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    </div>
 </body>
 </html>

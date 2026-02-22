@@ -1,0 +1,253 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Minecraft Commissions - Mattias15</title>
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet" />
+    <style>
+        :root {
+          --bg: #0a0b0f; --bg2: #0f1118; --bg3: #161923;
+          --border: rgba(255,255,255,0.07);
+          --text: #e8ecf4; --muted: #7a8499;
+          --mc: #5bdb8a; --mc-dim: rgba(91,219,138,0.12);
+          --rb: #e8613c; --accent: #4f8ef7; --accent-dim: rgba(79,142,247,0.12);
+        }
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { background: var(--bg); color: var(--text); font-family: 'DM Sans', sans-serif; font-weight: 300; line-height: 1.6; min-height: 100vh; }
+        body::before { content: ''; position: fixed; inset: 0; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E"); pointer-events: none; z-index: 999; opacity: 0.4; }
+        .wrapper { max-width: 1100px; margin: 0 auto; padding: 0 2rem; }
+
+        header { border-bottom: 1px solid var(--border); position: sticky; top: 0; background: rgba(10,11,15,0.92); backdrop-filter: blur(16px); z-index: 100; }
+        .topbar { display: flex; align-items: center; justify-content: space-between; height: 60px; }
+        .logo { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.1rem; letter-spacing: -0.02em; color: var(--text); text-decoration: none; }
+        .logo span { color: var(--mc); }
+        nav { display: flex; gap: 2rem; align-items: center; }
+        nav a { font-size: 0.85rem; font-weight: 400; color: var(--muted); text-decoration: none; letter-spacing: 0.03em; transition: color 0.2s; }
+        nav a:hover { color: var(--text); }
+        nav a.active { color: var(--mc); }
+
+        .page-hero { padding: 4rem 0 3rem; border-bottom: 1px solid var(--border); animation: fadeUp 0.7s ease both; }
+        .breadcrumb { display: flex; align-items: center; gap: 0.5rem; font-size: 0.75rem; color: var(--muted); margin-bottom: 1.5rem; }
+        .breadcrumb a { color: var(--muted); text-decoration: none; transition: color 0.2s; }
+        .breadcrumb a:hover { color: var(--text); }
+        .breadcrumb span { opacity: 0.4; }
+        .hero-badge { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.35rem 0.8rem; border-radius: 4px; font-size: 0.72rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; background: var(--mc-dim); color: var(--mc); border: 1px solid rgba(91,219,138,0.2); margin-bottom: 1rem; }
+        h1 { font-family: 'Syne', sans-serif; font-weight: 800; font-size: clamp(2.2rem, 5vw, 3.6rem); line-height: 1.05; letter-spacing: -0.03em; }
+        h1 em { font-style: normal; color: var(--mc); }
+        .hero-sub { margin-top: 0.8rem; font-size: 0.95rem; color: var(--muted); max-width: 520px; line-height: 1.75; }
+        .hero-actions { display: flex; gap: 0.75rem; margin-top: 2rem; flex-wrap: wrap; }
+        .btn-mc { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.65rem 1.4rem; background: var(--mc); color: #071a0f; border-radius: 6px; font-size: 0.88rem; font-weight: 500; text-decoration: none; transition: all 0.2s; border: none; font-family: 'DM Sans', sans-serif; cursor: pointer; }
+        .btn-mc:hover { background: #76e8a0; transform: translateY(-1px); }
+        .btn-ghost { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.65rem 1.4rem; background: transparent; color: var(--text); border: 1px solid var(--border); border-radius: 6px; font-size: 0.88rem; font-weight: 500; text-decoration: none; transition: all 0.2s; font-family: 'DM Sans', sans-serif; }
+        .btn-ghost:hover { border-color: rgba(255,255,255,0.2); background: rgba(255,255,255,0.04); }
+
+        .page-body { display: grid; grid-template-columns: 1fr 320px; gap: 4rem; padding: 3.5rem 0 5rem; align-items: start; }
+
+        .section-label { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-bottom: 1.5rem; display: block; }
+        .offerings { display: flex; flex-direction: column; gap: 0.75rem; margin-bottom: 3rem; }
+        .offering-row { background: var(--bg2); border: 1px solid var(--border); border-radius: 10px; padding: 1.5rem; display: flex; align-items: flex-start; gap: 1.2rem; transition: all 0.2s; position: relative; overflow: hidden; }
+        .offering-row::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 2px; background: var(--mc); opacity: 0; transition: opacity 0.2s; }
+        .offering-row:hover { border-color: rgba(91,219,138,0.15); }
+        .offering-row:hover::before { opacity: 1; }
+        .offering-icon { font-size: 1.4rem; flex-shrink: 0; width: 42px; height: 42px; background: var(--mc-dim); border-radius: 8px; display: flex; align-items: center; justify-content: center; }
+        .offering-body h3 { font-family: 'Syne', sans-serif; font-size: 0.95rem; font-weight: 700; margin-bottom: 0.3rem; }
+        .offering-body p { font-size: 0.82rem; color: var(--muted); line-height: 1.6; }
+
+        .featured-commission { background: var(--bg2); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; margin-bottom: 3rem; }
+        .featured-commission-header { padding: 1.5rem 1.5rem 0; }
+        .featured-tag { display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.2rem 0.6rem; border-radius: 3px; font-size: 0.65rem; font-weight: 600; letter-spacing: 0.07em; text-transform: uppercase; background: var(--accent-dim); color: var(--accent); margin-bottom: 0.75rem; }
+        .featured-commission h2 { font-family: 'Syne', sans-serif; font-size: 1.3rem; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 0.5rem; }
+        .featured-commission-desc { padding: 0 1.5rem 1.5rem; font-size: 0.87rem; color: var(--muted); line-height: 1.7; }
+        .featured-commission-img { width: 100%; height: 220px; background: var(--bg3); display: flex; align-items: center; justify-content: center; font-size: 3rem; opacity: 0.2; border-top: 1px solid var(--border); }
+        .featured-commission-footer { padding: 1.2rem 1.5rem; border-top: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; }
+        .price-tag { font-family: 'Syne', sans-serif; font-size: 0.9rem; font-weight: 700; color: var(--mc); }
+        .price-tag span { font-size: 0.7rem; color: var(--muted); font-family: 'DM Sans', sans-serif; font-weight: 300; margin-left: 0.3rem; }
+
+        .sidebar { position: sticky; top: 80px; display: flex; flex-direction: column; gap: 1rem; }
+        .sidebar-card { background: var(--bg2); border: 1px solid var(--border); border-radius: 10px; padding: 1.5rem; }
+        .sidebar-card h3 { font-family: 'Syne', sans-serif; font-size: 0.85rem; font-weight: 700; margin-bottom: 1rem; }
+        .sidebar-row { display: flex; justify-content: space-between; align-items: center; padding: 0.6rem 0; border-bottom: 1px solid var(--border); font-size: 0.82rem; }
+        .sidebar-row:last-child { border-bottom: none; }
+        .sidebar-row .key { color: var(--muted); }
+        .sidebar-row .val { color: var(--text); font-weight: 500; }
+        .sidebar-row .val.green { color: var(--mc); }
+        .sidebar-note { font-size: 0.78rem; color: var(--muted); line-height: 1.65; }
+        .discord-link { display: flex; align-items: center; gap: 0.6rem; padding: 0.65rem 1rem; border: 1px solid var(--border); border-radius: 8px; font-size: 0.82rem; font-weight: 500; color: var(--text); text-decoration: none; transition: all 0.2s; margin-top: 0.75rem; }
+        .discord-link:hover { border-color: rgba(255,255,255,0.18); background: rgba(255,255,255,0.04); }
+        .cta-full { display: flex; align-items: center; justify-content: center; gap: 0.5rem; padding: 0.75rem; background: var(--mc-dim); color: var(--mc); border: 1px solid rgba(91,219,138,0.2); border-radius: 8px; font-size: 0.85rem; font-weight: 500; text-decoration: none; transition: all 0.2s; }
+        .cta-full:hover { background: rgba(91,219,138,0.2); }
+
+        footer { border-top: 1px solid var(--border); padding: 2rem 0; display: flex; justify-content: space-between; align-items: center; }
+        footer p { font-size: 0.8rem; color: var(--muted); }
+
+        @keyframes fadeUp { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
+
+        @media (max-width: 800px) {
+          .page-body { grid-template-columns: 1fr; gap: 2rem; }
+          .sidebar { position: static; }
+          nav { display: none; }
+          footer { flex-direction: column; gap: 0.5rem; text-align: center; }
+        }
+
+.featured-commission img {
+    display:block;
+    margin:1rem auto;
+    max-width:85%;
+
+    border:3px solid #111;
+    border-radius:22px;
+
+    box-shadow:
+        0 6px 16px rgba(0,0,0,0.35),
+        inset 0 0 0 1px rgba(255,255,255,0.05);
+}
+
+        .featured-commission h2 a{
+    color:inherit;
+    text-decoration:none;
+    transition:opacity .15s ease;
+}
+
+.featured-commission h2 a:hover{
+    opacity:.8;
+}
+    </style>
+</head>
+<body>
+<header>
+    <div class="wrapper">
+        <div class="topbar">
+            <a href="index.html" class="logo">Mattias<span>15</span></a>
+            <nav>
+                <a href="work.html">Work</a>
+                <a href="commissions.html" class="active">Commissions</a>
+                <a href="bisecthosting.html">Server Hosting</a>
+                <a href="https://discord.gg/9XY62bv7AY" target="_blank" style="color:var(--text);border:1px solid var(--border);padding:0.4rem 0.9rem;border-radius:5px;font-size:0.82rem;">Discord ↗</a>
+            </nav>
+        </div>
+    </div>
+</header>
+
+<div class="wrapper">
+    <div class="page-hero">
+        <div class="breadcrumb">
+            <a href="commissions.html">Commissions</a>
+            <span>/</span>
+            <span>Minecraft Mods</span>
+        </div>
+        <div class="hero-badge">
+            <svg width="12" height="12" viewBox="0 0 16 16" fill="none"><rect x="1" y="1" width="6" height="6" rx="1" fill="currentColor"/><rect x="9" y="1" width="6" height="6" rx="1" fill="currentColor" opacity=".6"/><rect x="1" y="9" width="6" height="6" rx="1" fill="currentColor" opacity=".6"/><rect x="9" y="9" width="6" height="6" rx="1" fill="currentColor"/></svg>
+            Minecraft Java Edition
+        </div>
+        <h1>Minecraft Mod<br><em>Commissions</em></h1>
+        <p class="hero-sub">Custom Minecraft Java Edition mods.</p>
+        <div class="hero-actions">
+            <a href="requestcommission.html" class="btn-mc">Request a Mod →</a>
+            <a href="https://discord.com/users/533087848493219851" target="_blank" class="btn-ghost">Chat on Discord ↗</a>
+        </div>
+    </div>
+
+    <div class="page-body">
+        <div class="main-col">
+
+            <span class="section-label">What I Make</span>
+            <div class="offerings">
+                <div class="offering-row">
+                    <div class="offering-icon">⚔️</div>
+                    <div class="offering-body">
+                        <h3>Mobs & Entities</h3>
+                        <p>Custom mobs with AI, animations, drops, and spawn rules. From small mobs to full on bosses.</p>
+                    </div>
+                </div>
+                <div class="offering-row">
+                    <div class="offering-icon">🌍</div>
+                    <div class="offering-body">
+                        <h3>Biomes & World Gen</h3>
+                        <p>New biomes, structures, ores, features, and dimensions.</p>
+                    </div>
+                </div>
+                <div class="offering-row">
+                    <div class="offering-icon">🎮</div>
+                    <div class="offering-body">
+                        <h3>Game Mechanics</h3>
+                        <p>Custom minigames, twist, configs, changing how something in the game works, and more!</p>
+                    </div>
+                </div>
+                <div class="offering-row">
+                    <div class="offering-icon">🏗️</div>
+                    <div class="offering-body">
+                        <h3>Blocks & Items</h3>
+                        <p>New blocks, tools, armour, and decorative items with custom textures and crafting recipes. Maybe even blocks like the crafting table!</p>
+                    </div>
+                </div>
+                <div class="offering-row">
+                    <div class="offering-icon">✨</div>
+                    <div class="offering-body">
+                        <h3>QoL</h3>
+                        <p>Game tweaks, addons of other mods, quality of life features</p>
+                    </div>
+                </div>
+            </div>
+
+            <span class="section-label">Example Commission</span>
+            <div class="featured-commission">
+                <div class="featured-commission-header">
+                    <div class="featured-tag">Example</div>
+                    <h2>
+                        <a href="https://www.curseforge.com/minecraft/modpacks/acopalypse-z" target="_blank" rel="noopener noreferrer">
+                            Infection Mod
+                        </a>
+                    </h2>
+                </div>
+                <div class="featured-commission-desc">
+                    The Infection Mod has zombies which will have a 30% chance to spawn with the infection. If you get hit by an infected zombie, you will become Infected you will slowly lose hearts every 2 minutes until you die! Save yourself by using Vaccine Z it will cure you and restore all your hearts!
+                </div>
+                <img src="img/reviews/review.png" alt="Comission Review">
+                <div class="featured-commission-footer">
+
+                    <div class="price-tag">Negotiable pricing<span>— based on scope</span></div>
+                    <a href="requestcommission.html" class="btn-mc" style="padding:0.4rem 0.9rem;font-size:0.8rem;">Request Similar →</a>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="sidebar">
+            <div class="sidebar-card">
+                <h3>Commission Info</h3>
+                <div class="sidebar-row"><span class="key">Status</span><span class="val green">● Open</span></div>
+                <div class="sidebar-row"><span class="key">Platform</span><span class="val">Fabric NeoForge Forge</span></div>
+                <div class="sidebar-row"><span class="key">Versions</span><span class="val">1.20.1+ Mainly</span></div>
+                <div class="sidebar-row"><span class="key">Pricing</span><span class="val">Negotiable</span></div>
+                <div class="sidebar-row"><span class="key">Response</span><span class="val">Usually same week</span></div>
+            </div>
+
+            <a href="requestcommission.html" class="cta-full">
+                <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M22 2L11 13M22 2L15 22l-4-9-9-4 20-7z"/></svg>
+                Submit a Request
+            </a>
+
+            <div class="sidebar-card">
+                <h3>Prefer to chat first?</h3>
+                <p class="sidebar-note">DM me on Discord if you want to discuss the idea before committing to a request form.</p>
+                <a href="https://discord.com/users/533087848493219851" target="_blank" class="discord-link">
+                    <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M13.545 2.907a13.227 13.227 0 0 0-3.257-1.011.05.05 0 0 0-.052.025c-.141.25-.297.577-.406.833a12.19 12.19 0 0 0-3.658 0 8.258 8.258 0 0 0-.412-.833.051.051 0 0 0-.052-.025c-1.125.194-2.22.534-3.257 1.011a.041.041 0 0 0-.021.018C.356 6.024-.213 9.047.066 12.032c.001.014.01.028.021.037a13.276 13.276 0 0 0 3.995 2.02.05.05 0 0 0 .056-.019c.308-.42.582-.863.818-1.329a.05.05 0 0 0-.01-.059.051.051 0 0 0-.018-.011 8.875 8.875 0 0 1-1.248-.595.05.05 0 0 1-.02-.066.051.051 0 0 1 .015-.019c.084-.063.168-.129.248-.195a.05.05 0 0 1 .051-.007c2.619 1.196 5.454 1.196 8.041 0a.052.052 0 0 1 .053.007c.08.066.164.132.248.195a.051.051 0 0 1-.004.085 8.254 8.254 0 0 1-1.249.594.05.05 0 0 0-.03.03.052.052 0 0 0 .003.041c.24.465.515.909.817 1.329a.05.05 0 0 0 .056.019 13.235 13.235 0 0 0 4.001-2.02.049.049 0 0 0 .021-.037c.334-3.451-.559-6.449-2.366-9.106a.034.034 0 0 0-.02-.019Zm-8.198 7.307c-.789 0-1.438-.724-1.438-1.612 0-.889.637-1.613 1.438-1.613.807 0 1.45.73 1.438 1.613 0 .888-.637 1.612-1.438 1.612Zm5.316 0c-.788 0-1.438-.724-1.438-1.612 0-.889.637-1.613 1.438-1.613.807 0 1.451.73 1.438 1.613 0 .888-.631 1.612-1.438 1.612Z"/></svg>
+                    Message on Discord
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>© 2025 Mattias15. All rights reserved. (pls don't steal my website 🥹🫰)</p>
+        <p>
+            <a href="https://www.curseforge.com/members/mattiasay68/projects" target="_blank" style="color:var(--muted);text-decoration:none;margin-right:1.2rem;">CurseForge</a>
+            <a href="https://modrinth.com/user/mattias15" target="_blank" style="color:var(--muted);text-decoration:none;margin-right:1.2rem;">Modrinth</a>
+            <a href="https://discord.gg/9XY62bv7AY" target="_blank" style="color:var(--muted);text-decoration:none;">Discord</a>
+        </p>
+    </footer>
+</div>
+</body>
+</html>

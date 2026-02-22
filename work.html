@@ -1,0 +1,421 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Work — Mattias15</title>
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet" />
+    <style>
+        :root {
+          --bg: #0a0b0f;
+          --bg2: #0f1118;
+          --bg3: #161923;
+          --border: rgba(255,255,255,0.07);
+          --text: #e8ecf4;
+          --muted: #7a8499;
+          --mc: #5bdb8a;
+          --mc-dim: rgba(91,219,138,0.12);
+          --rb: #e8613c;
+          --rb-dim: rgba(232,97,60,0.12);
+          --accent: #4f8ef7;
+        }
+
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+
+        body {
+          background: var(--bg);
+          color: var(--text);
+          font-family: 'DM Sans', sans-serif;
+          font-weight: 300;
+          line-height: 1.6;
+          min-height: 100vh;
+        }
+
+        body::before {
+          content: '';
+          position: fixed;
+          inset: 0;
+          background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+          pointer-events: none;
+          z-index: 999;
+          opacity: 0.4;
+        }
+
+        .wrapper {
+          max-width: 1100px;
+          margin: 0 auto;
+          padding: 0 2rem;
+        }
+
+        header {
+          border-bottom: 1px solid var(--border);
+          position: sticky;
+          top: 0;
+          background: rgba(10, 11, 15, 0.92);
+          backdrop-filter: blur(16px);
+          z-index: 100;
+        }
+
+        .topbar {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          height: 60px;
+        }
+
+        .logo {
+          font-family: 'Syne', sans-serif;
+          font-weight: 800;
+          font-size: 1.1rem;
+          letter-spacing: -0.02em;
+          color: var(--text);
+          text-decoration: none;
+        }
+
+        .logo span { color: var(--mc); }
+
+        nav { display: flex; gap: 2rem; align-items: center; }
+
+        nav a {
+          font-size: 0.85rem;
+          font-weight: 400;
+          color: var(--muted);
+          text-decoration: none;
+          letter-spacing: 0.03em;
+          transition: color 0.2s;
+        }
+
+        nav a:hover { color: var(--text); }
+        nav a.active { color: var(--mc); }
+
+        .page-body {
+          min-height: calc(100vh - 60px);
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          padding: 5rem 0;
+        }
+
+        .page-top {
+          text-align: center;
+          margin-bottom: 4rem;
+          animation: fadeUp 0.6s ease both;
+        }
+
+        .hero-label {
+          font-size: 0.72rem;
+          font-weight: 500;
+          letter-spacing: 0.14em;
+          text-transform: uppercase;
+          color: var(--muted);
+          margin-bottom: 1rem;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 0.6rem;
+        }
+
+        .hero-label::before,
+        .hero-label::after {
+          content: '';
+          display: inline-block;
+          width: 20px;
+          height: 1px;
+          background: var(--muted);
+        }
+
+        h1 {
+          font-family: 'Syne', sans-serif;
+          font-weight: 800;
+          font-size: clamp(2.4rem, 5vw, 4rem);
+          line-height: 1.05;
+          letter-spacing: -0.03em;
+        }
+
+        h1 em { font-style: normal; color: var(--mc); }
+
+        .page-sub {
+          margin-top: 0.8rem;
+          font-size: 0.95rem;
+          color: var(--muted);
+          line-height: 1.75;
+        }
+
+        .platform-split {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 1px;
+          background: var(--border);
+          border: 1px solid var(--border);
+          border-radius: 16px;
+          overflow: hidden;
+          animation: fadeUp 0.6s 0.1s ease both;
+          opacity: 0;
+        }
+
+        .platform-panel {
+          background: var(--bg2);
+          padding: 3.5rem;
+          display: flex;
+          flex-direction: column;
+          gap: 1.5rem;
+          position: relative;
+          overflow: hidden;
+          cursor: pointer;
+          text-decoration: none;
+          color: inherit;
+          transition: background 0.3s;
+        }
+
+        .platform-panel::before {
+          content: '';
+          position: absolute;
+          top: 0; left: 0; right: 0;
+          height: 3px;
+          transition: height 0.3s;
+        }
+
+        .platform-panel.mc::before { background: var(--mc); }
+        .platform-panel.rb::before { background: var(--rb); }
+
+        .platform-panel::after {
+          content: '';
+          position: absolute;
+          inset: 0;
+          opacity: 0;
+          transition: opacity 0.3s;
+          pointer-events: none;
+        }
+
+        .platform-panel.mc::after { background: var(--mc-dim); }
+        .platform-panel.rb::after { background: var(--rb-dim); }
+
+        .platform-panel:hover { background: var(--bg3); }
+        .platform-panel:hover::after { opacity: 1; }
+        .platform-panel:hover::before { height: 4px; }
+
+        .panel-number {
+          font-family: 'Syne', sans-serif;
+          font-size: 5rem;
+          font-weight: 800;
+          line-height: 1;
+          letter-spacing: -0.04em;
+          opacity: 0.06;
+          position: absolute;
+          bottom: 2rem;
+          right: 2.5rem;
+          pointer-events: none;
+        }
+
+        .platform-tag {
+          display: inline-flex;
+          align-items: center;
+          gap: 0.5rem;
+          padding: 0.35rem 0.8rem;
+          border-radius: 4px;
+          font-size: 0.72rem;
+          font-weight: 600;
+          letter-spacing: 0.08em;
+          text-transform: uppercase;
+          align-self: flex-start;
+        }
+
+        .platform-tag.mc { background: var(--mc-dim); color: var(--mc); border: 1px solid rgba(91,219,138,0.2); }
+        .platform-tag.rb { background: var(--rb-dim); color: var(--rb); border: 1px solid rgba(232,97,60,0.2); }
+
+        .panel-title {
+          font-family: 'Syne', sans-serif;
+          font-size: 2rem;
+          font-weight: 800;
+          letter-spacing: -0.03em;
+          line-height: 1.1;
+        }
+
+        .panel-desc {
+          font-size: 0.92rem;
+          color: var(--muted);
+          line-height: 1.75;
+          max-width: 340px;
+        }
+
+        .panel-stats {
+          display: flex;
+          gap: 2rem;
+          padding-top: 1rem;
+          border-top: 1px solid var(--border);
+        }
+
+        .panel-stat-num {
+          font-family: 'Syne', sans-serif;
+          font-size: 1.4rem;
+          font-weight: 800;
+          letter-spacing: -0.02em;
+        }
+
+        .panel-stat-num.mc { color: var(--mc); }
+        .panel-stat-num.rb { color: var(--rb); }
+
+        .panel-stat-label {
+          font-size: 0.72rem;
+          color: var(--muted);
+          margin-top: 0.1rem;
+          letter-spacing: 0.03em;
+        }
+
+        .panel-cta {
+          display: inline-flex;
+          align-items: center;
+          gap: 0.5rem;
+          font-size: 0.88rem;
+          font-weight: 500;
+          margin-top: auto;
+          transition: gap 0.2s;
+        }
+
+        .platform-panel.mc .panel-cta { color: var(--mc); }
+        .platform-panel.rb .panel-cta { color: var(--rb); }
+
+        .platform-panel:hover .panel-cta { gap: 0.8rem; }
+
+        .footer-row {
+          display: flex;
+          justify-content: center;
+          gap: 2rem;
+          margin-top: 3rem;
+          animation: fadeUp 0.6s 0.2s ease both;
+          opacity: 0;
+        }
+
+        .footer-link {
+          font-size: 0.82rem;
+          color: var(--muted);
+          text-decoration: none;
+          transition: color 0.2s;
+        }
+
+        .footer-link:hover { color: var(--text); }
+
+        footer {
+          border-top: 1px solid var(--border);
+          padding: 2rem 0;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+        }
+
+        footer p { font-size: 0.8rem; color: var(--muted); }
+
+        @keyframes fadeUp {
+          from { opacity: 0; transform: translateY(18px); }
+          to   { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 700px) {
+          .platform-split { grid-template-columns: 1fr; }
+          .panel-title { font-size: 1.6rem; }
+          .platform-panel { padding: 2.5rem 2rem; }
+          nav { display: none; }
+          footer { flex-direction: column; gap: 0.5rem; text-align: center; }
+          .footer-row { flex-direction: column; align-items: center; gap: 1rem; }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="wrapper">
+        <div class="topbar">
+            <a href="index.html" class="logo">Mattias<span>15</span></a>
+            <nav>
+                <a href="work.html" class="active">Work</a>
+                <a href="commissions.html">Commissions</a>
+                <a href="bisecthosting.html">Server Hosting</a>
+                <a href="https://discord.gg/9XY62bv7AY" target="_blank" style="color:var(--text);border:1px solid var(--border);padding:0.4rem 0.9rem;border-radius:5px;font-size:0.82rem;">Discord ↗</a>
+            </nav>
+        </div>
+    </div>
+</header>
+
+<div class="wrapper">
+    <div class="page-body">
+
+        <div class="page-top">
+            <p class="hero-label">Portfolio</p>
+            <h1>Choose a <em>platform</em></h1>
+            <p class="page-sub">I create across two games pick one to explore.</p>
+        </div>
+
+        <div class="platform-split">
+
+            <a href="mods.html" class="platform-panel mc">
+                <div class="panel-number">01</div>
+                <div class="platform-tag mc">
+                    <svg width="12" height="12" viewBox="0 0 16 16" fill="none"><rect x="1" y="1" width="6" height="6" rx="1" fill="currentColor"/><rect x="9" y="1" width="6" height="6" rx="1" fill="currentColor" opacity=".6"/><rect x="1" y="9" width="6" height="6" rx="1" fill="currentColor" opacity=".6"/><rect x="9" y="9" width="6" height="6" rx="1" fill="currentColor"/></svg>
+                    Minecraft
+                </div>
+                <div class="panel-title">Java Mods</div>
+                <p class="panel-desc">Custom Minecraft mods for Java Edition that can be commissioned for private or public use!</p>
+                <div class="panel-stats">
+                    <div>
+                        <div class="panel-stat-num mc">30+</div>
+                        <div class="panel-stat-label">Mods published</div>
+                    </div>
+                    <div>
+                        <div class="panel-stat-num mc">600k+</div>
+                        <div class="panel-stat-label">Total downloads</div>
+                    </div>
+                </div>
+                <div class="panel-cta">
+                    Browse Minecraft mods
+                    <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </div>
+            </a>
+
+            <a href="roblox.html" class="platform-panel rb">
+                <div class="panel-number">02</div>
+                <div class="platform-tag rb">
+                    <svg width="12" height="12" viewBox="0 0 16 16" fill="none"><rect x="3" y="3" width="10" height="10" rx="2" fill="currentColor"/></svg>
+                    Roblox
+                </div>
+                <div class="panel-title">Games & Experiences</div>
+                <p class="panel-desc">Showcases my UI, Building, Scripting and all the games I have made.</p>
+                <div class="panel-stats">
+                    <div>
+                        <div class="panel-stat-num rb">Lua</div>
+                        <div class="panel-stat-label">Scripting</div>
+                    </div>
+                    <div>
+                        <div class="panel-stat-num rb">Open</div>
+                        <div class="panel-stat-label">For commissions</div>
+                    </div>
+                </div>
+                <div class="panel-cta">
+                    Browse Roblox projects
+                    <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </div>
+            </a>
+
+        </div>
+
+        <div class="footer-row">
+            <a href="https://modrinth.com/user/mattias15" target="_blank" class="footer-link">Modrinth ↗</a>
+            <a href="https://www.curseforge.com/members/mattiasay68/projects" target="_blank" class="footer-link">CurseForge ↗</a>
+            <a href="commissions.html" class="footer-link">Commissions →</a>
+            <a href="https://discord.gg/9XY62bv7AY" target="_blank" class="footer-link">Discord ↗</a>
+        </div>
+
+    </div>
+
+    <footer>
+        <p>© 2025 Mattias15. All rights reserved. (pls don't steal my website 🥹🫰)</p>
+        <p>
+            <a href="https://www.curseforge.com/members/mattiasay68/projects" target="_blank" style="color:var(--muted);text-decoration:none;margin-right:1.2rem;">CurseForge</a>
+            <a href="https://modrinth.com/user/mattias15" target="_blank" style="color:var(--muted);text-decoration:none;margin-right:1.2rem;">Modrinth</a>
+            <a href="https://discord.gg/9XY62bv7AY" target="_blank" style="color:var(--muted);text-decoration:none;">Discord</a>
+        </p>
+    </footer>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Roblox Commissions — Mattias15</title>
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet" />
+    <style>
+        :root {
+          --bg: #0a0b0f; --bg2: #0f1118; --bg3: #161923;
+          --border: rgba(255,255,255,0.07);
+          --text: #e8ecf4; --muted: #7a8499;
+          --mc: #5bdb8a; --mc-dim: rgba(91,219,138,0.12);
+          --rb: #e8613c; --rb-dim: rgba(232,97,60,0.12);
+          --accent: #4f8ef7;
+        }
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { background: var(--bg); color: var(--text); font-family: 'DM Sans', sans-serif; font-weight: 300; line-height: 1.6; min-height: 100vh; }
+        body::before { content: ''; position: fixed; inset: 0; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E"); pointer-events: none; z-index: 999; opacity: 0.4; }
+        .wrapper { max-width: 1100px; margin: 0 auto; padding: 0 2rem; }
+
+        header { border-bottom: 1px solid var(--border); position: sticky; top: 0; background: rgba(10,11,15,0.92); backdrop-filter: blur(16px); z-index: 100; }
+        .topbar { display: flex; align-items: center; justify-content: space-between; height: 60px; }
+        .logo { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.1rem; letter-spacing: -0.02em; color: var(--text); text-decoration: none; }
+        .logo span { color: var(--mc); }
+        nav { display: flex; gap: 2rem; align-items: center; }
+        nav a { font-size: 0.85rem; font-weight: 400; color: var(--muted); text-decoration: none; letter-spacing: 0.03em; transition: color 0.2s; }
+        nav a:hover { color: var(--text); }
+        nav a.active { color: var(--rb); }
+
+        .page-hero { padding: 4rem 0 3rem; border-bottom: 1px solid var(--border); animation: fadeUp 0.7s ease both; }
+        .breadcrumb { display: flex; align-items: center; gap: 0.5rem; font-size: 0.75rem; color: var(--muted); margin-bottom: 1.5rem; }
+        .breadcrumb a { color: var(--muted); text-decoration: none; transition: color 0.2s; }
+        .breadcrumb a:hover { color: var(--text); }
+        .breadcrumb span { opacity: 0.4; }
+        .hero-badge { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.35rem 0.8rem; border-radius: 4px; font-size: 0.72rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; background: var(--rb-dim); color: var(--rb); border: 1px solid rgba(232,97,60,0.2); margin-bottom: 1rem; }
+        h1 { font-family: 'Syne', sans-serif; font-weight: 800; font-size: clamp(2.2rem, 5vw, 3.6rem); line-height: 1.05; letter-spacing: -0.03em; }
+        h1 em { font-style: normal; color: var(--rb); }
+        .hero-sub { margin-top: 0.8rem; font-size: 0.95rem; color: var(--muted); max-width: 520px; line-height: 1.75; }
+        .hero-actions { display: flex; gap: 0.75rem; margin-top: 2rem; flex-wrap: wrap; }
+        .btn-rb { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.65rem 1.4rem; background: var(--rb); color: white; border-radius: 6px; font-size: 0.88rem; font-weight: 500; text-decoration: none; transition: all 0.2s; border: none; font-family: 'DM Sans', sans-serif; cursor: pointer; }
+        .btn-rb:hover { background: #f0784d; transform: translateY(-1px); }
+        .btn-ghost { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.65rem 1.4rem; background: transparent; color: var(--text); border: 1px solid var(--border); border-radius: 6px; font-size: 0.88rem; font-weight: 500; text-decoration: none; transition: all 0.2s; font-family: 'DM Sans', sans-serif; }
+        .btn-ghost:hover { border-color: rgba(255,255,255,0.2); background: rgba(255,255,255,0.04); }
+
+        .page-body { display: grid; grid-template-columns: 1fr 320px; gap: 4rem; padding: 3.5rem 0 5rem; align-items: start; }
+        .section-label { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-bottom: 1.5rem; display: block; }
+
+        .offerings-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; margin-bottom: 3rem; }
+        .offering-card { background: var(--bg2); border: 1px solid var(--border); border-radius: 10px; padding: 1.5rem; transition: all 0.2s; position: relative; overflow: hidden; }
+        .offering-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: var(--rb); opacity: 0; transition: opacity 0.2s; }
+        .offering-card:hover { border-color: rgba(232,97,60,0.15); }
+        .offering-card:hover::before { opacity: 1; }
+        .offering-icon { font-size: 1.5rem; margin-bottom: 0.75rem; display: block; }
+        .offering-card h3 { font-family: 'Syne', sans-serif; font-size: 0.9rem; font-weight: 700; margin-bottom: 0.4rem; }
+        .offering-card p { font-size: 0.8rem; color: var(--muted); line-height: 1.6; }
+        .offering-tag { display: inline-block; font-size: 0.62rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; padding: 0.15rem 0.45rem; border-radius: 3px; background: var(--rb-dim); color: var(--rb); margin-bottom: 0.6rem; }
+
+        .pricing-table { background: var(--bg2); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; margin-bottom: 3rem; }
+        .pricing-table-header { padding: 1.2rem 1.5rem; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
+        .pricing-table-header span { font-family: 'Syne', sans-serif; font-size: 0.85rem; font-weight: 700; }
+        .pricing-note { font-size: 0.72rem; color: var(--muted); }
+        .pricing-row { display: flex; justify-content: space-between; align-items: center; padding: 1rem 1.5rem; border-bottom: 1px solid var(--border); transition: background 0.15s; }
+        .pricing-row:last-child { border-bottom: none; }
+        .pricing-row:hover { background: rgba(255,255,255,0.02); }
+        .pricing-row .type { font-size: 0.85rem; color: var(--text); }
+        .pricing-row .type small { display: block; font-size: 0.75rem; color: var(--muted); margin-top: 0.15rem; }
+        .pricing-row .price { font-family: 'Syne', sans-serif; font-size: 0.9rem; font-weight: 700; color: var(--rb); }
+
+        .sidebar { position: sticky; top: 80px; display: flex; flex-direction: column; gap: 1rem; }
+        .sidebar-card { background: var(--bg2); border: 1px solid var(--border); border-radius: 10px; padding: 1.5rem; }
+        .sidebar-card h3 { font-family: 'Syne', sans-serif; font-size: 0.85rem; font-weight: 700; margin-bottom: 1rem; }
+        .sidebar-row { display: flex; justify-content: space-between; align-items: center; padding: 0.6rem 0; border-bottom: 1px solid var(--border); font-size: 0.82rem; }
+        .sidebar-row:last-child { border-bottom: none; }
+        .sidebar-row .key { color: var(--muted); }
+        .sidebar-row .val { color: var(--text); font-weight: 500; }
+        .sidebar-row .val.open { color: var(--mc); }
+        .sidebar-note { font-size: 0.78rem; color: var(--muted); line-height: 1.65; }
+        .discord-link { display: flex; align-items: center; gap: 0.6rem; padding: 0.65rem 1rem; border: 1px solid var(--border); border-radius: 8px; font-size: 0.82rem; font-weight: 500; color: var(--text); text-decoration: none; transition: all 0.2s; margin-top: 0.75rem; }
+        .discord-link:hover { border-color: rgba(255,255,255,0.18); background: rgba(255,255,255,0.04); }
+        .cta-full { display: flex; align-items: center; justify-content: center; gap: 0.5rem; padding: 0.75rem; background: var(--rb-dim); color: var(--rb); border: 1px solid rgba(232,97,60,0.2); border-radius: 8px; font-size: 0.85rem; font-weight: 500; text-decoration: none; transition: all 0.2s; }
+        .cta-full:hover { background: rgba(232,97,60,0.2); }
+
+        footer { border-top: 1px solid var(--border); padding: 2rem 0; display: flex; justify-content: space-between; align-items: center; }
+        footer p { font-size: 0.8rem; color: var(--muted); }
+
+        @keyframes fadeUp { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
+
+        @media (max-width: 800px) {
+          .page-body { grid-template-columns: 1fr; gap: 2rem; }
+          .offerings-grid { grid-template-columns: 1fr; }
+          .sidebar { position: static; }
+          nav { display: none; }
+          footer { flex-direction: column; gap: 0.5rem; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+<header>
+    <div class="wrapper">
+        <div class="topbar">
+            <a href="index.html" class="logo">Mattias<span>15</span></a>
+            <nav>
+                <a href="work.html">Work</a>
+                <a href="commissions.html" class="active">Commissions</a>
+                <a href="bisecthosting.html">Server Hosting</a>
+                <a href="https://discord.gg/9XY62bv7AY" target="_blank" style="color:var(--text);border:1px solid var(--border);padding:0.4rem 0.9rem;border-radius:5px;font-size:0.82rem;">Discord ↗</a>
+            </nav>
+        </div>
+    </div>
+</header>
+
+<div class="wrapper">
+    <div class="page-hero">
+        <div class="breadcrumb">
+            <a href="commissions.html">Commissions</a>
+            <span>/</span>
+            <span>Roblox</span>
+        </div>
+        <div class="hero-badge">
+            <svg width="12" height="12" viewBox="0 0 16 16" fill="none"><rect x="3" y="3" width="10" height="10" rx="2" fill="currentColor"/></svg>
+            Roblox Studio
+        </div>
+        <h1>Roblox<br><em>Commissions</em></h1>
+        <p class="hero-sub">Full Roblox games, UI systems, scripts, and builds.</p>
+        <div class="hero-actions">
+            <a href="requestcommission.html" class="btn-rb">Request a Project →</a>
+            <a href="https://discord.com/users/533087848493219851" target="_blank" class="btn-ghost">Chat on Discord ↗</a>
+        </div>
+    </div>
+
+    <div class="page-body">
+        <div class="main-col">
+
+            <span class="section-label">What I Make</span>
+            <div class="offerings-grid">
+                <div class="offering-card">
+                    <span class="offering-tag">Games</span>
+                    <span class="offering-icon">🎮</span>
+                    <h3>Full Game Development</h3>
+                    <p>Complete Roblox experiences with complete UI, Maps, Scripts, Datastore.</p>
+                </div>
+                <div class="offering-card">
+                    <span class="offering-tag">UI</span>
+                    <span class="offering-icon">🖥️</span>
+                    <h3>UI & Interfaces</h3>
+                    <p>Custom menus, HUDs, shops, and animated interfaces scaling properly across all device sizes.</p>
+                </div>
+                <div class="offering-card">
+                    <span class="offering-tag">Scripting</span>
+                    <span class="offering-icon">⚙️</span>
+                    <h3>Lua Scripting & Systems</h3>
+                    <p>Datastores, Shop Systems,Leaderstats, local scripts, module scriptts, server scripts.</p>
+                </div>
+                <div class="offering-card">
+                    <span class="offering-tag">Building</span>
+                    <span class="offering-icon">🏗️</span>
+                    <h3>Maps & Environments</h3>
+                    <p>Detailed maps, terrain, props, and buildings all made in Roblox Studio.</p>
+                </div>
+            </div>
+
+            <span class="section-label">Rough Pricing Guide</span>
+            <div class="pricing-table">
+                <div class="pricing-table-header">
+                    <span>Service Estimates</span>
+                    <span class="pricing-note">All prices negotiable DM for exact quotes</span>
+                </div>
+                <div class="pricing-row">
+                    <div class="type">Basic Script or System<small>e.g. a leaderboard, datastore, single mechanic</small></div>
+                    <div class="price">$10+</div>
+                </div>
+                <div class="pricing-row">
+                    <div class="type">UI Design & Implementation<small>e.g. full HUD, shop menu, main menu</small></div>
+                    <div class="price">$10+</div>
+                </div>
+                <div class="pricing-row">
+                    <div class="type">Map / Environment Build<small>e.g. detailed game map, lobby area</small></div>
+                    <div class="price">$50+</div>
+                </div>
+                <div class="pricing-row">
+                    <div class="type">Full Game Development<small>e.g. complete experience from scratch</small></div>
+                    <div class="price">$200+</div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="sidebar">
+            <div class="sidebar-card">
+                <h3>Commission Info</h3>
+                <div class="sidebar-row"><span class="key">Status</span><span class="val open">● Open</span></div>
+                <div class="sidebar-row"><span class="key">Language</span><span class="val">Lua</span></div>
+                <div class="sidebar-row"><span class="key">Platform</span><span class="val">Roblox Studio</span></div>
+                <div class="sidebar-row"><span class="key">Pricing</span><span class="val">Negotiable</span></div>
+                <div class="sidebar-row"><span class="key">Response</span><span class="val">Usually same week</span></div>
+            </div>
+
+            <a href="requestcommission.html" class="cta-full">
+                <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M22 2L11 13M22 2L15 22l-4-9-9-4 20-7z"/></svg>
+                Submit a Request
+            </a>
+
+            <div class="sidebar-card">
+                <h3>Prefer to chat first?</h3>
+                <p class="sidebar-note">DM me on Discord if you want to talk through your idea before filling out the form.</p>
+                <a href="https://discord.com/users/533087848493219851" target="_blank" class="discord-link">
+                    <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M13.545 2.907a13.227 13.227 0 0 0-3.257-1.011.05.05 0 0 0-.052.025c-.141.25-.297.577-.406.833a12.19 12.19 0 0 0-3.658 0 8.258 8.258 0 0 0-.412-.833.051.051 0 0 0-.052-.025c-1.125.194-2.22.534-3.257 1.011a.041.041 0 0 0-.021.018C.356 6.024-.213 9.047.066 12.032c.001.014.01.028.021.037a13.276 13.276 0 0 0 3.995 2.02.05.05 0 0 0 .056-.019c.308-.42.582-.863.818-1.329a.05.05 0 0 0-.01-.059.051.051 0 0 0-.018-.011 8.875 8.875 0 0 1-1.248-.595.05.05 0 0 1-.02-.066.051.051 0 0 1 .015-.019c.084-.063.168-.129.248-.195a.05.05 0 0 1 .051-.007c2.619 1.196 5.454 1.196 8.041 0a.052.052 0 0 1 .053.007c.08.066.164.132.248.195a.051.051 0 0 1-.004.085 8.254 8.254 0 0 1-1.249.594.05.05 0 0 0-.03.03.052.052 0 0 0 .003.041c.24.465.515.909.817 1.329a.05.05 0 0 0 .056.019 13.235 13.235 0 0 0 4.001-2.02.049.049 0 0 0 .021-.037c.334-3.451-.559-6.449-2.366-9.106a.034.034 0 0 0-.02-.019Zm-8.198 7.307c-.789 0-1.438-.724-1.438-1.612 0-.889.637-1.613 1.438-1.613.807 0 1.45.73 1.438 1.613 0 .888-.637 1.612-1.438 1.612Zm5.316 0c-.788 0-1.438-.724-1.438-1.612 0-.889.637-1.613 1.438-1.613.807 0 1.451.73 1.438 1.613 0 .888-.631 1.612-1.438 1.612Z"/></svg>
+                    Message on Discord
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>© 2025 Mattias15. All rights reserved. (pls don't steal my website 🥹🫰)</p>
+        <p>
+            <a href="https://www.curseforge.com/members/mattiasay68/projects" target="_blank" style="color:var(--muted);text-decoration:none;margin-right:1.2rem;">CurseForge</a>
+            <a href="https://modrinth.com/user/mattias15" target="_blank" style="color:var(--muted);text-decoration:none;margin-right:1.2rem;">Modrinth</a>
+            <a href="https://discord.gg/9XY62bv7AY" target="_blank" style="color:var(--muted);text-decoration:none;">Discord</a>
+        </p>
+    </footer>
+</div>
+</body>
+</html>

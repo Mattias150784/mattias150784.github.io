@@ -3,240 +3,485 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Commissions - Mattias15</title>
-
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&display=swap" rel="stylesheet" />
-
-    <!-- Bootstrap 5 -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
-
+    <title>Commissions — Mattias15</title>
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet" />
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-
-        html, body {
-            min-height: 100vh;
-            font-family: 'Poppins', sans-serif;
-            color: white;
-            overflow-x: hidden;
+        :root {
+          --bg: #0a0b0f;
+          --bg2: #0f1118;
+          --bg3: #161923;
+          --border: rgba(255,255,255,0.07);
+          --text: #e8ecf4;
+          --muted: #7a8499;
+          --mc: #5bdb8a;
+          --mc-dim: rgba(91,219,138,0.12);
+          --rb: #e8613c;
+          --rb-dim: rgba(232,97,60,0.12);
+          --accent: #4f8ef7;
+          --accent-dim: rgba(79,142,247,0.12);
         }
 
-        /* ——— MOVING DARK PURPLE / BLACK BACKGROUND ——— */
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+
         body {
-            background: #000;
-            position: relative;
+          background: var(--bg);
+          color: var(--text);
+          font-family: 'DM Sans', sans-serif;
+          font-weight: 300;
+          line-height: 1.6;
+          min-height: 100vh;
         }
 
-        .bg-animation {
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            background: linear-gradient(135deg,
-                #0d001a 0%,
-                #1a0033 15%,
-                #4b0082 35%,
-                #1c002c 60%,
-                #0a0014 80%,
-                #000000 100%
-            );
-            background-size: 400% 400%;
-            animation: nebulaFlow 20s ease infinite;
-            z-index: -2;
+        body::before {
+          content: '';
+          position: fixed;
+          inset: 0;
+          background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+          pointer-events: none;
+          z-index: 999;
+          opacity: 0.4;
         }
 
-        .bg-animation::before {
-            content: "";
-            position: absolute;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            background: radial-gradient(circle at 30% 50%, rgba(138, 43, 226, 0.3), transparent 50%),
-                        radial-gradient(circle at 70% 30%, rgba(75, 0, 130, 0.2), transparent 60%);
-            animation: pulseGlow 12s ease-in-out infinite;
+        .wrapper {
+          max-width: 1100px;
+          margin: 0 auto;
+          padding: 0 2rem;
         }
 
-        @keyframes nebulaFlow {
-            0%   { background-position: 0% 50%; }
-            50%  { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
+        header {
+          border-bottom: 1px solid var(--border);
+          position: sticky;
+          top: 0;
+          background: rgba(10,11,15,0.92);
+          backdrop-filter: blur(16px);
+          z-index: 100;
         }
 
-        @keyframes pulseGlow {
-            0%, 100% { opacity: 0.6; }
-            50%      { opacity: 1; }
+        .topbar {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          height: 60px;
         }
 
-        .particles {
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            pointer-events: none;
-            z-index: -1;
-            background-image:
-                radial-gradient(2px 2px at 20% 30%, rgba(186, 85, 211, 0.5), transparent),
-                radial-gradient(3px 3px at 60% 70%, rgba(147, 112, 219, 0.4), transparent),
-                radial-gradient(2px 2px at 90% 10%, rgba(218, 112, 214, 0.5), transparent);
-            background-size: 300% 300%;
-            animation: float 35s linear infinite;
+        .logo {
+          font-family: 'Syne', sans-serif;
+          font-weight: 800;
+          font-size: 1.1rem;
+          letter-spacing: -0.02em;
+          color: var(--text);
+          text-decoration: none;
         }
 
-        @keyframes float {
-            0%   { transform: translateY(0) translateX(0); }
-            100% { transform: translateY(-100vh) translateX(50px); }
+        .logo span { color: var(--mc); }
+
+        nav { display: flex; gap: 2rem; align-items: center; }
+
+        nav a {
+          font-size: 0.85rem;
+          font-weight: 400;
+          color: var(--muted);
+          text-decoration: none;
+          letter-spacing: 0.03em;
+          transition: color 0.2s;
         }
 
-        /* Centered Page Container */
-        .page-container {
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 2rem;
-            position: relative;
-            z-index: 1;
+        nav a:hover { color: var(--text); }
+        nav a.active { color: var(--accent); }
+
+        .page-hero {
+          padding: 4.5rem 0 3.5rem;
+          border-bottom: 1px solid var(--border);
+          animation: fadeUp 0.7s ease both;
         }
 
-        /* Glassmorphic Card */
-        .content-card {
-            background: rgba(20, 0, 40, 0.7);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border-radius: 25px;
-            padding: 2.5rem 3rem;
-            max-width: 700px;
-            width: 100%;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
-            border: 1px solid rgba(147, 112, 219, 0.2);
-            text-align: center;
-            opacity: 0;
-            transform: translateY(20px);
-            animation: fadeInUp 1s forwards;
+        .hero-eyebrow {
+          font-size: 0.72rem;
+          font-weight: 500;
+          letter-spacing: 0.14em;
+          text-transform: uppercase;
+          color: var(--muted);
+          margin-bottom: 1rem;
+          display: flex;
+          align-items: center;
+          gap: 0.6rem;
         }
 
-        @keyframes fadeInUp {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        .hero-eyebrow::before {
+          content: '';
+          display: inline-block;
+          width: 20px;
+          height: 1px;
+          background: var(--muted);
         }
 
-        .main-title {
-            font-family: 'Orbitron', monospace;
-            font-size: 3.5rem;
-            font-weight: 900;
-            margin-bottom: 1.5rem;
-            background: linear-gradient(135deg, #c797eb, #9a67ea, #8a2be2);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            text-transform: uppercase;
-            animation: titleGlow 3s ease-in-out infinite alternate;
+        h1 {
+          font-family: 'Syne', sans-serif;
+          font-weight: 800;
+          font-size: clamp(2.4rem, 5vw, 4rem);
+          line-height: 1.05;
+          letter-spacing: -0.03em;
         }
 
-        @keyframes titleGlow {
-            from { filter: drop-shadow(0 0 10px rgba(138, 43, 226, 0.6)); }
-            to   { filter: drop-shadow(0 0 20px rgba(186, 85, 211, 0.8)); }
+        h1 em { font-style: normal; color: var(--accent); }
+
+        .hero-sub {
+          margin-top: 0.8rem;
+          font-size: 0.95rem;
+          color: var(--muted);
+          max-width: 520px;
+          line-height: 1.75;
         }
 
-        .subtitle {
-            color: #d8c4e8;
-            margin-bottom: 2.5rem;
-            font-size: 1.1rem;
+        .avail-pill {
+          display: inline-flex;
+          align-items: center;
+          gap: 0.5rem;
+          padding: 0.4rem 1rem;
+          border-radius: 5px;
+          background: var(--mc-dim);
+          color: var(--mc);
+          border: 1px solid rgba(91,219,138,0.2);
+          font-size: 0.75rem;
+          font-weight: 600;
+          letter-spacing: 0.06em;
+          text-transform: uppercase;
+          margin-top: 1.5rem;
+          align-self: flex-start;
         }
 
-        /* Commission Choice Cards */
-        .choice-container {
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
+        .avail-dot {
+          width: 6px; height: 6px;
+          border-radius: 50%;
+          background: var(--mc);
+          box-shadow: 0 0 6px rgba(91,219,138,0.7);
         }
 
-        .choice-card {
-            background: rgba(30, 0, 60, 0.5);
-            border: 1px solid rgba(147, 112, 219, 0.4);
-            padding: 1.5rem;
-            border-radius: 15px;
-            text-decoration: none;
-            color: white;
-            transition: all 0.3s ease;
-            text-align: left;
+        .section-label {
+          font-size: 0.72rem;
+          font-weight: 600;
+          letter-spacing: 0.14em;
+          text-transform: uppercase;
+          color: var(--muted);
+          padding: 3rem 0 1.5rem;
         }
 
-        .choice-card:hover {
-            transform: translateY(-5px) scale(1.02);
-            background: rgba(50, 0, 80, 0.7);
-            border-color: rgba(186, 85, 211, 0.7);
-            box-shadow: 0 10px 30px rgba(75, 0, 130, 0.4);
+        .commission-grid {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 1rem;
+          margin-bottom: 4rem;
+          animation: fadeUp 0.6s 0.1s ease both;
+          opacity: 0;
         }
 
-        .choice-title {
-            font-size: 1.5rem;
-            font-weight: 600;
-            margin-bottom: 0.25rem;
-            color: #d8c4e8;
+        .commission-card {
+          background: var(--bg2);
+          border: 1px solid var(--border);
+          border-radius: 12px;
+          padding: 2.5rem;
+          text-decoration: none;
+          color: inherit;
+          display: flex;
+          flex-direction: column;
+          gap: 1rem;
+          position: relative;
+          overflow: hidden;
+          transition: all 0.25s;
         }
 
-        .choice-desc {
-            font-size: 1rem;
-            color: #bca8cd;
+        .commission-card::before {
+          content: '';
+          position: absolute;
+          top: 0; left: 0; right: 0;
+          height: 2px;
+          opacity: 0;
+          transition: opacity 0.25s;
         }
 
-        .btn-home {
-            background: rgba(0, 31, 63, 0.8);
-            border: 1px solid rgba(100, 150, 255, 0.3);
-            color: white;
-            padding: 0.7rem 2.5rem;
-            border-radius: 30px;
-            font-weight: 600;
-            text-decoration: none;
-            display: inline-block;
-            transition: all 0.3s ease;
-            margin-top: 2.5rem;
+        .commission-card.mc-card::before { background: var(--mc); }
+        .commission-card.rb-card::before { background: var(--rb); }
+        .commission-card.custom-card::before { background: var(--accent); }
+
+        .commission-card::after {
+          content: '';
+          position: absolute;
+          inset: 0;
+          opacity: 0;
+          transition: opacity 0.25s;
+          pointer-events: none;
         }
 
-        .btn-home:hover {
-            background: rgba(0, 50, 100, 0.9);
-            transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(100, 150, 255, 0.3);
-            color: white;
+        .commission-card.mc-card::after    { background: var(--mc-dim); }
+        .commission-card.rb-card::after    { background: var(--rb-dim); }
+        .commission-card.custom-card::after { background: var(--accent-dim); }
+
+        .commission-card:hover {
+          border-color: rgba(255,255,255,0.13);
+          transform: translateY(-2px);
+          box-shadow: 0 12px 32px rgba(0,0,0,0.35);
         }
 
-        @media (max-width: 768px) {
-            .main-title { font-size: 2.5rem; }
-            .content-card { padding: 2rem 1.5rem; }
+        .commission-card:hover::before { opacity: 1; }
+        .commission-card:hover::after  { opacity: 1; }
+
+        .commission-card.full-width { grid-column: span 2; }
+
+        .card-badge {
+          display: inline-flex;
+          align-items: center;
+          gap: 0.4rem;
+          padding: 0.3rem 0.7rem;
+          border-radius: 4px;
+          font-size: 0.68rem;
+          font-weight: 600;
+          letter-spacing: 0.07em;
+          text-transform: uppercase;
+          align-self: flex-start;
+        }
+
+        .badge-mc     { background: var(--mc-dim);     color: var(--mc); }
+        .badge-rb     { background: var(--rb-dim);     color: var(--rb); }
+        .badge-custom { background: var(--accent-dim); color: var(--accent); }
+
+        .commission-card h2 {
+          font-family: 'Syne', sans-serif;
+          font-size: 1.25rem;
+          font-weight: 700;
+          letter-spacing: -0.02em;
+          color: var(--text);
+        }
+
+        .commission-card p {
+          font-size: 0.88rem;
+          color: var(--muted);
+          line-height: 1.7;
+          flex: 1;
+        }
+
+        .card-includes {
+          display: flex;
+          flex-direction: column;
+          gap: 0.4rem;
+        }
+
+        .include-item {
+          display: flex;
+          align-items: center;
+          gap: 0.6rem;
+          font-size: 0.82rem;
+          color: var(--muted);
+        }
+
+        .include-item::before {
+          content: '✓';
+          font-size: 0.65rem;
+          font-weight: 700;
+          width: 16px;
+          height: 16px;
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          flex-shrink: 0;
+        }
+
+        .mc-card .include-item::before   { background: var(--mc-dim);     color: var(--mc); }
+        .rb-card .include-item::before   { background: var(--rb-dim);     color: var(--rb); }
+        .custom-card .include-item::before { background: var(--accent-dim); color: var(--accent); }
+
+        .card-cta {
+          display: inline-flex;
+          align-items: center;
+          gap: 0.4rem;
+          font-size: 0.82rem;
+          font-weight: 500;
+          margin-top: 0.5rem;
+          transition: gap 0.2s;
+        }
+
+        .mc-card .card-cta     { color: var(--mc); }
+        .rb-card .card-cta     { color: var(--rb); }
+        .custom-card .card-cta { color: var(--accent); }
+
+        .commission-card:hover .card-cta { gap: 0.7rem; }
+
+        .how-section {
+          border-top: 1px solid var(--border);
+          padding: 3rem 0 4rem;
+          animation: fadeUp 0.6s 0.2s ease both;
+          opacity: 0;
+        }
+
+        .steps-row {
+          display: grid;
+          grid-template-columns: repeat(4, 1fr);
+          gap: 1px;
+          background: var(--border);
+          border: 1px solid var(--border);
+          border-radius: 12px;
+          overflow: hidden;
+          margin-top: 1.5rem;
+        }
+
+        .step {
+          background: var(--bg2);
+          padding: 2rem 1.5rem;
+          position: relative;
+          transition: background 0.2s;
+        }
+
+        .step:hover { background: var(--bg3); }
+
+        .step-num {
+          font-family: 'Syne', sans-serif;
+          font-size: 2rem;
+          font-weight: 800;
+          color: var(--accent);
+          opacity: 0.25;
+          letter-spacing: -0.04em;
+          line-height: 1;
+          margin-bottom: 1rem;
+        }
+
+        .step h4 {
+          font-family: 'Syne', sans-serif;
+          font-size: 0.9rem;
+          font-weight: 700;
+          margin-bottom: 0.4rem;
+        }
+
+        .step p {
+          font-size: 0.8rem;
+          color: var(--muted);
+          line-height: 1.6;
+        }
+
+        footer {
+          border-top: 1px solid var(--border);
+          padding: 2rem 0;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+        }
+
+        footer p { font-size: 0.8rem; color: var(--muted); }
+
+        @keyframes fadeUp {
+          from { opacity: 0; transform: translateY(18px); }
+          to   { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 700px) {
+          .commission-grid { grid-template-columns: 1fr; }
+          .commission-card.full-width { grid-column: span 1; }
+          .steps-row { grid-template-columns: 1fr 1fr; }
+          nav { display: none; }
+          footer { flex-direction: column; gap: 0.5rem; text-align: center; }
         }
     </style>
 </head>
 <body>
 
-<!-- Moving Background Layers -->
-<div class="bg-animation"></div>
-<div class="particles"></div>
-
-<div class="page-container">
-    <div class="content-card">
-        <h1 class="main-title">Commissions</h1>
-        <p class="subtitle">Choose a commission type or request a custom project.</p>
-
-        <div class="choice-container">
-            <!-- Infection Mod Commission Card -->
-            <a href="infection.html" class="choice-card">
-                <div class="choice-title">Infection Mod Commission</div>
-                <p class="choice-desc">One of my commissions</p>
-            </a>
-
-            <!-- Request Custom Commission Card -->
-            <a href="requestcommission.html" class="choice-card">
-                <div class="choice-title">Request a Custom Commission</div>
-                <p class="choice-desc">Have a unique idea? Let's discuss a custom mod or project.</p>
-            </a>
+<header>
+    <div class="wrapper">
+        <div class="topbar">
+            <a href="index.html" class="logo">Mattias<span>15</span></a>
+            <nav>
+                <a href="work.html">Work</a>
+                <a href="commissions.html" class="active">Commissions</a>
+                <a href="bisecthosting.html">Server Hosting</a>
+                <a href="https://discord.gg/9XY62bv7AY" target="_blank" style="color:var(--text);border:1px solid var(--border);padding:0.4rem 0.9rem;border-radius:5px;font-size:0.82rem;">Discord ↗</a>
+            </nav>
         </div>
-
-        <a href="index.html" class="btn-home">← Back to Home</a>
     </div>
-</div>
+</header>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<div class="wrapper">
+
+    <div class="page-hero">
+      <p class="hero-eyebrow">Work With Me</p>
+      <h1>Commission a<br><em>project</em></h1>
+      <p class="hero-sub">I take on commissions for Minecraft mods and Roblox assets/games. Choose one and fill out the form if you would like to request me.</p>
+      <div class="avail-pill">
+        <span class="avail-dot"></span>
+        Currently open for commissions
+      </div>
+    </div>
+
+    <p class="section-label">Commission Types</p>
+
+    <div class="commission-grid">
+
+        <a href="commission-minecraft.html" target="_blank" class="commission-card mc-card">
+            <span class="card-badge badge-mc">Minecraft · Java</span>
+            <h2>Minecraft Mod Commissions</h2>
+            <p>Custom minecraft mods that include mobs, biomes, QoL changes, blocks, items, and more.</p>
+            <div class="card-includes">
+                <div class="include-item">Mobs, biomes & world gen</div>
+                <div class="include-item">Structures & Twist</div>
+                <div class="include-item">Blocks, items & armor</div>
+            </div>
+            <div class="card-cta">See what I make <span>→</span></div>
+        </a>
+
+        <a href="commission-roblox.html" target="_blank" class="commission-card rb-card">
+            <span class="card-badge badge-rb">Roblox Studio</span>
+            <h2>Roblox Commissions</h2>
+            <p>Games, basic scripting, UI systems, and builds</p>
+            <div class="card-includes">
+                <div class="include-item">Full games or individual systems</div>
+                <div class="include-item">Custom UI & interfaces</div>
+                <div class="include-item">Maps & environment builds</div>
+            </div>
+            <div class="card-cta">See what I make <span>→</span></div>
+        </a>
+
+        <a href="requestcommission.html" class="commission-card custom-card full-width">
+            <span class="card-badge badge-custom">Custom</span>
+            <h2>Request a Custom Commission</h2>
+            <p>Have a unique idea that doesn't fit neatly into a category? Let's talk about it, I'm open to make custom Minecraft mods, Roblox projects, and I can even make Websites, Discord Bots or anything in between. Fill out the request form and I'll get back to you as fast as I can.</p>
+            <div class="card-cta">Start a request <span>→</span></div>
+        </a>
+
+    </div>
+
+    <div class="how-section">
+        <p class="section-label">How It Works</p>
+        <div class="steps-row">
+            <div class="step">
+                <div class="step-num">01</div>
+                <h4>Submit a Request</h4>
+                <p>Fill out the commission form with your idea, budget, and contact info.</p>
+            </div>
+            <div class="step">
+                <div class="step-num">02</div>
+                <h4>We Discuss</h4>
+                <p>I'll reach out via Discord or email to clarify details and confirm scope.</p>
+            </div>
+            <div class="step">
+                <div class="step-num">03</div>
+                <h4>I Build It</h4>
+                <p>Work begins once we've agreed — I'll keep you updated throughout.</p>
+            </div>
+            <div class="step">
+                <div class="step-num">04</div>
+                <h4>Delivery</h4>
+                <p>You receive the finished project files and any documentation needed.</p>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>© 2025 Mattias15. All rights reserved. (pls don't steal my website 🥹🫰)</p>
+        <p>
+            <a href="https://www.curseforge.com/members/mattiasay68/projects" target="_blank" style="color:var(--muted);text-decoration:none;margin-right:1.2rem;">CurseForge</a>
+            <a href="https://modrinth.com/user/mattias15" target="_blank" style="color:var(--muted);text-decoration:none;margin-right:1.2rem;">Modrinth</a>
+            <a href="https://discord.gg/9XY62bv7AY" target="_blank" style="color:var(--muted);text-decoration:none;">Discord</a>
+        </p>
+    </footer>
+
+</div>
 </body>
 </html>

@@ -3,297 +3,511 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>BisectHosting Partner - Mattias15</title>
-
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&display=swap" rel="stylesheet" />
-
-    <!-- Bootstrap 5 -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
-
+    <title>Server Hosting — Mattias15</title>
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet" />
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-
-        html, body {
-            min-height: 100vh;
-            font-family: 'Poppins', sans-serif;
-            color: white;
-            overflow-x: hidden;
+        :root {
+          --bg: #0a0b0f;
+          --bg2: #0f1118;
+          --bg3: #161923;
+          --border: rgba(255,255,255,0.07);
+          --text: #e8ecf4;
+          --muted: #7a8499;
+          --mc: #5bdb8a;
+          --mc-dim: rgba(91,219,138,0.12);
+          --rb: #e8613c;
+          --accent: #4f8ef7;
+          --accent-dim: rgba(79,142,247,0.12);
+          --bh: #f47c20;
+          --bh-dim: rgba(244,124,32,0.12);
         }
 
-        /* ——— BLACK + LIGHT BLUE ANIMATED BACKGROUND ——— */
-        body { background: #000; position: relative; }
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
 
-        .bg-animation {
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            background: linear-gradient(135deg,
-                #000428 0%,
-                #001122 15%,
-                #002a55 35%,
-                #003366 60%,
-                #001f3f 80%,
-                #000000 100%
-            );
-            background-size: 400% 400%;
-            animation: cyberFlow 20s ease infinite;
-            z-index: -2;
+        body {
+          background: var(--bg);
+          color: var(--text);
+          font-family: 'DM Sans', sans-serif;
+          font-weight: 300;
+          line-height: 1.6;
+          min-height: 100vh;
         }
 
-        .bg-animation::before {
-            content: "";
-            position: absolute;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            background: radial-gradient(circle at 30% 50%, rgba(0, 191, 255, 0.3), transparent 50%),
-                        radial-gradient(circle at 70% 30%, rgba(0, 172, 230, 0.25), transparent 60%);
-            animation: pulseGlow 12s ease-in-out infinite;
+        body::before {
+          content: '';
+          position: fixed;
+          inset: 0;
+          background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+          pointer-events: none;
+          z-index: 999;
+          opacity: 0.4;
         }
 
-        @keyframes cyberFlow {
-            0%   { background-position: 0% 50%; }
-            50%  { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
+        .wrapper { max-width: 1100px; margin: 0 auto; padding: 0 2rem; }
+
+        header {
+          border-bottom: 1px solid var(--border);
+          position: sticky;
+          top: 0;
+          background: rgba(10,11,15,0.92);
+          backdrop-filter: blur(16px);
+          z-index: 100;
         }
 
-        @keyframes pulseGlow {
-            0%, 100% { opacity: 0.6; }
-            50%      { opacity: 1; }
+        .topbar { display: flex; align-items: center; justify-content: space-between; height: 60px; }
+
+        .logo { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.1rem; letter-spacing: -0.02em; color: var(--text); text-decoration: none; }
+        .logo span { color: var(--mc); }
+
+        nav { display: flex; gap: 2rem; align-items: center; }
+        nav a { font-size: 0.85rem; font-weight: 400; color: var(--muted); text-decoration: none; letter-spacing: 0.03em; transition: color 0.2s; }
+        nav a:hover { color: var(--text); }
+        nav a.active { color: var(--bh); }
+
+        .split-hero {
+          display: grid;
+          grid-template-columns: 1fr 340px;
+          min-height: 320px;
+          border-bottom: 1px solid var(--border);
+          animation: fadeUp 0.7s ease both;
         }
 
-        .particles {
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            pointer-events: none;
-            z-index: -1;
-            background-image:
-                radial-gradient(2px 2px at 20% 30%, rgba(100, 200, 255, 0.6), transparent),
-                radial-gradient(3px 3px at 60% 70%, rgba(0, 191, 255, 0.5), transparent),
-                radial-gradient(2px 2px at 90% 10%, rgba(0, 230, 255, 0.6), transparent);
-            background-size: 300% 300%;
-            animation: float 40s linear infinite;
+        .split-hero-left {
+          padding: 4rem 3rem 4rem 0;
+          border-right: 1px solid var(--border);
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
         }
 
-        @keyframes float {
-            0%   { transform: translateY(0) translateX(0); }
-            100% { transform: translateY(-100vh) translateX(60px); }
+        .hero-eyebrow {
+          font-size: 0.72rem;
+          font-weight: 600;
+          letter-spacing: 0.14em;
+          text-transform: uppercase;
+          color: var(--bh);
+          margin-bottom: 1.2rem;
+          display: flex;
+          align-items: center;
+          gap: 0.6rem;
         }
 
-        .page-container {
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 2rem;
-            position: relative;
-            z-index: 1;
+        .hero-eyebrow::before { content: ''; width: 20px; height: 1px; background: var(--bh); display: inline-block; }
+
+        h1 { font-family: 'Syne', sans-serif; font-weight: 800; font-size: clamp(2.4rem, 5vw, 4rem); line-height: 1.03; letter-spacing: -0.03em; }
+        h1 em { font-style: normal; color: var(--bh); }
+
+        .hero-sub { margin-top: 1rem; font-size: 0.95rem; color: var(--muted); line-height: 1.75; max-width: 440px; }
+
+        .promo-pill {
+          display: inline-flex;
+          align-items: center;
+          gap: 0.6rem;
+          padding: 0.55rem 1.2rem;
+          border-radius: 6px;
+          background: var(--bh-dim);
+          border: 1px solid rgba(244,124,32,0.25);
+          color: var(--bh);
+          font-size: 0.85rem;
+          font-weight: 600;
+          margin-top: 1.8rem;
+          align-self: flex-start;
+          letter-spacing: 0.02em;
         }
 
-        .content-card {
-            background: rgba(0, 15, 40, 0.75);
-            backdrop-filter: blur(14px);
-            -webkit-backdrop-filter: blur(14px);
-            border-radius: 28px;
-            padding: 3rem 2.5rem;
-            max-width: 900px;
-            width: 100%;
-            box-shadow: 0 12px 50px rgba(0, 0, 0, 0.6);
-            border: 1px solid rgba(0, 191, 255, 0.3);
-            text-align: center;
-            opacity: 0;
-            transform: translateY(20px);
-            animation: fadeInUp 1s forwards;
+        .promo-pill .code {
+          font-family: 'Syne', sans-serif;
+          font-size: 1rem;
+          font-weight: 800;
+          letter-spacing: 0.06em;
+          color: var(--bh);
+          background: rgba(244,124,32,0.15);
+          padding: 0.15rem 0.5rem;
+          border-radius: 3px;
+          border: 1px solid rgba(244,124,32,0.2);
         }
 
-        @keyframes fadeInUp {
-            to { opacity: 1; transform: translateY(0); }
+        .hero-btn {
+          display: inline-flex;
+          align-items: center;
+          gap: 0.5rem;
+          padding: 0.7rem 1.5rem;
+          background: var(--bh);
+          color: white;
+          border-radius: 6px;
+          font-size: 0.9rem;
+          font-weight: 500;
+          text-decoration: none;
+          transition: all 0.2s;
+          margin-top: 1.5rem;
+          align-self: flex-start;
+          font-family: 'DM Sans', sans-serif;
         }
 
-        .logo {
-            width: 180px;
-            height: auto;
-            margin-bottom: 1.5rem;
-            filter: drop-shadow(0 0 15px rgba(0, 191, 255, 0.6));
+        .hero-btn:hover { background: #f58f3a; transform: translateY(-1px); box-shadow: 0 8px 24px rgba(244,124,32,0.35); }
+
+        .split-hero-right {
+          padding: 3rem 0 3rem 3rem;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          gap: 0;
         }
 
-        .main-title {
-            font-family: 'Orbitron', monospace;
-            font-size: 3.8rem;
-            font-weight: 900;
-            margin-bottom: 1rem;
-            background: linear-gradient(135deg, #00ccff, #0099ff, #0066cc);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            animation: titleGlow 3s ease-in-out infinite alternate;
+        .bh-logo-wrap {
+          width: 100%;
+          height: 90px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          margin-bottom: 1.5rem;
         }
 
-        @keyframes titleGlow {
-            from { filter: drop-shadow(0 0 12px rgba(0, 204, 255, 0.7)); }
-            to   { filter: drop-shadow(0 0 25px rgba(0, 204, 255, 1)); }
+        .bh-logo-wrap img {
+          max-width: 180px;
+          max-height: 70px;
+          object-fit: contain;
+          filter: brightness(0) invert(1);
+          opacity: 0.85;
         }
 
-        .subtitle {
-            font-size: 1.3rem;
-            color: #a8e6ff;
-            margin: 1.5rem 0;
+        .stat-stack { display: flex; flex-direction: column; }
+
+        .stat-row {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          padding: 0.85rem 0;
+          border-bottom: 1px solid var(--border);
+          font-size: 0.82rem;
         }
 
-        .highlight {
-            background: rgba(0, 191, 255, 0.15);
-            padding: 12px 20px;
-            border-radius: 12px;
-            font-weight: 600;
-            color: #00ffff;
-            display: inline-block;
-            margin: 1rem 0;
-            border: 1px solid rgba(0, 191, 255, 0.4);
+        .stat-row:first-child { border-top: 1px solid var(--border); }
+        .stat-key { color: var(--muted); }
+        .stat-val { font-family: 'Syne', sans-serif; font-size: 0.9rem; font-weight: 700; color: var(--bh); }
+        .stat-val.white { color: var(--text); }
+
+        .ram-section { padding: 3.5rem 0; border-bottom: 1px solid var(--border); animation: fadeUp 0.6s 0.1s ease both; opacity: 0; }
+
+        .section-eyebrow { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-bottom: 1.5rem; display: block; }
+
+        .ram-grid {
+          display: grid;
+          grid-template-columns: repeat(4, 1fr);
+          gap: 1px;
+          background: var(--border);
+          border: 1px solid var(--border);
+          border-radius: 12px;
+          overflow: hidden;
         }
 
-        .promo-code {
-            font-size: 1.8rem;
-            font-weight: bold;
-            color: #00ffff;
-            letter-spacing: 3px;
-            margin: 1.5rem 0;
+        .ram-card {
+          background: var(--bg2);
+          padding: 2rem 1.5rem;
+          display: flex;
+          flex-direction: column;
+          gap: 0.5rem;
+          transition: background 0.2s;
+          position: relative;
+          overflow: hidden;
         }
 
-        .bisect-link {
-            color: #00ffff;
-            font-size: 1.3rem;
-            font-weight: 600;
-            text-decoration: none;
-            border-bottom: 2px dashed rgba(0, 255, 255, 0.5);
-            transition: all 0.3s;
+        .ram-card::before {
+          content: '';
+          position: absolute;
+          top: 0; left: 0; right: 0;
+          height: 2px;
+          background: var(--bh);
+          opacity: 0;
+          transition: opacity 0.2s;
         }
 
-        .bisect-link:hover {
-            color: #66ffff;
-            border-bottom: 2px solid #00ffff;
+        .ram-card:hover { background: var(--bg3); }
+        .ram-card:hover::before { opacity: 1; }
+
+        .ram-players {
+          font-family: 'Syne', sans-serif;
+          font-size: 1.6rem;
+          font-weight: 800;
+          letter-spacing: -0.03em;
+          color: var(--text);
+          line-height: 1;
         }
 
-        .ram-list {
-            text-align: left;
-            max-width: 600px;
-            margin: 2rem auto;
-            background: rgba(0, 30, 60, 0.4);
-            padding: 1.5rem;
-            border-radius: 16px;
-            border: 1px solid rgba(0, 191, 255, 0.3);
+        .ram-label { font-size: 0.75rem; color: var(--muted); letter-spacing: 0.04em; }
+
+        .ram-amount {
+          font-family: 'Syne', sans-serif;
+          font-size: 1.1rem;
+          font-weight: 800;
+          color: var(--bh);
+          margin-top: 0.5rem;
         }
 
-        .ram-list li {
-            margin: 0.8rem 0;
-            font-size: 1.1rem;
+        .ram-note { font-size: 0.72rem; color: var(--muted); line-height: 1.5; }
+
+        .why-section { padding: 3.5rem 0; border-bottom: 1px solid var(--border); animation: fadeUp 0.6s 0.15s ease both; opacity: 0; }
+
+        .features-grid {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 1rem;
         }
 
-        .ram-list strong {
-            color: #00ffff;
+        .feature-card {
+          background: var(--bg2);
+          border: 1px solid var(--border);
+          border-radius: 10px;
+          padding: 1.5rem;
+          transition: all 0.2s;
+          position: relative;
+          overflow: hidden;
         }
 
-        .btn-primary {
-            background: linear-gradient(135deg, #00bfff, #0088cc);
-            border: none;
-            color: white;
-            padding: 1rem 3rem;
-            border-radius: 50px;
-            font-weight: 600;
-            font-size: 1.2rem;
-            text-decoration: none;
-            display: inline-block;
-            margin-top: 2rem;
-            transition: all 0.3s ease;
-            box-shadow: 0 8px 25px rgba(0, 191, 255, 0.4);
+        .feature-card::before {
+          content: '';
+          position: absolute;
+          top: 0; left: 0; right: 0;
+          height: 2px;
+          background: var(--bh);
+          opacity: 0;
+          transition: opacity 0.2s;
         }
 
-        .btn-primary:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 15px 35px rgba(0, 191, 255, 0.6);
-            background: linear-gradient(135deg, #00d4ff, #0099e6);
+        .feature-card:hover { border-color: rgba(244,124,32,0.18); transform: translateY(-2px); }
+        .feature-card:hover::before { opacity: 1; }
+
+        .feature-icon { font-size: 1.4rem; margin-bottom: 0.75rem; display: block; }
+
+        .feature-card h4 { font-family: 'Syne', sans-serif; font-size: 0.9rem; font-weight: 700; margin-bottom: 0.35rem; }
+        .feature-card p { font-size: 0.8rem; color: var(--muted); line-height: 1.6; }
+
+        .cta-bar {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          border: 1px solid var(--border);
+          border-radius: 12px;
+          padding: 2.5rem 3rem;
+          background: var(--bg2);
+          margin: 3.5rem 0 4rem;
+          gap: 2rem;
+          flex-wrap: wrap;
+          position: relative;
+          overflow: hidden;
+          animation: fadeUp 0.6s 0.2s ease both;
+          opacity: 0;
         }
 
-        .btn-home {
-            background: rgba(0, 31, 63, 0.8);
-            border: 1px solid rgba(100, 150, 255, 0.3);
-            color: white;
-            padding: 0.8rem 2.5rem;
-            border-radius: 50px;
-            font-weight: 600;
-            text-decoration: none;
-            display: inline-block;
-            margin-top: 1rem;
-            transition: all 0.3s ease;
+        .cta-bar::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 3px; background: var(--bh); }
+
+        .cta-bar::after {
+          content: '';
+          position: absolute;
+          top: -40px; right: -40px;
+          width: 200px; height: 200px;
+          background: radial-gradient(ellipse, rgba(244,124,32,0.07), transparent 70%);
+          pointer-events: none;
         }
 
-        .btn-home:hover {
-            background: rgba(0, 50, 100, 0.9);
-            transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(100, 150, 255, 0.3);
+        .cta-bar h2 { font-family: 'Syne', sans-serif; font-size: 1.4rem; font-weight: 800; letter-spacing: -0.02em; margin-bottom: 0.3rem; }
+        .cta-bar p { font-size: 0.88rem; color: var(--muted); }
+
+        .cta-right { display: flex; flex-direction: column; align-items: flex-end; gap: 0.75rem; flex-shrink: 0; }
+
+        .link-pill {
+          display: inline-flex;
+          align-items: center;
+          gap: 0.4rem;
+          font-family: 'Syne', sans-serif;
+          font-size: 0.78rem;
+          font-weight: 600;
+          letter-spacing: 0.06em;
+          color: var(--bh);
+          text-decoration: none;
+          padding: 0.35rem 0.8rem;
+          border: 1px solid rgba(244,124,32,0.2);
+          border-radius: 4px;
+          background: var(--bh-dim);
+          transition: all 0.2s;
         }
 
-        @media (max-width: 768px) {
-            .main-title { font-size: 2.8rem; }
-            .content-card { padding: 2.5rem 1.5rem; }
-            .logo { width: 140px; }
-            .promo-code { font-size: 1.5rem; }
+        .link-pill:hover { background: rgba(244,124,32,0.2); }
+
+        footer { border-top: 1px solid var(--border); padding: 2rem 0; display: flex; justify-content: space-between; align-items: center; }
+        footer p { font-size: 0.8rem; color: var(--muted); }
+
+        @keyframes fadeUp { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
+
+        @media (max-width: 900px) {
+          .ram-grid { grid-template-columns: 1fr 1fr; }
+          .features-grid { grid-template-columns: 1fr 1fr; }
+          .split-hero { grid-template-columns: 1fr; }
+          .split-hero-left { border-right: none; border-bottom: 1px solid var(--border); padding: 3rem 0; }
+          .split-hero-right { padding: 2rem 0; }
+        }
+
+        @media (max-width: 640px) {
+          .ram-grid { grid-template-columns: 1fr; }
+          .features-grid { grid-template-columns: 1fr; }
+          .cta-bar { flex-direction: column; align-items: flex-start; padding: 2rem; }
+          .cta-right { align-items: flex-start; }
+          nav { display: none; }
+          footer { flex-direction: column; gap: 0.5rem; text-align: center; }
         }
     </style>
 </head>
 <body>
 
-<!-- Animated Background -->
-<div class="bg-animation"></div>
-<div class="particles"></div>
+<header>
+    <div class="wrapper">
+        <div class="topbar">
+            <a href="index.html" class="logo">Mattias<span>15</span></a>
+            <nav>
+                <a href="work.html">Work</a>
+                <a href="commissions.html">Commissions</a>
+                <a href="bisecthosting.html" class="active">Server Hosting</a>
+                <a href="https://discord.gg/9XY62bv7AY" target="_blank" style="color:var(--text);border:1px solid var(--border);padding:0.4rem 0.9rem;border-radius:5px;font-size:0.82rem;">Discord ↗</a>
+            </nav>
+        </div>
+    </div>
+</header>
 
-<div class="page-container">
-    <div class="content-card">
+<div class="wrapper">
 
-        <img src="img/bisecthostinglogo.png" alt="BisectHosting Logo" class="logo">
-
-        <h1 class="main-title">BisectHosting Partner</h1>
-
-        <p class="subtitle">
-            Official server hosting partner fast, reliable, and worldwide locations.
-        </p>
-
-        <div class="highlight">
-            New users get <strong>25% OFF</strong> their first month!
+    <div class="split-hero">
+        <div class="split-hero-left">
+            <p class="hero-eyebrow">Partner</p>
+            <h1>Server hosting<br>by <em>BisectHosting</em></h1>
+            <p class="hero-sub">Fast, reliable Minecraft server hosting with worldwide locations. New users get 25% off their first month using my code.</p>
+            <div class="promo-pill">
+                Use code <span class="code">Mattias15</span> for 25% off
+            </div>
+            <a href="https://bisecthosting.com/Mattias15" target="_blank" class="hero-btn">
+                Get 25% Off Now
+                <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6m0 0v6m0-6L10 14"/></svg>
+            </a>
         </div>
 
-        <p>Use code: <span class="promo-code">Mattias15</span></p>
-
-        <p>
-            <a class="bisect-link" href="https://bisecthosting.com/Mattias15" target="_blank">
-                https://bisecthosting.com/Mattias15
-            </a>
-        </p>
-
-        <h4 class="mt-5 mb-3" style="color: #00ccff;">Recommended RAM</h4>
-        <ul class="ram-list">
-            <li>If you are <strong>2 players</strong> with a modpack: <strong>minimum 6GB</strong></li>
-            <li>If you are <strong>4 players</strong>: <strong>minimum 7GB</strong></li>
-            <li>If you are <strong>6 players</strong>: <strong>minimum 9GB</strong></li>
-            <li>If you are <strong>8+ players</strong>: <strong>minimum 11GB</strong></li>
-        </ul>
-
-        <p class="mt-4" style="color: #a8e6ff;">
-            Every server purchased through our link supports the channel and helps keep the mods coming!
-        </p>
-
-        <p><strong>Enjoy lag free modded gameplay with your friends!</strong></p>
-
-        <a href="https://bisecthosting.com/Mattias15" target="_blank" class="btn-primary">
-            Get 25% Off Now!
-        </a>
-
-        <br>
-        <a href="index.html" class="btn-home">Back to Home</a>
+        <div class="split-hero-right">
+            <div class="bh-logo-wrap">
+                <img src="img/bisecthostinglogo.png" alt="BisectHosting" />
+            </div>
+            <div class="stat-stack">
+                <div class="stat-row">
+                    <span class="stat-key">Discount</span>
+                    <span class="stat-val">25% off first month</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-key">Promo code</span>
+                    <span class="stat-val">Mattias15</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-key">Locations</span>
+                    <span class="stat-val white">Worldwide</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-key">Game</span>
+                    <span class="stat-val white">Minecraft Java</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-key">Support</span>
+                    <span class="stat-val white">24 / 7</span>
+                </div>
+            </div>
+        </div>
     </div>
-</div>
 
+    <div class="ram-section">
+        <span class="section-eyebrow">Recommended RAM Guide</span>
+        <div class="ram-grid">
+            <div class="ram-card">
+                <div class="ram-players">2</div>
+                <div class="ram-label">Players with modpack</div>
+                <div class="ram-amount">6 GB min</div>
+                <p class="ram-note">Comfortable for small modpacks with two friends.</p>
+            </div>
+            <div class="ram-card">
+                <div class="ram-players">4</div>
+                <div class="ram-label">Players with modpack</div>
+                <div class="ram-amount">7 GB min</div>
+                <p class="ram-note">Good for heavier packs with four players.</p>
+            </div>
+            <div class="ram-card">
+                <div class="ram-players">6</div>
+                <div class="ram-label">Players with modpack</div>
+                <div class="ram-amount">9 GB min</div>
+                <p class="ram-note">Smooth performance for mid size groups.</p>
+            </div>
+            <div class="ram-card">
+                <div class="ram-players">8+</div>
+                <div class="ram-label">Players with modpack</div>
+                <div class="ram-amount">11 GB min</div>
+                <p class="ram-note">Recommended for large groups or intensive packs.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="why-section">
+        <span class="section-eyebrow">Why BisectHosting</span>
+        <div class="features-grid">
+            <div class="feature-card">
+                <span class="feature-icon">⚡</span>
+                <h4>High Performance</h4>
+                <p>NVMe SSDs and powerful CPUs mean fast world loading and low TPS lag even on heavy modpacks.</p>
+            </div>
+            <div class="feature-card">
+                <span class="feature-icon">🌍</span>
+                <h4>Worldwide Locations</h4>
+                <p>Servers across North America, Europe, Asia, and Australia pick the one closest to you so you won't lag.</p>
+            </div>
+            <div class="feature-card">
+                <span class="feature-icon">🛡️</span>
+                <h4>DDoS Protection</h4>
+                <p>Built in DDoS protection keeps your server online and your sessions uninterrupted.</p>
+            </div>
+            <div class="feature-card">
+                <span class="feature-icon">🎛️</span>
+                <h4>Easy Control Panel</h4>
+                <p>One click modpack installs, file manager, console access, and scheduled tasks all in the browser.</p>
+            </div>
+            <div class="feature-card">
+                <span class="feature-icon">💬</span>
+                <h4>24/7 Support</h4>
+                <p>Live chat support available around the clock to help with setup, mods, or any issues.</p>
+            </div>
+            <div class="feature-card">
+                <span class="feature-icon">💸</span>
+                <h4>Affordable Pricing</h4>
+                <p>Using code <strong style="color:var(--bh)">Mattias15</strong> gets you 25% off your first month.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="cta-bar">
+        <div>
+            <h2>Ready to play lag free with your friends?</h2>
+            <p>Use code <strong style="color:var(--bh)">Mattias15</strong> at checkout for 25% off helps support me aswell!</p>
+        </div>
+        <div class="cta-right">
+            <a href="https://bisecthosting.com/Mattias15" target="_blank" class="hero-btn" style="margin-top:0;">
+                Get Started at BisectHosting
+                <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6m0 0v6m0-6L10 14"/></svg>
+            </a>
+            <a href="https://bisecthosting.com/Mattias15" target="_blank" class="link-pill">bisecthosting.com/Mattias15 ↗</a>
+        </div>
+    </div>
+
+    <footer>
+        <p>© 2025 Mattias15. All rights reserved. (pls don't steal my website 🥹🫰)</p>
+        <p>
+            <a href="https://www.curseforge.com/members/mattiasay68/projects" target="_blank" style="color:var(--muted);text-decoration:none;margin-right:1.2rem;">CurseForge</a>
+            <a href="https://modrinth.com/user/mattias15" target="_blank" style="color:var(--muted);text-decoration:none;margin-right:1.2rem;">Modrinth</a>
+            <a href="https://discord.gg/9XY62bv7AY" target="_blank" style="color:var(--muted);text-decoration:none;">Discord</a>
+        </p>
+    </footer>
+
+</div>
 </body>
 </html>

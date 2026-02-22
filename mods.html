@@ -3,434 +3,782 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Matt's Mods - Minecraft Creations</title>
-
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&display=swap" rel="stylesheet" />
-
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
-
+    <title>Minecraft Mods — Mattias15</title>
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet" />
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-
-        html, body {
-            height: 100%;
-            font-family: 'Poppins', sans-serif;
-            color: white;
-            overflow-x: hidden;
+        :root {
+          --bg: #0a0b0f;
+          --bg2: #0f1118;
+          --bg3: #161923;
+          --border: rgba(255,255,255,0.07);
+          --text: #e8ecf4;
+          --muted: #7a8499;
+          --mc: #5bdb8a;
+          --mc-dim: rgba(91,219,138,0.12);
+          --rb: #e8613c;
+          --accent: #4f8ef7;
         }
+
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
 
         body {
-            background: #000;
-            position: relative;
+          background: var(--bg);
+          color: var(--text);
+          font-family: 'DM Sans', sans-serif;
+          font-weight: 300;
+          line-height: 1.6;
+          min-height: 100vh;
         }
 
-        .bg-animation {
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg,
-                #0f0000 0%,
-                #1a0000 15%,
-                #2d0000 30%,
-                #1c0000 50%,
-                #0a0000 70%,
-                #000000 100%
-            );
-            background-size: 400% 400%;
-            animation: lavaFlow 18s ease infinite;
-            z-index: -2;
+        body::before {
+          content: '';
+          position: fixed;
+          inset: 0;
+          background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+          pointer-events: none;
+          z-index: 999;
+          opacity: 0.4;
         }
 
-        .bg-animation::before {
-            content: "";
-            position: absolute;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            background: radial-gradient(circle at 30% 50%, rgba(139,0,0,0.4), transparent 50%),
-                        radial-gradient(circle at 70% 30%, rgba(100,0,0,0.3), transparent 60%);
-            animation: pulseGlow 12s ease-in-out infinite;
+        .wrapper {
+          max-width: 1100px;
+          margin: 0 auto;
+          padding: 0 2rem;
         }
 
-        @keyframes lavaFlow {
-            0%   { background-position: 0% 50%; }
-            50%  { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
+        header {
+          border-bottom: 1px solid var(--border);
+          position: sticky;
+          top: 0;
+          background: rgba(10, 11, 15, 0.92);
+          backdrop-filter: blur(16px);
+          z-index: 100;
         }
 
-        @keyframes pulseGlow {
-            0%, 100% { opacity: 0.6; }
-            50%      { opacity: 1; }
+        .topbar {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          height: 60px;
         }
 
-        .particles {
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            pointer-events: none;
-            z-index: -1;
-            background-image:
-                radial-gradient(2px 2px at 20% 30%, rgba(180,0,0,0.5), transparent),
-                radial-gradient(3px 3px at 60% 70%, rgba(139,0,0,0.4), transparent),
-                radial-gradient(2px 2px at 90% 10%, rgba(160,0,0,0.5), transparent),
-                radial-gradient(1px 1px at 40% 80%, rgba(120,0,0,0.3), transparent);
-            background-size: 300% 300%;
-            animation: float 35s linear infinite;
+        .logo {
+          font-family: 'Syne', sans-serif;
+          font-weight: 800;
+          font-size: 1.1rem;
+          letter-spacing: -0.02em;
+          color: var(--text);
+          text-decoration: none;
         }
 
-        @keyframes float {
-            0%   { transform: translateY(0) translateX(0); }
-            100% { transform: translateY(-100vh) translateX(50px); }
+        .logo span { color: var(--mc); }
+
+        nav { display: flex; gap: 2rem; align-items: center; }
+
+        nav a {
+          font-size: 0.85rem;
+          font-weight: 400;
+          color: var(--muted);
+          text-decoration: none;
+          letter-spacing: 0.03em;
+          transition: color 0.2s;
         }
 
-        .main-title {
-            font-family: 'Orbitron', monospace;
-            font-size: 4.5rem;
-            font-weight: 900;
-            text-align: center;
-            margin: 3rem 0 2rem;
-            background: linear-gradient(135deg, #b30000, #8b0000, #cc0000);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            text-transform: uppercase;
-            letter-spacing: 4px;
-            animation: titleGlow 3s ease-in-out infinite alternate;
-            position: relative;
-            z-index: 10;
+        nav a:hover { color: var(--text); }
+        nav a.active { color: var(--mc); }
+
+        .page-hero {
+          padding: 4rem 0 3rem;
+          border-bottom: 1px solid var(--border);
+          animation: fadeUp 0.7s ease both;
         }
 
-        @keyframes titleGlow {
-            from { filter: drop-shadow(0 0 15px rgba(179,0,0,0.7)); }
-            to   { filter: drop-shadow(0 0 30px rgba(204,0,0,0.9)); }
+        .page-hero-inner {
+          display: flex;
+          align-items: flex-end;
+          justify-content: space-between;
+          gap: 2rem;
+          flex-wrap: wrap;
         }
 
-        .showcase-container {
-            overflow: hidden;
-            background: rgba(15,0,0,0.85);
-            backdrop-filter: blur(12px);
-            border: 2px solid rgba(139,0,0,0.5);
-            border-left: none;
-            border-right: none;
-            padding: 25px 0;
-            margin: 2rem 0;
-            position: relative;
+        .hero-label {
+          font-size: 0.72rem;
+          font-weight: 500;
+          letter-spacing: 0.14em;
+          text-transform: uppercase;
+          color: var(--muted);
+          margin-bottom: 1rem;
+          display: flex;
+          align-items: center;
+          gap: 0.6rem;
         }
 
-        .showcase-track {
-            display: flex;
-            animation: scrollShowcase 32s linear infinite;
+        .hero-label::before {
+          content: '';
+          display: inline-block;
+          width: 20px;
+          height: 1px;
+          background: var(--muted);
         }
 
-        .showcase-track img {
-            height: 180px;
-            margin: 0 25px;
-            border-radius: 14px;
-            border: 2px solid transparent;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.6);
-            transition: all 0.4s ease;
+        h1 {
+          font-family: 'Syne', sans-serif;
+          font-weight: 800;
+          font-size: clamp(2.4rem, 5vw, 4rem);
+          line-height: 1.05;
+          letter-spacing: -0.03em;
         }
 
-        .showcase-track img:hover {
-            transform: scale(1.15) translateY(-12px);
-            border-color: #8b0000;
-            box-shadow: 0 15px 40px rgba(139,0,0,0.7);
+        h1 em { font-style: normal; color: var(--mc); }
+
+        .hero-sub {
+          margin-top: 0.8rem;
+          font-size: 0.95rem;
+          color: var(--muted);
+          max-width: 480px;
+          line-height: 1.75;
         }
 
-        @keyframes scrollShowcase {
-            0%   { transform: translateX(0); }
-            100% { transform: translateX(-50%); }
+        .hero-right {
+          display: flex;
+          flex-direction: column;
+          align-items: flex-end;
+          gap: 0.75rem;
+        }
+
+        .platform-badge {
+          display: inline-flex;
+          align-items: center;
+          gap: 0.5rem;
+          padding: 0.4rem 0.9rem;
+          border-radius: 5px;
+          font-size: 0.75rem;
+          font-weight: 600;
+          letter-spacing: 0.08em;
+          text-transform: uppercase;
+          background: var(--mc-dim);
+          color: var(--mc);
+          border: 1px solid rgba(91,219,138,0.2);
+        }
+
+        .hero-links {
+          display: flex;
+          gap: 0.6rem;
+        }
+
+        .pill-link {
+          display: inline-flex;
+          align-items: center;
+          gap: 0.4rem;
+          padding: 0.45rem 1rem;
+          border-radius: 5px;
+          font-size: 0.82rem;
+          font-weight: 500;
+          text-decoration: none;
+          border: 1px solid var(--border);
+          color: var(--text);
+          transition: all 0.2s;
+        }
+
+        .pill-link:hover {
+          border-color: rgba(255,255,255,0.18);
+          background: rgba(255,255,255,0.05);
+        }
+
+        .scroll-banner {
+          overflow: hidden;
+          border-bottom: 1px solid var(--border);
+          background: var(--bg2);
+          padding: 1.2rem 0;
+          position: relative;
+        }
+
+        .scroll-banner::before,
+        .scroll-banner::after {
+          content: '';
+          position: absolute;
+          top: 0; bottom: 0;
+          width: 80px;
+          z-index: 2;
+          pointer-events: none;
+        }
+
+        .scroll-banner::before { left: 0; background: linear-gradient(to right, var(--bg2), transparent); }
+        .scroll-banner::after  { right: 0; background: linear-gradient(to left, var(--bg2), transparent); }
+
+        .scroll-track {
+          display: flex;
+          animation: scrollLeft 28s linear infinite;
+          width: max-content;
+        }
+
+        .scroll-track:hover { animation-play-state: paused; }
+
+        .scroll-track img {
+          height: 130px;
+          width: auto;
+          border-radius: 8px;
+          margin: 0 12px;
+          border: 1px solid var(--border);
+          transition: all 0.3s;
+          object-fit: cover;
+        }
+
+        .scroll-track img:hover {
+          border-color: var(--mc);
+          transform: scale(1.06);
+          box-shadow: 0 0 20px rgba(91,219,138,0.2);
+        }
+
+        @keyframes scrollLeft {
+          0%   { transform: translateX(0); }
+          100% { transform: translateX(-50%); }
+        }
+
+        .filter-row {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          padding: 2.5rem 0 1.5rem;
+          border-bottom: 1px solid var(--border);
+          margin-bottom: 2.5rem;
+          flex-wrap: wrap;
+          gap: 1rem;
+        }
+
+        .filter-tabs { display: flex; gap: 0.4rem; }
+
+        .filter-tab {
+          padding: 0.4rem 1rem;
+          border-radius: 5px;
+          font-size: 0.82rem;
+          font-weight: 500;
+          border: 1px solid var(--border);
+          color: var(--muted);
+          background: transparent;
+          cursor: pointer;
+          transition: all 0.2s;
+          font-family: 'DM Sans', sans-serif;
+        }
+
+        .filter-tab:hover { color: var(--text); border-color: rgba(255,255,255,0.15); }
+
+        .filter-tab.active {
+          background: var(--mc-dim);
+          color: var(--mc);
+          border-color: rgba(91,219,138,0.25);
+        }
+
+        .mod-count { font-size: 0.8rem; color: var(--muted); }
+        .mod-count span { font-family: 'Syne', sans-serif; font-weight: 700; color: var(--text); }
+
+        .mods-grid {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 1rem;
+          margin-bottom: 5rem;
         }
 
         .mod-card {
-            background: rgba(20,0,0,0.85);
-            backdrop-filter: blur(12px);
-            border-radius: 20px;
-            overflow: hidden;
-            border: 1px solid rgba(139,0,0,0.4);
-            transition: all 0.4s ease;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
+          background: var(--bg2);
+          border: 1px solid var(--border);
+          border-radius: 10px;
+          overflow: hidden;
+          display: flex;
+          flex-direction: column;
+          transition: all 0.25s;
+          position: relative;
+        }
+
+        .mod-card::before {
+          content: '';
+          position: absolute;
+          top: 0; left: 0; right: 0;
+          height: 2px;
+          background: var(--mc);
+          opacity: 0;
+          transition: opacity 0.25s;
         }
 
         .mod-card:hover {
-            transform: translateY(-10px) scale(1.02);
-            border-color: #8b0000;
-            box-shadow: 0 25px 60px rgba(139,0,0,0.5);
+          border-color: rgba(91,219,138,0.2);
+          transform: translateY(-3px);
+          box-shadow: 0 12px 32px rgba(0,0,0,0.4), 0 0 0 1px rgba(91,219,138,0.08);
         }
 
-        .mod-card-img-container {
-            height: 320px; /* Increased from 260px */
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: rgba(0,0,0,0.4);
-            padding: 20px;
-            border-bottom: 2px solid rgba(139,0,0,0.4);
+        .mod-card:hover::before { opacity: 1; }
+
+        .mod-card.featured-mod {
+          grid-column: span 2;
+          flex-direction: row;
         }
 
-        .mod-card img {
-            max-width: 100%;
-            max-height: 100%;
-            object-fit: contain;
-            transition: transform 0.4s ease;
+        .mod-card.featured-mod .mod-img {
+          width: 220px;
+          flex-shrink: 0;
         }
 
-        .mod-card:hover img {
-            transform: scale(1.12);
+        .mod-img {
+          height: 220px;
+          background: rgba(0,0,0,0.3);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          overflow: hidden;
+          border-bottom: 1px solid var(--border);
+          padding: 1rem;
         }
 
-        .mod-card-body {
-            padding: 2rem;
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
+        .mod-card.featured-mod .mod-img {
+          height: 100%;
+          border-bottom: none;
+          border-right: 1px solid var(--border);
         }
 
-        .mod-card-title {
-            color: #ff6666;
-            font-weight: 700;
-            font-size: 1.6rem;
-            margin-bottom: 1rem;
+        .mod-img img {
+          width: 100%;
+          height: 100%;
+          object-fit: contain;
+          transition: transform 0.4s ease;
         }
 
-        .mod-card-text {
-            color: #e0e0e0;
-            font-size: 1.05rem;
-            line-height: 1.7;
-            margin-bottom: 1.5rem;
+        .mod-card:hover .mod-img img { transform: scale(1.05); }
+
+        .mod-body {
+          padding: 1.5rem;
+          display: flex;
+          flex-direction: column;
+          flex: 1;
         }
 
-        .btn-mod {
-            background: linear-gradient(135deg, #8b0000, #660000);
-            color: white;
-            padding: 0.8rem 2.2rem;
-            border-radius: 30px;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            font-size: 0.95rem;
-            transition: all 0.3s;
-            border: none;
-            text-decoration: none;
-            display: inline-block;
-            align-self: flex-start;
+        .mod-tags {
+          display: flex;
+          gap: 0.4rem;
+          flex-wrap: wrap;
+          margin-bottom: 0.75rem;
         }
 
-        .btn-mod:hover {
-            background: linear-gradient(135deg, #a00000, #8b0000);
-            transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(139,0,0,0.5);
-            color: white;
+        .mod-tag {
+          font-size: 0.65rem;
+          font-weight: 600;
+          letter-spacing: 0.07em;
+          text-transform: uppercase;
+          padding: 0.2rem 0.5rem;
+          border-radius: 3px;
+          background: var(--mc-dim);
+          color: var(--mc);
         }
 
-        .btn-home {
-            background: rgba(0,30,60,0.9);
-            border: 1px solid rgba(100,150,255,0.4);
-            padding: 1rem 3.5rem;
-            border-radius: 50px;
-            font-weight: 600;
-            font-size: 1.1rem;
-            transition: all 0.3s;
-            color: white;
-            text-decoration: none;
-            display: inline-block;
+        .mod-tag.tag-adventure { background: rgba(168,85,247,0.12); color: #c084fc; }
+        .mod-tag.tag-mobs      { background: rgba(234,179,8,0.12);  color: #fbbf24; }
+        .mod-tag.tag-building  { background: rgba(59,130,246,0.12); color: #93c5fd; }
+        .mod-tag.tag-utility   { background: rgba(20,184,166,0.12); color: #5eead4; }
+        .mod-tag.tag-flagship  { background: rgba(79,142,247,0.15); color: var(--accent); }
+        .mod-tag.tag-new       { background: rgba(91,219,138,0.15); color: var(--mc); }
+
+        .mod-card h3 {
+          font-family: 'Syne', sans-serif;
+          font-size: 1rem;
+          font-weight: 700;
+          letter-spacing: -0.01em;
+          margin-bottom: 0.5rem;
+          color: var(--text);
         }
 
-        .btn-home:hover {
-            background: rgba(0,50,100,0.95);
-            transform: translateY(-4px);
-            box-shadow: 0 12px 30px rgba(100,150,255,0.3);
-            color: white;
+        .mod-card.featured-mod h3 { font-size: 1.3rem; }
+
+        .mod-card p {
+          font-size: 0.84rem;
+          color: var(--muted);
+          line-height: 1.65;
+          flex: 1;
         }
 
-        .fade-in-up {
-            opacity: 0;
-            transform: translateY(30px);
-            animation: fadeInUp 0.8s forwards;
+        .mod-footer {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          margin-top: 1.2rem;
+          padding-top: 1rem;
+          border-top: 1px solid var(--border);
         }
 
-        @keyframes fadeInUp {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        .mod-links { display: flex; gap: 0.5rem; }
+
+        .mod-link {
+          display: inline-flex;
+          align-items: center;
+          gap: 0.3rem;
+          font-size: 0.75rem;
+          font-weight: 500;
+          color: var(--muted);
+          text-decoration: none;
+          transition: color 0.2s;
         }
 
-        .fade-in-up:nth-child(1) { animation-delay: 0.1s; }
-        .fade-in-up:nth-child(2) { animation-delay: 0.2s; }
-        .fade-in-up:nth-child(3) { animation-delay: 0.3s; }
-        .fade-in-up:nth-child(4) { animation-delay: 0.4s; }
-        .fade-in-up:nth-child(5) { animation-delay: 0.5s; }
-        .fade-in-up:nth-child(6) { animation-delay: 0.6s; }
-        .fade-in-up:nth-child(7) { animation-delay: 0.7s; }
+        .mod-link:hover { color: var(--mc); }
 
-        @media (max-width: 768px) {
-            .main-title { font-size: 2.8rem; }
-            .showcase-track img { height: 120px; margin: 0 15px; }
-            .mod-card-img-container { height: 240px; }
-            .mod-card-title { font-size: 1.4rem; }
+        .btn-explore {
+          display: inline-flex;
+          align-items: center;
+          gap: 0.4rem;
+          padding: 0.4rem 0.9rem;
+          background: var(--mc-dim);
+          color: var(--mc);
+          border: 1px solid rgba(91,219,138,0.2);
+          border-radius: 5px;
+          font-size: 0.78rem;
+          font-weight: 500;
+          text-decoration: none;
+          transition: all 0.2s;
+          font-family: 'DM Sans', sans-serif;
         }
 
-        @media (min-width: 1400px) {
-            .container { max-width: 1320px; }
+        .btn-explore:hover { background: rgba(91,219,138,0.2); }
+
+        footer {
+          border-top: 1px solid var(--border);
+          padding: 2rem 0;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+        }
+
+        footer p { font-size: 0.8rem; color: var(--muted); }
+
+        @keyframes fadeUp {
+          from { opacity: 0; transform: translateY(18px); }
+          to   { opacity: 1; transform: translateY(0); }
+        }
+
+        .animate { opacity: 0; animation: fadeUp 0.6s ease both; }
+        .animate:nth-child(1) { animation-delay: 0.05s; }
+        .animate:nth-child(2) { animation-delay: 0.10s; }
+        .animate:nth-child(3) { animation-delay: 0.15s; }
+        .animate:nth-child(4) { animation-delay: 0.20s; }
+        .animate:nth-child(5) { animation-delay: 0.25s; }
+        .animate:nth-child(6) { animation-delay: 0.30s; }
+        .animate:nth-child(7) { animation-delay: 0.35s; }
+        .animate:nth-child(8) { animation-delay: 0.40s; }
+        .animate:nth-child(9) { animation-delay: 0.45s; }
+
+        @media (max-width: 900px) {
+          .mods-grid { grid-template-columns: 1fr 1fr; }
+          .mod-card.featured-mod { grid-column: span 2; }
+        }
+
+        @media (max-width: 640px) {
+          .mods-grid { grid-template-columns: 1fr; }
+          .mod-card.featured-mod { grid-column: span 1; flex-direction: column; }
+          .mod-card.featured-mod .mod-img { width: 100%; height: 220px; border-right: none; border-bottom: 1px solid var(--border); }
+          .page-hero-inner { flex-direction: column; align-items: flex-start; }
+          .hero-right { align-items: flex-start; }
+          nav { display: none; }
+          footer { flex-direction: column; gap: 0.5rem; text-align: center; }
         }
     </style>
 </head>
 <body>
 
-<div class="bg-animation"></div>
-<div class="particles"></div>
-
-<main class="container-fluid py-5" style="position: relative; z-index: 1;">
-    <h1 class="main-title">Matt's Mods</h1>
-
-    <div class="showcase-container">
-        <div class="showcase-track">
-            <img src="img/mods/mystigrecia.png" alt="Mysti Grecia">
-            <img src="img/mods/minersdreamed.png" alt="Miners Dream">
-            <img src="img/mods/colorexpansion.png" alt="Color Expansion">
-            <img src="img/mods/randomitems.png" alt="Random Items">
-            <img src="img/mods/pedestals.png" alt="Pedestals">
-            <img src="img/mods/pixelblock.png" alt="Pixel Blocks">
-            <img src="img/mods/cobbleblocks.png" alt="Cobble Blocks">
-            <img src="img/mods/scorchingdesert.png" alt="Scorching Desert">
-
-            <img src="img/mods/mystigrecia.png" alt="Mysti Grecia">
-            <img src="img/mods/minersdreamed.png" alt="Miners Dream">
-            <img src="img/mods/colorexpansion.png" alt="Color Expansion">
-            <img src="img/mods/randomitems.png" alt="Random Items">
-            <img src="img/mods/pedestals.png" alt="Pedestals">
-            <img src="img/mods/pixelblock.png" alt="Pixel Blocks">
-            <img src="img/mods/cobbleblocks.png" alt="Cobble Blocks">
-            <img src="img/mods/scorchingdesert.png" alt="Scorching Desert">
+<header>
+    <div class="wrapper">
+        <div class="topbar">
+            <a href="index.html" class="logo">Mattias<span>15</span></a>
+            <nav>
+                <a href="mods.html" class="active">Mods</a>
+                <a href="commissions.html">Commissions</a>
+                <a href="bisecthosting.html">Server Hosting</a>
+                <a href="https://discord.gg/9XY62bv7AY" target="_blank" style="color:var(--text);border:1px solid var(--border);padding:0.4rem 0.9rem;border-radius:5px;font-size:0.82rem;">Discord ↗</a>
+            </nav>
         </div>
     </div>
+</header>
 
-    <div class="container py-4">
-        <div class="row g-4">
-            <!-- Mysti Grecia -->
-            <div class="col-xl-4 col-lg-6 fade-in-up">
-                <div class="mod-card">
-                    <div class="mod-card-img-container">
-                        <img src="img/mods/mystigrecia.png" alt="Mysti Grecia">
-                    </div>
-                    <div class="mod-card-body">
-                        <h3 class="mod-card-title">Mysti Grecia</h3>
-                        <p class="mod-card-text">Dive into Greek Mythology with this Percy Jacksoninspired adventure mod!</p>
-                        <a href="mystigrecia.html" class="btn-mod">Explore More</a>
-                    </div>
-                </div>
+<div class="wrapper">
+    <div class="page-hero">
+        <div class="page-hero-inner">
+            <div>
+                <p class="hero-label">Minecraft Java Edition</p>
+                <h1>All my <em>mods</em></h1>
+                <p class="hero-sub">Browse my catalogue of mods I have made and published!</p>
             </div>
-
-            <!-- Miners Dream -->
-            <div class="col-xl-4 col-lg-6 fade-in-up">
-                <div class="mod-card">
-                    <div class="mod-card-img-container">
-                        <img src="img/mods/minersdreamed.png" alt="Miners Dream">
-                    </div>
-                    <div class="mod-card-body">
-                        <h3 class="mod-card-title">Miners Dream</h3>
-                        <p class="mod-card-text">Experience the legendary OreSpawn Miners Dream in modern Minecraft versions!</p>
-                        <a href="minersdream.html" class="btn-mod">Explore More</a>
-                    </div>
+            <div class="hero-right">
+                <div class="platform-badge">
+                    <svg width="12" height="12" viewBox="0 0 16 16" fill="none"><rect x="1" y="1" width="6" height="6" rx="1" fill="currentColor"/><rect x="9" y="1" width="6" height="6" rx="1" fill="currentColor" opacity=".6"/><rect x="1" y="9" width="6" height="6" rx="1" fill="currentColor" opacity=".6"/><rect x="9" y="9" width="6" height="6" rx="1" fill="currentColor"/></svg>
+                    Minecraft · Java Edition
                 </div>
-            </div>
-
-            <!-- Color Expansion -->
-            <div class="col-xl-4 col-lg-6 fade-in-up">
-                <div class="mod-card">
-                    <div class="mod-card-img-container">
-                        <img src="img/mods/colorexpansion.png" alt="Color Expansion">
-                    </div>
-                    <div class="mod-card-body">
-                        <h3 class="mod-card-title">Color Expansion</h3>
-                        <p class="mod-card-text">Expand your building palette with countless new block variants and colors!</p>
-                        <a href="colorexpansion.html" class="btn-mod">Explore More</a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Random Items -->
-            <div class="col-xl-4 col-lg-6 fade-in-up">
-                <div class="mod-card">
-                    <div class="mod-card-img-container">
-                        <img src="img/mods/randomitems.png" alt="Random Items">
-                    </div>
-                    <div class="mod-card-body">
-                        <h3 class="mod-card-title">Random Items</h3>
-                        <p class="mod-card-text">Receive random items at timed intervals for endless surprises!</p>
-                        <a href="randomitems.html" class="btn-mod">Explore More</a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Pedestals -->
-            <div class="col-xl-4 col-lg-6 fade-in-up">
-                <div class="mod-card">
-                    <div class="mod-card-img-container">
-                        <img src="img/mods/pedestals.png" alt="Pedestals">
-                    </div>
-                    <div class="mod-card-body">
-                        <h3 class="mod-card-title">Pedestals</h3>
-                        <p class="mod-card-text">Showcase your most precious items on elegant display pedestals!</p>
-                        <a href="pedestals.html" class="btn-mod">Explore More</a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Pixel Blocks -->
-            <div class="col-xl-4 col-lg-6 fade-in-up">
-                <div class="mod-card">
-                    <div class="mod-card-img-container">
-                        <img src="img/mods/pixelblock.png" alt="Pixel Block">
-                    </div>
-                    <div class="mod-card-body">
-                        <h3 class="mod-card-title">Pixel Blocks</h3>
-                        <p class="mod-card-text">Pokemon Lucky Blocks! Mine to spawn random Pokemon in your world!</p>
-                        <a href="pixelblock.html" class="btn-mod">Explore More</a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Cobble Blocks -->
-            <div class="col-xl-4 col-lg-6 fade-in-up">
-                <div class="mod-card">
-                    <div class="mod-card-img-container">
-                        <img src="img/mods/cobbleblocks.png" alt="Cobble Blocks">
-                    </div>
-                    <div class="mod-card-body">
-                        <h3 class="mod-card-title">Cobble Blocks</h3>
-                        <p class="mod-card-text">Cobblemon Lucky Blocks! Mine to discover random Cobblemon spawns!</p>
-                        <a href="cobbleblocks.html" class="btn-mod">Explore More</a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Scorching Desert -->
-            <div class="col-xl-4 col-lg-6 fade-in-up">
-                <div class="mod-card">
-                    <div class="mod-card-img-container">
-                        <img src="img/mods/scorchingdesert.png" alt="Scorching Desert">
-                    </div>
-                    <div class="mod-card-body">
-                        <h3 class="mod-card-title">Scorching Desert</h3>
-                        <p class="mod-card-text">Scorching Desert expands on the vanilla desert, adding new mobs, blocks, structures, and biomes!</p>
-                        <a href="scorchingdesert/scorchingdesert.html" class="btn-mod">Explore More</a>
-                    </div>
+                <div class="hero-links">
+                    <a href="https://modrinth.com/user/mattias15" target="_blank" class="pill-link">Modrinth ↗</a>
+                    <a href="https://www.curseforge.com/members/mattiasay68/projects" target="_blank" class="pill-link">CurseForge ↗</a>
                 </div>
             </div>
         </div>
     </div>
+</div>
 
-    <div class="text-center mt-5">
-        <a href="index.html" class="btn-home">← Back to Home</a>
+<div class="scroll-banner">
+    <div class="scroll-track">
+        <img src="img/mods/mystigrecia.png"     alt="Mysti Grecia">
+        <img src="img/mods/minersdreamed.png"   alt="Miners Dream">
+        <img src="img/mods/colorexpansion.png"  alt="Color Expansion">
+        <img src="img/mods/randomitems.png"     alt="Random Items">
+        <img src="img/mods/pedestals.png"       alt="Pedestals">
+        <img src="img/mods/pixelblock.png"      alt="Pixel Blocks">
+        <img src="img/mods/cobbleblocks.png"    alt="Cobble Blocks">
+        <img src="img/mods/scorchingdesert.png" alt="Scorching Desert">
+        <img src="img/mods/mystigrecia.png"     alt="Mysti Grecia">
+        <img src="img/mods/minersdreamed.png"   alt="Miners Dream">
+        <img src="img/mods/colorexpansion.png"  alt="Color Expansion">
+        <img src="img/mods/randomitems.png"     alt="Random Items">
+        <img src="img/mods/pedestals.png"       alt="Pedestals">
+        <img src="img/mods/pixelblock.png"      alt="Pixel Blocks">
+        <img src="img/mods/cobbleblocks.png"    alt="Cobble Blocks">
+        <img src="img/mods/scorchingdesert.png" alt="Scorching Desert">
     </div>
-</main>
+</div>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<div class="wrapper">
+
+    <div class="filter-row">
+        <div class="filter-tabs">
+            <button class="filter-tab active" onclick="filterMods('all', this)">All</button>
+            <button class="filter-tab" onclick="filterMods('adventure', this)">Adventure</button>
+            <button class="filter-tab" onclick="filterMods('mobs', this)">Mobs</button>
+            <button class="filter-tab" onclick="filterMods('building', this)">Building</button>
+            <button class="filter-tab" onclick="filterMods('utility', this)">Utility</button>
+        </div>
+        <p class="mod-count"><span id="mod-count">9</span> mods</p>
+    </div>
+
+    <div class="mods-grid" id="mods-grid">
+
+        <!-- Capybara -->
+        <div class="mod-card featured-mod animate" data-tags="mobs">
+            <div class="mod-img">
+                <img src="img/mods/capybaras.png" alt="Capybaras">
+            </div>
+            <div class="mod-body">
+                <div class="mod-tags">
+                    <span class="mod-tag tag-adventure">Mobs</span>
+                    <span class="mod-tag tag-flagship">Cosmetics</span>
+                </div>
+                <h3>Capybaras+</h3>
+                <p>Capybaras brings the world’s chillest animal to Minecraft. They spawn in swamps and mangrove biomes and can be tamed with sugar cane. Once tamed, you can give them fun cosmetics like a top hat or equip them with iron, gold, or diamond armor. There are plenty of different variants of capybaras to discover, making each one feel unique. When killing them, they drop capybara fur blocks that can be crafted into carpets. </p>
+                <div class="mod-footer">
+                    <div class="mod-links">
+                        <a href="https://modrinth.com/mod/capybaras" target="_blank" class="mod-link">Modrinth ↗</a>
+                        <a href="https://www.curseforge.com/minecraft/mc-mods/capybaras-mod" target="_blank" class="mod-link">CurseForge ↗</a>
+                    </div>
+                    <a href="capybaras.html" class="btn-explore">Explore →</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Scorching Desert -->
+        <div class="mod-card animate" data-tags="adventure">
+            <div class="mod-img">
+                <img src="img/mods/scorchingdesert.png" alt="Scorching Desert">
+            </div>
+            <div class="mod-body">
+                <div class="mod-tags">
+                    <span class="mod-tag tag-adventure">Adventure</span>
+                    <span class="mod-tag tag-adventure">World Gen</span>
+                    <span class="mod-tag tag-adventure">Mobs</span>
+                </div>
+                <h3>Scorching Desert</h3>
+                <p>Expands on the vanilla desert with new mobs, blocks, structures, and biomes.</p>
+                <div class="mod-footer">
+                    <div class="mod-links">
+                        <a href="#" class="mod-link">Modrinth ↗</a>
+                        <a href="#" class="mod-link">CurseForge ↗</a>
+                    </div>
+                    <a href="scorchingdesert/scorchingdesert.html" class="btn-explore">Explore →</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Miners Dream -->
+        <div class="mod-card animate" data-tags="adventure">
+            <div class="mod-img">
+                <img src="img/mods/minersdreamed.png" alt="Miners Dream">
+            </div>
+            <div class="mod-body">
+                <div class="mod-tags">
+                    <span class="mod-tag tag-adventure">Adventure</span>
+                </div>
+                <h3>Miners Dream</h3>
+                <p>The OreSpawn Miners Dream revived for modern Minecraft versions.</p>
+                <div class="mod-footer">
+                    <div class="mod-links">
+                        <a href="#" class="mod-link">Modrinth ↗</a>
+                        <a href="#" class="mod-link">CurseForge ↗</a>
+                    </div>
+                    <a href="minersdream.html" class="btn-explore">Explore →</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mysti Grecia -->
+        <div class="mod-card animate" data-tags="mobs">
+            <div class="mod-img">
+                <img src="img/mods/mystigrecia.png" alt="Mysti Grecia+">
+            </div>
+            <div class="mod-body">
+                <div class="mod-tags">
+                    <span class="mod-tag tag-mobs">Mobs</span>
+                    <span class="mod-tag tag-new">Adventure</span>
+                    <span class="mod-tag tag-new">Weapons</span>
+                </div>
+                <h3>Mysti Grecia</h3>
+                <p>Adds greek mythology and Percy Jackson themed weapons, entities and blocks!</p>
+                <div class="mod-footer">
+                    <div class="mod-links">
+                        <a href="https://modrinth.com/mod/mysti-grecia" target="_blank" class="mod-link">Modrinth ↗</a>
+                        <a href="https://www.curseforge.com/minecraft/mc-mods/mysti-grecia" target="_blank" class="mod-link">CurseForge ↗</a>
+                    </div>
+                    <a href="mystigrecia.html" class="btn-explore">Explore →</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Color Expansion -->
+        <div class="mod-card animate" data-tags="building">
+            <div class="mod-img">
+                <img src="img/mods/colorexpansion.png" alt="Color Expansion">
+            </div>
+            <div class="mod-body">
+                <div class="mod-tags">
+                    <span class="mod-tag tag-building">Building</span>
+                </div>
+                <h3>Color Expansion</h3>
+                <p>Expand your building palette with 32 new block variants.</p>
+                <div class="mod-footer">
+                    <div class="mod-links">
+                        <a href="#" class="mod-link">Modrinth ↗</a>
+                        <a href="#" class="mod-link">CurseForge ↗</a>
+                    </div>
+                    <a href="colorexpansion.html" class="btn-explore">Explore →</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pedestals -->
+        <div class="mod-card animate" data-tags="building">
+            <div class="mod-img">
+                <img src="img/mods/pedestals.png" alt="Pedestals">
+            </div>
+            <div class="mod-body">
+                <div class="mod-tags">
+                    <span class="mod-tag tag-building">Building</span>
+                    <span class="mod-tag tag-utility" style="background:rgba(20,184,166,0.12);color:#5eead4;">Display</span>
+                </div>
+                <h3>Pedestals</h3>
+                <p>Showcase your most precious items on custom display pedestals.</p>
+                <div class="mod-footer">
+                    <div class="mod-links">
+                        <a href="#" class="mod-link">Modrinth ↗</a>
+                        <a href="#" class="mod-link">CurseForge ↗</a>
+                    </div>
+                    <a href="pedestals.html" class="btn-explore">Explore →</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pixel Blocks -->
+        <div class="mod-card animate" data-tags="utility">
+            <div class="mod-img">
+                <img src="img/mods/pixelblock.png" alt="Pixel Blocks">
+            </div>
+            <div class="mod-body">
+                <div class="mod-tags">
+                    <span class="mod-tag" style="background:rgba(20,184,166,0.12);color:#5eead4;">Lucky Blocks</span>
+                </div>
+                <h3>Pixel Blocks</h3>
+                <p>Pokémon Lucky Blocks break to spawn a random Pokémon in your world.</p>
+                <div class="mod-footer">
+                    <div class="mod-links">
+                        <a href="#" class="mod-link">Modrinth ↗</a>
+                        <a href="#" class="mod-link">CurseForge ↗</a>
+                    </div>
+                    <a href="pixelblock.html" class="btn-explore">Explore →</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Cobble Blocks -->
+        <div class="mod-card animate" data-tags="utility">
+            <div class="mod-img">
+                <img src="img/mods/cobbleblocks.png" alt="Cobble Blocks">
+            </div>
+            <div class="mod-body">
+                <div class="mod-tags">
+                    <span class="mod-tag" style="background:rgba(20,184,166,0.12);color:#5eead4;">Lucky Blocks</span>
+                </div>
+                <h3>Cobble Blocks</h3>
+                <p>Cobblemon Lucky Blocks break to spawn a random Cobblemon in your world.</p>
+                <div class="mod-footer">
+                    <div class="mod-links">
+                        <a href="#" class="mod-link">Modrinth ↗</a>
+                        <a href="#" class="mod-link">CurseForge ↗</a>
+                    </div>
+                    <a href="cobbleblocks.html" class="btn-explore">Explore →</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Random Items -->
+        <div class="mod-card animate" data-tags="utility">
+            <div class="mod-img">
+                <img src="img/mods/randomitems.png" alt="Random Items">
+            </div>
+            <div class="mod-body">
+                <div class="mod-tags">
+                    <span class="mod-tag" style="background:rgba(20,184,166,0.12);color:#5eead4;">Utility</span>
+                </div>
+                <h3>Random Items</h3>
+                <p>Receive random items at timed intervals for endless surprises.</p>
+                <div class="mod-footer">
+                    <div class="mod-links">
+                        <a href="#" class="mod-link">Modrinth ↗</a>
+                        <a href="#" class="mod-link">CurseForge ↗</a>
+                    </div>
+                    <a href="randomitems.html" class="btn-explore">Explore →</a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <footer>
+        <p>© 2025 Mattias15. All rights reserved. (pls don't steal my website 🥹🫰)</p>
+        <p>
+            <a href="https://www.curseforge.com/members/mattiasay68/projects" target="_blank" style="color:var(--muted);text-decoration:none;margin-right:1.2rem;">CurseForge</a>
+            <a href="https://modrinth.com/user/mattias15" target="_blank" style="color:var(--muted);text-decoration:none;margin-right:1.2rem;">Modrinth</a>
+            <a href="https://discord.gg/9XY62bv7AY" target="_blank" style="color:var(--muted);text-decoration:none;">Discord</a>
+        </p>
+    </footer>
+
+</div>
+
+<script>
+    function filterMods(tag, btn) {
+      document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
+      btn.classList.add('active');
+
+      const cards = document.querySelectorAll('#mods-grid .mod-card');
+      let count = 0;
+
+      cards.forEach(card => {
+        const tags = card.dataset.tags || '';
+        const show = tag === 'all' || tags.includes(tag);
+        card.style.display = show ? '' : 'none';
+        if (show) count++;
+      });
+
+      document.getElementById('mod-count').textContent = count;
+    }
+</script>
+
 </body>
 </html>
