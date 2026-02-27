@@ -6,25 +6,23 @@
     <title>Server Hosting · Mattias15</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Silkscreen:wght@400;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
     <style>
         *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
         :root {
-          --bg: #101410;
-          --surface: #181f18;
-          --surface-2: #1e261e;
-          --border: #263026;
-          --border-strong: #354235;
-          --text: #eef2ea;
-          --text-muted: #a3b0a0;
-          --text-subtle: #6e7d6c;
-          --green: #7cd97f;
-          --bh: #ff8c42;
-          --bh-soft: rgba(255, 140, 66, 0.12);
-          --shadow: rgba(0, 0, 0, 0.45);
-          --pixel: 'Silkscreen', monospace;
-          --mono: 'Silkscreen', monospace;
+          --bg: #0a0a0b;
+          --surface: #111114;
+          --surface-2: #161619;
+          --border: rgba(255, 255, 255, 0.06);
+          --border-strong: rgba(255, 255, 255, 0.1);
+          --text: #ededf0;
+          --text-muted: #8a8a93;
+          --text-subtle: #56565f;
+          --green: #4ade80;
+          --bh: #f97316;
+          --bh-soft: rgba(249, 115, 22, 0.1);
+          --mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, monospace;
         }
 
         html { scroll-behavior: smooth; }
@@ -32,21 +30,14 @@
         body {
           background: var(--bg);
           color: var(--text);
-          font-family: 'Space Grotesk', system-ui, sans-serif;
-          font-size: 15.5px;
+          font-family: 'Inter', system-ui, -apple-system, sans-serif;
+          font-size: 15px;
           line-height: 1.6;
+          font-feature-settings: 'cv11', 'ss01', 'ss03';
           -webkit-font-smoothing: antialiased;
         }
 
-        body::before {
-          content: '';
-          display: block;
-          height: 6px;
-          background: repeating-linear-gradient(90deg,
-            #57a64e 0 14px, #4c9245 14px 26px, #67b85a 26px 42px, #3f8c43 42px 54px);
-        }
-
-        ::selection { background: rgba(255, 140, 66, 0.3); color: var(--text); }
+        ::selection { background: rgba(249, 115, 22, 0.25); color: var(--text); }
 
         .wrapper {
           max-width: 1080px;
@@ -54,13 +45,13 @@
           padding: 0 28px;
         }
 
-        /* Header */
+        /* ── HEADER ────────────────────────── */
         header {
           position: sticky; top: 0; z-index: 50;
           border-bottom: 1px solid var(--border);
-          background: rgba(16, 20, 16, 0.85);
-          backdrop-filter: blur(12px);
-          -webkit-backdrop-filter: blur(12px);
+          background: rgba(10, 10, 11, 0.72);
+          backdrop-filter: saturate(180%) blur(14px);
+          -webkit-backdrop-filter: saturate(180%) blur(14px);
         }
 
         .topbar {
@@ -93,24 +84,23 @@
         }
         nav a.active {
           color: var(--green);
-          background: rgba(124, 217, 127, 0.12);
-          border-color: rgba(124, 217, 127, 0.35);
+          background: rgba(74, 222, 128, 0.1);
+          border-color: rgba(74, 222, 128, 0.3);
         }
 
         .nav-cta {
-          color: #0c130c !important;
+          color: #052010 !important;
           background: var(--green);
           border-color: transparent;
           margin-left: 4px;
           font-weight: 600;
-          box-shadow: 2px 2px 0 var(--shadow);
         }
         .nav-cta:hover {
-          background: #93e496;
+          background: #6ee89a;
           border-color: transparent;
         }
 
-        /* Hero */
+        /* ── HERO ──────────────────────────── */
         .hero {
           display: grid;
           grid-template-columns: 1fr 340px;
@@ -120,9 +110,9 @@
         }
 
         .hero-eyebrow {
-          font-family: var(--pixel);
-          font-size: 11px;
-          letter-spacing: 0.5px;
+          font-size: 12px;
+          font-weight: 600;
+          letter-spacing: 0.08em;
           text-transform: uppercase;
           color: var(--bh);
           margin-bottom: 22px;
@@ -175,18 +165,17 @@
           gap: 8px;
           padding: 12px 22px;
           background: var(--bh);
-          color: #1c0f05;
-          border-radius: 7px;
-          font-size: 14.5px;
-          font-weight: 700;
+          color: #fff;
+          border-radius: 8px;
+          font-size: 14px;
+          font-weight: 500;
           text-decoration: none;
-          box-shadow: 3px 3px 0 var(--shadow);
-          transition: background 0.15s, transform 0.1s, box-shadow 0.1s;
+          transition: background 0.15s, transform 0.1s;
           align-self: flex-start;
         }
 
-        .btn-bh:hover { background: #ffa266; transform: translate(-1px, -1px); box-shadow: 4px 4px 0 var(--shadow); }
-        .btn-bh:active { transform: translate(2px, 2px); box-shadow: 1px 1px 0 var(--shadow); }
+        .btn-bh:hover { background: #fb923c; }
+        .btn-bh:active { transform: translateY(1px); }
 
         .hero-aside {
           background: var(--surface);
@@ -224,18 +213,18 @@
         .stat-val { font-weight: 500; color: var(--text); }
         .stat-val.accent { color: var(--bh); font-family: var(--mono); font-size: 12.5px; }
 
-        /* Sections */
+        /* ── SECTIONS ──────────────────────── */
         .section {
           padding: 56px 0;
           border-top: 1px solid var(--border);
         }
 
         .section-label {
-          font-family: var(--pixel);
-          font-size: 10px;
-          letter-spacing: 1px;
+          font-size: 11.5px;
+          font-weight: 600;
+          letter-spacing: 0.08em;
           text-transform: uppercase;
-          color: var(--bh);
+          color: var(--text-subtle);
           margin-bottom: 28px;
           display: block;
         }
@@ -285,7 +274,7 @@
           line-height: 1.55;
         }
 
-        /* Features */
+        /* ── FEATURES ──────────────────────── */
         .features-grid {
           display: grid;
           grid-template-columns: repeat(3, 1fr);
@@ -331,7 +320,7 @@
           line-height: 1.65;
         }
 
-        /* Cta */
+        /* ── CTA ───────────────────────────── */
         .cta-bar {
           display: flex;
           align-items: center;
@@ -339,7 +328,9 @@
           border: 1px solid var(--border);
           border-radius: 14px;
           padding: 32px 36px;
-          background: var(--surface);
+          background:
+            radial-gradient(ellipse at right, rgba(249, 115, 22, 0.06), transparent 60%),
+            var(--surface);
           margin: 32px 0 56px;
           gap: 28px;
           flex-wrap: wrap;
@@ -376,7 +367,7 @@
 
         .cta-url:hover { color: var(--text-muted); }
 
-        /* Footer */
+        /* ── FOOTER ────────────────────────── */
         footer {
           border-top: 1px solid var(--border);
           padding: 28px 0;
@@ -548,7 +539,7 @@
     </div>
 
     <footer>
-        <p>© <span id="year">2026</span> Mattias15. All rights reserved. (pls don't steal my website 🥹🫰)</p>
+        <p>© 2025 Mattias15. All rights reserved. (pls don't steal my website 🥹🫰)</p>
         <p>
             <a href="https://www.curseforge.com/members/mattiasay68/projects" target="_blank" rel="noopener">CurseForge</a>
             <a href="https://modrinth.com/user/mattias15" target="_blank" rel="noopener">Modrinth</a>
@@ -557,10 +548,5 @@
     </footer>
 
 </div>
-
-<script>
-    document.getElementById('year').textContent = new Date().getFullYear();
-</script>
-
 </body>
 </html>

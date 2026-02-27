@@ -3,796 +3,700 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Roblox Projects Mattias15</title>
-    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet" />
+    <title>Roblox Projects · Mattias15</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Silkscreen:wght@400;700&display=swap" rel="stylesheet" />
     <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
         :root {
-          --bg: #0a0b0f;
-          --bg2: #0f1118;
-          --bg3: #161923;
-          --border: rgba(255,255,255,0.07);
-          --text: #e8ecf4;
-          --muted: #7a8499;
-          --mc: #5bdb8a;
-          --rb: #e8613c;
-          --rb-dim: rgba(232,97,60,0.12);
-          --accent: #4f8ef7;
+            --bg: #101410;
+            --surface: #181f18;
+            --surface2: #1e261e;
+            --border: #263026;
+            --border-hover: #354235;
+            --text: #eef2ea;
+            --text-muted: #a3b0a0;
+            --text-subtle: #6e7d6c;
+            --green: #7cd97f;
+            --green-bg: rgba(124, 217, 127, 0.12);
+            --orange: #ff8c42;
+            --orange-bg: rgba(255, 140, 66, 0.12);
+            --rb: #ff8c42;
+            --rb-bg: rgba(255, 140, 66, 0.12);
+            --shadow: rgba(0, 0, 0, 0.45);
+            --pixel: 'Silkscreen', monospace;
+            --blue: #60a5fa;
+            --blue-bg: rgba(96, 165, 250, 0.1);
+            --purple: #c084fc;
+            --purple-bg: rgba(192, 132, 252, 0.1);
+            --yellow: #fbbf24;
+            --yellow-bg: rgba(251, 191, 36, 0.1);
+            --teal: #5eead4;
+            --teal-bg: rgba(94, 234, 212, 0.1);
+            --mono: 'Silkscreen', monospace;
         }
 
-        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
         html { scroll-behavior: smooth; }
 
         body {
-          background: var(--bg);
-          color: var(--text);
-          font-family: 'DM Sans', sans-serif;
-          font-weight: 300;
-          line-height: 1.6;
-          min-height: 100vh;
+            background: var(--bg);
+            color: var(--text);
+            font-family: 'Space Grotesk', system-ui, sans-serif;
+            font-size: 15.5px;
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
         }
 
         body::before {
-          content: '';
-          position: fixed;
-          inset: 0;
-          background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
-          pointer-events: none;
-          z-index: 999;
-          opacity: 0.4;
+            content: '';
+            display: block;
+            height: 6px;
+            background: repeating-linear-gradient(90deg,
+              #57a64e 0 14px, #4c9245 14px 26px, #67b85a 26px 42px, #3f8c43 42px 54px);
         }
 
+        ::selection { background: rgba(255, 140, 66, 0.3); color: var(--text); }
+
         .wrapper {
-          max-width: 1100px;
-          margin: 0 auto;
-          padding: 0 2rem;
+            max-width: 1080px;
+            margin: 0 auto;
+            padding: 0 28px;
         }
 
         header {
-          border-bottom: 1px solid var(--border);
-          position: sticky;
-          top: 0;
-          background: rgba(10,11,15,0.92);
-          backdrop-filter: blur(16px);
-          z-index: 100;
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            border-bottom: 1px solid var(--border);
+            background: rgba(16, 20, 16, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
         }
 
         .topbar {
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-          height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 60px;
         }
 
         .logo {
-          font-family: 'Syne', sans-serif;
-          font-weight: 800;
-          font-size: 1.1rem;
-          letter-spacing: -0.02em;
-          color: var(--text);
-          text-decoration: none;
+            font-family: var(--mono);
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--text);
+            text-decoration: none;
         }
 
-        .logo span { color: var(--mc); }
+        .logo span { color: var(--green); }
 
-        nav { display: flex; gap: 2rem; align-items: center; }
+        nav {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
 
         nav a {
-          font-size: 0.85rem;
-          font-weight: 400;
-          color: var(--muted);
-          text-decoration: none;
-          letter-spacing: 0.03em;
-          transition: color 0.2s;
+            font-size: 13.5px;
+            font-weight: 500;
+            color: var(--text-muted);
+            text-decoration: none;
+            padding: 7px 14px;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            background: var(--surface);
+            white-space: nowrap;
+            transition: color 0.15s, background 0.15s, border-color 0.15s;
         }
 
-        nav a:hover { color: var(--text); }
-        nav a.active { color: var(--rb); }
+        nav a:hover {
+            color: var(--text);
+            background: var(--surface2);
+            border-color: var(--border-hover);
+        }
+
+        nav a.active {
+            color: var(--green);
+            background: var(--green-bg);
+            border-color: rgba(124, 217, 127, 0.35);
+        }
+
+        .nav-cta {
+            color: #0c130c !important;
+            background: var(--green);
+            border-color: transparent;
+            margin-left: 4px;
+            font-weight: 600;
+            box-shadow: 2px 2px 0 var(--shadow);
+        }
+
+        .nav-cta:hover {
+            background: #93e496;
+            border-color: transparent;
+        }
 
         .split-hero {
-          display: grid;
-          grid-template-columns: 1fr 380px;
-          min-height: 340px;
-          border-bottom: 1px solid var(--border);
-          animation: fadeUp 0.7s ease both;
+            display: grid;
+            grid-template-columns: 1fr 320px;
+            gap: 48px;
+            padding: 72px 0 64px;
+            align-items: center;
         }
 
         .split-hero-left {
-          padding: 4rem 3rem 4rem 0;
-          border-right: 1px solid var(--border);
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
         }
 
         .hero-eyebrow {
-          font-size: 0.72rem;
-          font-weight: 600;
-          letter-spacing: 0.14em;
-          text-transform: uppercase;
-          color: var(--rb);
-          margin-bottom: 1.2rem;
-          display: flex;
-          align-items: center;
-          gap: 0.6rem;
-        }
-
-        .hero-eyebrow::before {
-          content: '';
-          width: 20px;
-          height: 1px;
-          background: var(--rb);
-          display: inline-block;
+            font-family: var(--pixel);
+            font-size: 11px;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            color: var(--rb);
+            margin-bottom: 22px;
         }
 
         h1 {
-          font-family: 'Syne', sans-serif;
-          font-weight: 800;
-          font-size: clamp(2.6rem, 5vw, 4.2rem);
-          line-height: 1.03;
-          letter-spacing: -0.03em;
+            font-size: clamp(32px, 4.8vw, 48px);
+            font-weight: 600;
+            line-height: 1.04;
+            letter-spacing: -0.03em;
+            margin-bottom: 16px;
         }
 
         h1 em { font-style: normal; color: var(--rb); }
 
         .hero-sub {
-          margin-top: 1rem;
-          font-size: 0.95rem;
-          color: var(--muted);
-          line-height: 1.75;
-          max-width: 420px;
+            font-size: 16px;
+            color: var(--text-muted);
+            line-height: 1.65;
+            max-width: 440px;
+            margin-bottom: 30px;
         }
 
         .hero-btns {
-          display: flex;
-          gap: 0.75rem;
-          margin-top: 2rem;
-          flex-wrap: wrap;
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
         }
 
         .btn-rb {
-          display: inline-flex;
-          align-items: center;
-          gap: 0.5rem;
-          padding: 0.65rem 1.4rem;
-          background: var(--rb);
-          color: white;
-          border-radius: 6px;
-          font-size: 0.88rem;
-          font-weight: 500;
-          text-decoration: none;
-          transition: all 0.2s;
-          border: none;
-          font-family: 'DM Sans', sans-serif;
-          cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            padding: 11px 20px;
+            background: var(--rb);
+            color: #1c0f05;
+            border-radius: 7px;
+            font-size: 14.5px;
+            font-weight: 700;
+            text-decoration: none;
+            box-shadow: 3px 3px 0 var(--shadow);
+            transition: background 0.15s, transform 0.1s, box-shadow 0.1s;
         }
 
-        .btn-rb:hover { background: #f0784d; transform: translateY(-1px); }
+        .btn-rb:hover { background: #ffa266; transform: translate(-1px, -1px); box-shadow: 4px 4px 0 var(--shadow); }
+        .btn-rb:active { transform: translate(2px, 2px); box-shadow: 1px 1px 0 var(--shadow); }
 
         .btn-ghost {
-          display: inline-flex;
-          align-items: center;
-          gap: 0.5rem;
-          padding: 0.65rem 1.4rem;
-          background: transparent;
-          color: var(--text);
-          border: 1px solid var(--border);
-          border-radius: 6px;
-          font-size: 0.88rem;
-          font-weight: 500;
-          text-decoration: none;
-          transition: all 0.2s;
-          font-family: 'DM Sans', sans-serif;
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            padding: 11px 20px;
+            background: var(--surface2);
+            color: var(--text);
+            border: 1px solid var(--border-hover);
+            border-radius: 7px;
+            font-size: 14.5px;
+            font-weight: 700;
+            text-decoration: none;
+            box-shadow: 3px 3px 0 var(--shadow);
+            transition: background 0.15s, border-color 0.15s, transform 0.1s, box-shadow 0.1s;
         }
 
-        .btn-ghost:hover { border-color: rgba(255,255,255,0.2); background: rgba(255,255,255,0.04); }
+        .btn-ghost:hover { background: var(--surface2); border-color: #48584a; transform: translate(-1px, -1px); box-shadow: 4px 4px 0 var(--shadow); }
 
         .split-hero-right {
-          padding: 3rem 0 3rem 3rem;
-          display: flex;
-          flex-direction: column;
-          justify-content: space-between;
-          gap: 1.5rem;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 22px;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
         }
 
         .rb-badge {
-          display: inline-flex;
-          align-items: center;
-          gap: 0.5rem;
-          padding: 0.4rem 0.9rem;
-          border-radius: 5px;
-          font-size: 0.75rem;
-          font-weight: 600;
-          letter-spacing: 0.08em;
-          text-transform: uppercase;
-          background: var(--rb-dim);
-          color: var(--rb);
-          border: 1px solid rgba(232,97,60,0.2);
-          align-self: flex-start;
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            padding: 5px 11px;
+            border-radius: 999px;
+            font-size: 12px;
+            font-weight: 500;
+            background: var(--rb-bg);
+            color: var(--rb);
+            align-self: flex-start;
+        }
+        .rb-badge::before {
+            content: '';
+            width: 6px; height: 6px; border-radius: 50%;
+            background: var(--rb);
         }
 
-        .stat-stack {
-          display: flex;
-          flex-direction: column;
-          gap: 0;
-        }
+        .stat-stack { display: flex; flex-direction: column; }
 
         .stat-row {
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-          padding: 1rem 0;
-          border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 11px 0;
+            border-bottom: 1px solid var(--border);
+            font-size: 13.5px;
         }
 
-        .stat-row:first-child { border-top: 1px solid var(--border); }
+        .stat-row:first-child { border-top: 1px solid var(--border); padding-top: 12px; }
+        .stat-row:last-child { border-bottom: none; padding-bottom: 0; }
+        .stat-key { color: var(--text-muted); }
+        .stat-val { font-weight: 500; color: var(--rb); font-family: var(--mono); font-size: 12.5px; }
+        .stat-val.white { color: var(--text); font-family: 'Space Grotesk', sans-serif; font-size: 13.5px; }
 
-        .stat-key {
-          font-size: 0.8rem;
-          color: var(--muted);
-          letter-spacing: 0.03em;
+        .tab-nav {
+            display: flex;
+            border-bottom: 1px solid var(--border);
+            overflow-x: auto;
+            scrollbar-width: none;
         }
 
-        .stat-val {
-          font-family: 'Syne', sans-serif;
-          font-size: 0.95rem;
-          font-weight: 700;
-          color: var(--rb);
+        .tab-nav::-webkit-scrollbar { display: none; }
+
+        .tab-btn {
+            padding: 15px 20px;
+            font-size: 14px;
+            font-weight: 500;
+            font-family: inherit;
+            color: var(--text-muted);
+            background: transparent;
+            border: none;
+            border-bottom: 1.5px solid transparent;
+            cursor: pointer;
+            transition: color 0.15s, border-color 0.15s;
+            white-space: nowrap;
+            margin-bottom: -1px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
 
-        .page-tab-nav {
-          display: flex;
-          gap: 0;
-          border-bottom: 1px solid var(--border);
+        .tab-btn:hover { color: var(--text); }
+        .tab-btn.active { color: var(--text); border-bottom-color: var(--rb); }
+
+        .tab-count {
+            font-family: var(--mono);
+            font-size: 11px;
+            font-weight: 400;
+            padding: 1px 7px;
+            border-radius: 999px;
+            background: var(--surface2);
+            color: var(--text-subtle);
+            min-width: 20px;
+            text-align: center;
         }
 
-        .page-tab-btn {
-          padding: 1.1rem 1.6rem;
-          font-size: 0.85rem;
-          font-weight: 500;
-          font-family: 'DM Sans', sans-serif;
-          color: var(--muted);
-          background: transparent;
-          border: none;
-          border-bottom: 2px solid transparent;
-          cursor: pointer;
-          transition: all 0.2s;
-          white-space: nowrap;
-          letter-spacing: 0.02em;
-          margin-bottom: -1px;
+        .tab-btn.active .tab-count {
+            background: var(--rb-bg);
+            color: var(--rb);
         }
 
-        .page-tab-btn:hover { color: var(--text); }
-        .page-tab-btn.active { color: var(--rb); border-bottom-color: var(--rb); }
+        .tab-panel { display: none; padding: 40px 0 64px; }
+        .tab-panel.active { display: block; }
 
-        .page-panel { display: none; }
-        .page-panel.active { display: block; }
-
-        .filter-bar {
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-          padding: 1.8rem 0;
-          border-bottom: 1px solid var(--border);
-          gap: 1rem;
-          flex-wrap: wrap;
+        .section-label {
+            font-family: var(--pixel);
+            font-size: 10px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: var(--rb);
+            margin-bottom: 20px;
+            display: block;
         }
 
-        .filter-tabs { display: flex; gap: 0.4rem; flex-wrap: wrap; }
+        .games-list { display: flex; flex-direction: column; }
 
-        .filter-tab {
-          padding: 0.35rem 0.9rem;
-          border-radius: 4px;
-          font-size: 0.8rem;
-          font-weight: 500;
-          border: 1px solid var(--border);
-          color: var(--muted);
-          background: transparent;
-          cursor: pointer;
-          transition: all 0.2s;
-          font-family: 'DM Sans', sans-serif;
+        .game-row {
+            display: grid;
+            grid-template-columns: 80px 1fr auto;
+            align-items: center;
+            gap: 22px;
+            padding: 18px;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            text-decoration: none;
+            color: inherit;
+            transition: border-color 0.15s, background 0.15s;
+            margin-bottom: 10px;
+            background: var(--surface);
         }
 
-        .filter-tab:hover { color: var(--text); border-color: rgba(255,255,255,0.15); }
+        .game-row:hover { border-color: var(--border-hover); background: var(--surface2); }
 
-        .filter-tab.active {
-          background: var(--rb-dim);
-          color: var(--rb);
-          border-color: rgba(232,97,60,0.25);
+        .game-thumb {
+            width: 80px;
+            height: 80px;
+            border-radius: 9px;
+            overflow: hidden;
+            background: var(--surface2);
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
         }
 
-        .proj-count { font-size: 0.78rem; color: var(--muted); }
-        .proj-count span { font-family: 'Syne', sans-serif; font-weight: 700; color: var(--text); }
+        .game-thumb img { width: 100%; height: 100%; object-fit: cover; }
 
-        .projects-list {
-          margin: 0 0 5rem;
+        .game-info { flex: 1; min-width: 0; }
+
+        .game-tags {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+            margin-bottom: 6px;
         }
 
-        .proj-row {
-          display: grid;
-          grid-template-columns: 80px 1fr auto;
-          align-items: center;
-          gap: 2rem;
-          padding: 1.8rem 0;
-          border-bottom: 1px solid var(--border);
-          text-decoration: none;
-          color: inherit;
-          position: relative;
-          transition: all 0.2s;
-          cursor: pointer;
+        .tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 11px;
+            font-weight: 500;
+            padding: 2px 8px;
+            border-radius: 999px;
+        }
+        .tag::before {
+            content: '';
+            width: 5px; height: 5px; border-radius: 50%;
+            background: currentColor;
         }
 
-        .proj-row::before {
-          content: '';
-          position: absolute;
-          left: -2rem;
-          top: 0; bottom: 0;
-          width: 2px;
-          background: var(--rb);
-          opacity: 0;
-          transition: opacity 0.2s;
+        .tag-game      { background: var(--rb-bg);     color: var(--rb); }
+        .tag-ui        { background: var(--blue-bg);   color: var(--blue); }
+        .tag-scripting { background: var(--purple-bg); color: var(--purple); }
+        .tag-building  { background: var(--yellow-bg); color: var(--yellow); }
+        .tag-gfx       { background: var(--green-bg);  color: var(--green); }
+        .tag-system    { background: var(--teal-bg);   color: var(--teal); }
+
+        .game-title {
+            font-size: 15.5px;
+            font-weight: 600;
+            letter-spacing: -0.015em;
+            color: var(--text);
+            margin-bottom: 4px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
 
-        .proj-row:hover { background: rgba(232,97,60,0.03); }
-        .proj-row:hover::before { opacity: 1; }
-
-        .proj-thumb {
-          width: 80px;
-          height: 80px;
-          border-radius: 8px;
-          border: 1px solid var(--border);
-          overflow: hidden;
-          background: var(--bg3);
-          flex-shrink: 0;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          font-size: 1.8rem;
-          transition: border-color 0.2s;
+        .game-desc {
+            font-size: 13.5px;
+            color: var(--text-muted);
+            line-height: 1.55;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
         }
 
-        .proj-row:hover .proj-thumb { border-color: rgba(232,97,60,0.3); }
-
-        .proj-thumb img {
-          width: 100%;
-          height: 100%;
-          object-fit: contain;
-        }
-
-        .proj-thumb-placeholder {
-          opacity: 0.3;
-          font-size: 1.6rem;
-        }
-
-        .proj-info { flex: 1; min-width: 0; }
-
-        .proj-tags {
-          display: flex;
-          gap: 0.35rem;
-          flex-wrap: wrap;
-          margin-bottom: 0.4rem;
-        }
-
-        .proj-tag {
-          font-size: 0.62rem;
-          font-weight: 600;
-          letter-spacing: 0.07em;
-          text-transform: uppercase;
-          padding: 0.15rem 0.45rem;
-          border-radius: 3px;
-        }
-
-        .tag-game      { background: rgba(232,97,60,0.14);  color: var(--rb); }
-        .tag-ui        { background: rgba(79,142,247,0.12); color: #93c5fd; }
-        .tag-scripting { background: rgba(168,85,247,0.12); color: #c084fc; }
-        .tag-building  { background: rgba(234,179,8,0.12);  color: #fbbf24; }
-        .tag-gfx       { background: rgba(234,179,8,0.12);  color: #44fb24; }
-        .tag-system    { background: rgba(20,184,166,0.12); color: #5eead4; }
-
-        .proj-title {
-          font-family: 'Syne', sans-serif;
-          font-size: 1.05rem;
-          font-weight: 700;
-          letter-spacing: -0.01em;
-          color: var(--text);
-          margin-bottom: 0.3rem;
-          white-space: nowrap;
-          overflow: hidden;
-          text-overflow: ellipsis;
-        }
-
-        .proj-desc {
-          font-size: 0.83rem;
-          color: var(--muted);
-          line-height: 1.55;
-          display: -webkit-box;
-          -webkit-line-clamp: 2;
-          -webkit-box-orient: vertical;
-          overflow: hidden;
-        }
-
-        .proj-meta {
-          display: flex;
-          flex-direction: column;
-          align-items: flex-end;
-          gap: 0.6rem;
-          flex-shrink: 0;
+        .game-meta {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 10px;
+            flex-shrink: 0;
         }
 
         .status-pill {
-          display: inline-flex;
-          align-items: center;
-          gap: 0.35rem;
-          font-size: 0.68rem;
-          font-weight: 500;
-          color: var(--muted);
-          white-space: nowrap;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 12px;
+            font-weight: 500;
+            color: var(--text-muted);
+            white-space: nowrap;
         }
 
         .status-dot {
-          width: 6px;
-          height: 6px;
-          border-radius: 50%;
-          flex-shrink: 0;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            flex-shrink: 0;
         }
 
-        .status-dot.live   { background: var(--mc); box-shadow: 0 0 6px rgba(91,219,138,0.6); }
-        .status-dot.wip    { background: #fbbf24; box-shadow: 0 0 6px rgba(251,191,36,0.5); }
-        .status-dot.paused { background: var(--muted); }
+        .status-dot.live   { background: var(--green); box-shadow: 0 0 0 3px rgba(74, 222, 128, 0.15); }
+        .status-dot.wip    { background: var(--yellow); }
+        .status-dot.paused { background: var(--text-subtle); }
 
-        .proj-action {
-          display: inline-flex;
-          align-items: center;
-          gap: 0.4rem;
-          padding: 0.35rem 0.8rem;
-          background: var(--rb-dim);
-          color: var(--rb);
-          border: 1px solid rgba(232,97,60,0.2);
-          border-radius: 4px;
-          font-size: 0.75rem;
-          font-weight: 500;
-          text-decoration: none;
-          transition: all 0.2s;
-          font-family: 'DM Sans', sans-serif;
-          white-space: nowrap;
+        .play-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 7px 14px;
+            background: var(--rb);
+            color: #1c0f05;
+            border-radius: 7px;
+            font-size: 13px;
+            font-weight: 700;
+            text-decoration: none;
+            box-shadow: 2px 2px 0 var(--shadow);
+            transition: background 0.15s, transform 0.1s, box-shadow 0.1s;
+            white-space: nowrap;
         }
 
-        .proj-action:hover { background: rgba(232,97,60,0.2); }
+        .play-btn:hover { background: #ffa266; transform: translate(-1px, -1px); box-shadow: 3px 3px 0 var(--shadow); }
 
-        .categories-section {
-          padding: 3rem 0 5rem;
+        .media-grid-wide {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 12px;
+            margin-bottom: 32px;
         }
 
-        .section-eyebrow {
-          font-size: 0.72rem;
-          font-weight: 600;
-          letter-spacing: 0.14em;
-          text-transform: uppercase;
-          color: var(--muted);
-          margin-bottom: 2rem;
+        .media-grid-square {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+            gap: 12px;
+            margin-bottom: 32px;
         }
 
-        .categories-grid {
-          display: grid;
-          grid-template-columns: repeat(4, 1fr);
-          gap: 1px;
-          background: var(--border);
-          border: 1px solid var(--border);
-          border-radius: 12px;
-          overflow: hidden;
+        .media-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: border-color 0.15s, transform 0.15s;
         }
 
-        .cat-card {
-          background: var(--bg2);
-          padding: 2rem 1.5rem;
-          transition: background 0.2s;
-          position: relative;
-          overflow: hidden;
+        .media-card:hover { border-color: var(--border-hover); }
+
+        .media-card img {
+            width: 100%;
+            display: block;
+            background: var(--surface2);
         }
 
-        .cat-card:hover { background: var(--bg3); }
+        .media-card img.wide   { aspect-ratio: 16 / 9; object-fit: cover; }
+        .media-card img.square { aspect-ratio: 1 / 1;  object-fit: cover; }
 
-        .cat-card::before {
-          content: '';
-          position: absolute;
-          top: 0; left: 0; right: 0;
-          height: 2px;
+        .media-card-info { padding: 12px 14px; }
+
+        .media-card-title {
+            font-size: 13.5px;
+            font-weight: 500;
+            color: var(--text);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
 
-        .cat-card:nth-child(1)::before { background: var(--rb); }
-        .cat-card:nth-child(2)::before { background: #93c5fd; }
-        .cat-card:nth-child(3)::before { background: #c084fc; }
-        .cat-card:nth-child(4)::before { background: #fbbf24; }
-
-        .cat-icon {
-          font-size: 1.6rem;
-          margin-bottom: 1rem;
-          display: block;
+        .empty-state {
+            padding: 56px 24px;
+            text-align: center;
+            border: 1px dashed var(--border-hover);
+            border-radius: 12px;
+            color: var(--text-subtle);
+            font-size: 14px;
         }
 
-        .cat-title {
-          font-family: 'Syne', sans-serif;
-          font-size: 0.95rem;
-          font-weight: 700;
-          margin-bottom: 0.5rem;
+        .what-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+            margin-top: 40px;
+            margin-bottom: 32px;
         }
 
-        .cat-desc {
-          font-size: 0.8rem;
-          color: var(--muted);
-          line-height: 1.65;
+        .what-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 24px;
+            transition: border-color 0.15s;
+        }
+
+        .what-card:hover { border-color: var(--border-hover); }
+
+        .what-icon {
+            width: 34px;
+            height: 34px;
+            border-radius: 8px;
+            background: var(--surface2);
+            border: 1px solid var(--border);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--rb);
+            margin-bottom: 16px;
+        }
+
+        .what-card h4 {
+            font-size: 14.5px;
+            font-weight: 600;
+            margin-bottom: 6px;
+            color: var(--text);
+            letter-spacing: -0.01em;
+        }
+
+        .what-card p {
+            font-size: 13.5px;
+            color: var(--text-muted);
+            line-height: 1.65;
         }
 
         .cta-bar {
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-          border: 1px solid var(--border);
-          border-radius: 12px;
-          padding: 2.5rem 3rem;
-          background: var(--bg2);
-          margin-bottom: 4rem;
-          gap: 2rem;
-          flex-wrap: wrap;
-          position: relative;
-          overflow: hidden;
-        }
-
-        .cta-bar::before {
-          content: '';
-          position: absolute;
-          left: 0; top: 0; bottom: 0;
-          width: 3px;
-          background: var(--rb);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 32px;
+            background:
+              radial-gradient(ellipse at right, rgba(249, 115, 22, 0.06), transparent 60%),
+              var(--surface);
+            margin-top: 32px;
+            gap: 24px;
+            flex-wrap: wrap;
         }
 
         .cta-bar h2 {
-          font-family: 'Syne', sans-serif;
-          font-size: 1.4rem;
-          font-weight: 800;
-          letter-spacing: -0.02em;
-          margin-bottom: 0.3rem;
+            font-size: 22px;
+            font-weight: 600;
+            letter-spacing: -0.025em;
+            margin-bottom: 6px;
         }
 
-        .cta-bar p {
-          font-size: 0.88rem;
-          color: var(--muted);
+        .cta-bar p { font-size: 14px; color: var(--text-muted); line-height: 1.55; max-width: 460px; }
+        .cta-btns { display: flex; gap: 10px; flex-wrap: wrap; flex-shrink: 0; }
+
+        .models-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 12px;
+            margin-bottom: 32px;
         }
 
-        .cta-btns { display: flex; gap: 0.75rem; flex-wrap: wrap; }
-
-        .gfx-section-label {
-          font-size: 0.72rem;
-          font-weight: 600;
-          letter-spacing: 0.14em;
-          text-transform: uppercase;
-          color: var(--muted);
-          padding: 2.5rem 0 1.2rem;
-          display: flex;
-          align-items: center;
-          gap: 0.75rem;
+        .model-viewer-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: border-color 0.15s;
         }
 
-        .gfx-section-label::after {
-          content: '';
-          flex: 1;
-          height: 1px;
-          background: var(--border);
+        .model-viewer-card:hover { border-color: var(--border-hover); }
+
+        .model-canvas-wrap {
+            position: relative;
+            width: 100%;
+            height: 260px;
+            background: var(--surface2);
+            overflow: hidden;
         }
 
-        .gfx-icons-grid {
-          display: grid;
-          grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-          gap: 1rem;
-          margin-bottom: 1rem;
+        .model-canvas {
+            width: 100%;
+            height: 100%;
+            display: block;
+            cursor: grab;
+            outline: none;
         }
 
-        .gfx-icon-card {
-          background: var(--bg2);
-          border: 1px solid var(--border);
-          border-radius: 12px;
-          overflow: hidden;
-          transition: border-color 0.2s, transform 0.2s;
-          cursor: pointer;
+        .model-canvas:active { cursor: grabbing; }
+
+        .model-canvas-wrap .model-hint {
+            position: absolute;
+            bottom: 8px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 11px;
+            font-weight: 500;
+            color: var(--text-subtle);
+            background: rgba(12, 12, 14, 0.7);
+            padding: 3px 10px;
+            border-radius: 20px;
+            pointer-events: none;
+            letter-spacing: 0.03em;
+            white-space: nowrap;
+            backdrop-filter: blur(4px);
+            transition: opacity 0.3s;
         }
 
-        .gfx-icon-card:hover {
-          border-color: rgba(232,97,60,0.3);
-          transform: translateY(-2px);
+        .model-canvas-wrap.interacting .model-hint { opacity: 0; }
+
+        .model-loading {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            font-size: 13px;
+            color: var(--text-subtle);
+            pointer-events: none;
         }
 
-        .gfx-icon-img {
-          width: 100%;
-          aspect-ratio: 1 / 1;
-          object-fit: cover;
-          display: block;
-          background: var(--bg3);
+        .model-loading-spinner {
+            width: 24px;
+            height: 24px;
+            border: 2px solid var(--border);
+            border-top-color: var(--rb);
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
         }
 
-        .gfx-icon-label {
-          padding: 0.6rem 0.75rem;
-          font-family: 'Syne', sans-serif;
-          font-size: 0.75rem;
-          font-weight: 700;
-          color: var(--text);
-          white-space: nowrap;
-          overflow: hidden;
-          text-overflow: ellipsis;
-        }
-
-        .gfx-icon-sub {
-          padding: 0 0.75rem 0.6rem;
-          font-size: 0.68rem;
-          color: var(--muted);
-        }
-
-        .gfx-thumbs-grid {
-          display: grid;
-          grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
-          gap: 1rem;
-          margin-bottom: 3rem;
-        }
-
-        .gfx-thumb-card {
-          background: var(--bg2);
-          border: 1px solid var(--border);
-          border-radius: 12px;
-          overflow: hidden;
-          transition: border-color 0.2s, transform 0.2s;
-          cursor: pointer;
-        }
-
-        .gfx-thumb-card:hover {
-          border-color: rgba(232,97,60,0.3);
-          transform: translateY(-2px);
-        }
-
-        .gfx-thumb-img {
-          width: 100%;
-          aspect-ratio: 16 / 9;
-          object-fit: cover;
-          display: block;
-          background: var(--bg3);
-        }
-
-        .gfx-thumb-info {
-          padding: 0.75rem 1rem;
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-          gap: 0.5rem;
-        }
-
-        .gfx-thumb-title {
-          font-family: 'Syne', sans-serif;
-          font-size: 0.82rem;
-          font-weight: 700;
-          color: var(--text);
-          white-space: nowrap;
-          overflow: hidden;
-          text-overflow: ellipsis;
-        }
-
-        .gfx-thumb-dim {
-          font-size: 0.65rem;
-          color: var(--muted);
-          flex-shrink: 0;
-          background: var(--bg3);
-          padding: 0.2rem 0.45rem;
-          border-radius: 3px;
-          font-family: 'DM Sans', sans-serif;
-        }
-
-        .ui-section-label {
-          font-size: 0.72rem;
-          font-weight: 600;
-          letter-spacing: 0.14em;
-          text-transform: uppercase;
-          color: var(--muted);
-          padding: 2.5rem 0 1.2rem;
-          display: flex;
-          align-items: center;
-          gap: 0.75rem;
-        }
-
-        .ui-section-label::after {
-          content: '';
-          flex: 1;
-          height: 1px;
-          background: var(--border);
-        }
-
-        .ui-grid {
-          display: grid;
-          grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-          gap: 1rem;
-          margin-bottom: 3rem;
-        }
-
-        .ui-card {
-          background: var(--bg2);
-          border: 1px solid var(--border);
-          border-radius: 12px;
-          overflow: hidden;
-          transition: border-color 0.2s, transform 0.2s;
-        }
-
-        .ui-card:hover {
-          border-color: rgba(79,142,247,0.3);
-          transform: translateY(-2px);
-        }
-
-        .ui-card-preview {
-          width: 100%;
-          aspect-ratio: 16 / 9;
-          object-fit: cover;
-          display: block;
-          background: var(--bg3);
-        }
-
-        .ui-card-info {
-          padding: 0.9rem 1rem;
-        }
-
-        .ui-card-title {
-          font-family: 'Syne', sans-serif;
-          font-size: 0.85rem;
-          font-weight: 700;
-          color: var(--text);
-          margin-bottom: 0.25rem;
-        }
-
-        .ui-card-desc {
-          font-size: 0.78rem;
-          color: var(--muted);
-          line-height: 1.55;
-        }
-
-        .gfx-page-body { padding-bottom: 5rem; }
-        .ui-page-body { padding-bottom: 5rem; }
+        @keyframes spin { to { transform: rotate(360deg); } }
 
         footer {
-          border-top: 1px solid var(--border);
-          padding: 2rem 0;
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
+            border-top: 1px solid var(--border);
+            padding: 28px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
-        footer p { font-size: 0.8rem; color: var(--muted); }
+        footer p { font-size: 13px; color: var(--text-subtle); }
 
-        @keyframes fadeUp {
-          from { opacity: 0; transform: translateY(18px); }
-          to   { opacity: 1; transform: translateY(0); }
+        footer a {
+            color: var(--text-subtle);
+            text-decoration: none;
+            margin-left: 22px;
+            font-size: 13px;
+            transition: color 0.15s;
         }
 
-        .animate { opacity: 0; animation: fadeUp 0.5s ease both; }
-        .animate:nth-child(1) { animation-delay: 0.04s; }
-        .animate:nth-child(2) { animation-delay: 0.08s; }
-        .animate:nth-child(3) { animation-delay: 0.12s; }
-        .animate:nth-child(4) { animation-delay: 0.16s; }
-        .animate:nth-child(5) { animation-delay: 0.20s; }
-        .animate:nth-child(6) { animation-delay: 0.24s; }
-        .animate:nth-child(7) { animation-delay: 0.28s; }
+        footer a:hover { color: var(--text); }
 
-        @media (max-width: 900px) {
-          .split-hero { grid-template-columns: 1fr; }
-          .split-hero-left { border-right: none; border-bottom: 1px solid var(--border); padding: 3rem 0; }
-          .split-hero-right { padding: 2rem 0; }
-          .categories-grid { grid-template-columns: 1fr 1fr; }
-          .proj-row { grid-template-columns: 64px 1fr auto; gap: 1.2rem; }
-          .proj-thumb { width: 64px; height: 64px; }
-          .gfx-thumbs-grid { grid-template-columns: 1fr; }
+        @media (max-width: 860px) {
+            .split-hero { grid-template-columns: 1fr; gap: 32px; padding: 48px 0; }
+            .what-grid { grid-template-columns: 1fr 1fr; }
         }
 
-        @media (max-width: 640px) {
-          .proj-row { grid-template-columns: 56px 1fr; gap: 1rem; }
-          .proj-meta { display: none; }
-          .categories-grid { grid-template-columns: 1fr; }
-          .cta-bar { flex-direction: column; align-items: flex-start; padding: 2rem; }
-          nav { display: none; }
-          footer { flex-direction: column; gap: 0.5rem; text-align: center; }
-          .gfx-icons-grid { grid-template-columns: repeat(2, 1fr); }
-          .ui-grid { grid-template-columns: 1fr; }
+        @media (max-width: 600px) {
+            .game-row { grid-template-columns: 64px 1fr; gap: 14px; }
+            .game-meta { display: none; }
+            .what-grid { grid-template-columns: 1fr; }
+            .cta-bar { flex-direction: column; align-items: flex-start; padding: 28px; }
+            .media-grid-wide { grid-template-columns: 1fr; }
+            .models-grid { grid-template-columns: 1fr; }
+            .topbar { gap: 12px; }
+            nav { overflow-x: auto; min-width: 0; scrollbar-width: none; }
+            nav::-webkit-scrollbar { display: none; }
+            nav a { padding: 6px 10px; font-size: 12.5px; }
+            footer { flex-direction: column; gap: 14px; text-align: center; }
         }
     </style>
 </head>
@@ -801,12 +705,13 @@
 <header>
     <div class="wrapper">
         <div class="topbar">
-            <a href="index.html" class="logo">Mattias<span>15</span></a>
+            <a href="index.html" class="logo">mattias<span>15</span></a>
             <nav>
-                <a href="work.html" class="active">Work</a>
+                <a href="mods.html">Mods</a>
+                <a href="roblox.html" class="active">Roblox</a>
                 <a href="commissions.html">Commissions</a>
                 <a href="bisecthosting.html">Server Hosting</a>
-                <a href="https://discord.gg/9XY62bv7AY" target="_blank" style="color:var(--text);border:1px solid var(--border);padding:0.4rem 0.9rem;border-radius:5px;font-size:0.82rem;">Discord ↗</a>
+                <a href="https://discord.gg/9XY62bv7AY" target="_blank" rel="noopener" class="nav-cta">Discord</a>
             </nav>
         </div>
     </div>
@@ -814,293 +719,486 @@
 
 <div class="wrapper">
 
-    <div class="split-hero">
+    <section class="split-hero">
         <div class="split-hero-left">
             <p class="hero-eyebrow">Roblox Studio</p>
             <h1>Games &amp;<br><em>experiences</em></h1>
             <p class="hero-sub">Roblox game development showcasing full games, UI, maps, builds, and more!</p>
             <div class="hero-btns">
                 <a href="commissions.html" class="btn-rb">Commission Me</a>
-                <a href="https://discord.com/users/533087848493219851" target="_blank" class="btn-ghost">Discord ↗</a>
+                <a href="https://discord.com/users/533087848493219851" target="_blank" rel="noopener" class="btn-ghost">Discord</a>
             </div>
         </div>
-        <div class="split-hero-right">
-            <div class="rb-badge">
-                <svg width="12" height="12" viewBox="0 0 16 16" fill="none"><rect x="3" y="3" width="10" height="10" rx="2" fill="currentColor"/></svg>
-                Roblox Studio
-            </div>
+        <aside class="split-hero-right">
+            <div class="rb-badge">Roblox Studio</div>
             <div class="stat-stack">
                 <div class="stat-row">
-                    <span class="stat-key">Coding Language</span>
+                    <span class="stat-key">Language</span>
                     <span class="stat-val">Lua</span>
                 </div>
                 <div class="stat-row">
                     <span class="stat-key">Project Types</span>
-                    <span class="stat-val">4</span>
+                    <span class="stat-val white">4</span>
                 </div>
                 <div class="stat-row">
                     <span class="stat-key">Commissions</span>
-                    <span class="stat-val">Open</span>
+                    <span class="stat-val white">Open</span>
                 </div>
                 <div class="stat-row">
                     <span class="stat-key">Response Time</span>
-                    <span class="stat-val">Quick</span>
+                    <span class="stat-val white">Quick</span>
                 </div>
             </div>
-        </div>
-    </div>
+        </aside>
+    </section>
 
-    <div class="page-tab-nav">
-        <button class="page-tab-btn active" data-page="games">Games</button>
-        <button class="page-tab-btn" data-page="gfx">GFX</button>
-        <button class="page-tab-btn" data-page="ui">UI</button>
-        <button class="page-tab-btn" data-page="building">Building</button>
-        <button class="page-tab-btn" data-page="scripting">Scripting</button>
-    </div>
+    <div class="tab-nav" id="tabNav"></div>
 
-    <div class="page-panel active" id="page-games">
+    <div class="tab-panel active" id="tab-games">
 
-        <div class="projects-list" id="projects-list">
+        <div class="games-list" id="games-list"></div>
 
-            <div class="proj-row animate">
-                <div class="proj-thumb">
-                    <img src="img/roblox/guessthelogo.png" alt="Guess The Logo">
-                </div>
-                <div class="proj-info">
-                    <div class="proj-title">Guess The Logo!</div>
-                    <p class="proj-desc">Guess the correct logo! Different stages and categories like Youtubers, Foods, Movies look at the image, type the answer, and progress to the next stage!</p>
-                </div>
-                <div class="proj-meta">
-                    <span class="status-pill"><span class="status-dot live"></span>Released</span>
-                    <a href="https://www.roblox.com/games/89278874006767/Guess-The-Logo" class="proj-action">Play →</a>
-                </div>
+        <div class="what-grid">
+            <div class="what-card">
+                <h4>Full Games</h4>
+                <p>Complete Roblox experiences with polished systems, UI, and gameplay.</p>
             </div>
-
-                     <div class="proj-row animate">
-                       <div class="proj-thumb">
-                           <img src="img/roblox/rateothers.png" alt="Rate Others">
-                        </div>
-                         <div class="proj-info">
-                                                 <div class="proj-title">Rate Others</div>
-                                <p class="proj-desc">Rate other roblox users by typing their names in and writing a review. You also can rate them 1-5 stars and view the global leaderboard to see who is the most liked roblox user!</p>
-                            </div>
-                            <div class="proj-meta">
-                                <span class="status-pill"><span class="status-dot live"></span>Released</span>
-                                <a href="https://www.roblox.com/games/94944750310659/Rate-Others" class="proj-action">Play →</a>
-                            </div>
-                        </div>
-
-        </div>
-
-        <div class="categories-section">
-            <p class="section-eyebrow">What I Do</p>
-            <div class="categories-grid">
-                <div class="cat-card">
-                    <span class="cat-icon">🎮</span>
-                    <div class="cat-title">Games</div>
-                    <p class="cat-desc">Full Roblox experiences with polished systems including UI, Building, Scripting.</p>
-                </div>
-                <div class="cat-card">
-                    <span class="cat-icon">🖥️</span>
-                    <div class="cat-title">UI & Interfaces</div>
-                    <p class="cat-desc">Custom menus, HUDs, shops, and interfaces animated and scaled to fit across all device sizes.</p>
-                </div>
-                <div class="cat-card">
-                    <span class="cat-icon">⚙️</span>
-                    <div class="cat-title">Scripting</div>
-                    <p class="cat-desc">Datastores, leaderstats, monetization, and modular Lua code that's clean and reusable.</p>
-                </div>
-                <div class="cat-card">
-                    <span class="cat-icon">🏗️</span>
-                    <div class="cat-title">Building</div>
-                    <p class="cat-desc">Detailed maps, environments, and buildings built within Roblox Studio.</p>
-                </div>
+            <div class="what-card">
+                <h4>UI & Interfaces</h4>
+                <p>Custom menus, HUDs, shops, and interfaces scaled across all devices.</p>
+            </div>
+            <div class="what-card">
+                <h4>Scripting</h4>
+                <p>Datastores, leaderstats, monetization, and clean modular Lua code.</p>
+            </div>
+            <div class="what-card">
+                <h4>Building</h4>
+                <p>Detailed maps, environments, and structures built in Roblox Studio.</p>
             </div>
         </div>
 
         <div class="cta-bar">
             <div>
-                <h2>Need a Roblox Game built?</h2>
-                <p>I am open for comissions I take games, UI, scripting, and build request. Quick response time and High quality results</p>
+                <h2>Need a Roblox game built?</h2>
+                <p>Open for commissions I can do games, UI, scripting, and builds. Quick turnaround, high quality.</p>
             </div>
             <div class="cta-btns">
                 <a href="commissions.html" class="btn-rb">Commission Me</a>
-                <a href="https://discord.gg/9XY62bv7AY" target="_blank" class="btn-ghost">Join Community ↗</a>
+                <a href="https://discord.gg/9XY62bv7AY" target="_blank" rel="noopener" class="btn-ghost">Discord</a>
             </div>
         </div>
 
     </div>
 
-    <div class="page-panel" id="page-gfx">
-        <div class="gfx-page-body">
+    <div class="tab-panel" id="tab-gfx">
+        <p class="section-label">Icons &nbsp;512 × 512</p>
+        <div class="media-grid-square" id="gfx-icons"></div>
 
-            <p class="gfx-section-label">Icons &nbsp; 512 x 512</p>
-
-            <div class="gfx-icons-grid">
-
-                <div class="gfx-icon-card">
-                    <img class="gfx-icon-img" src="img/gfx/icons/OneShotLogo.png" alt="One Shot Logo" />
-                    <div class="gfx-icon-label">One Shot Logo</div>
-                </div>
-
-            </div>
-
-            <p class="gfx-section-label">Thumbnails &nbsp; 1920 x 1080</p>
-
-            <div class="gfx-thumbs-grid">
-
-                <div class="gfx-thumb-card">
-                    <img class="gfx-thumb-img" src="img/gfx/thumbnails/MiningThumbnail.png" alt="Mining Simulator Thumbnail" />
-                    <div class="gfx-thumb-info">
-                        <span class="gfx-thumb-title">Mining Simulator Thumbnail</span>
-                    </div>
-                </div>
-
-                <div class="gfx-thumb-card">
-                    <img class="gfx-thumb-img" src="img/gfx/thumbnails/DeathNote.png" alt="Death Note Recreation" />
-                    <div class="gfx-thumb-info">
-                        <span class="gfx-thumb-title">Death Note Recreation</span>
-                    </div>
-                </div>
-
-                <div class="gfx-thumb-card">
-                    <img class="gfx-thumb-img" src="img/gfx/thumbnails/OneShotThumbnail.png" alt="One Shot Thumbnail" />
-                    <div class="gfx-thumb-info">
-                        <span class="gfx-thumb-title">One Shot Thumbnail</span>
-                    </div>
-                </div>
-
-                <div class="gfx-thumb-card">
-                    <img class="gfx-thumb-img" src="img/gfx/thumbnails/DeathNoteLSide.png" alt="Death Note Intro Recreation" />
-                    <div class="gfx-thumb-info">
-                        <span class="gfx-thumb-title">Recreating Death Note Intro from L's Perspective</span>
-                    </div>
-                </div>
-
-                <div class="gfx-thumb-card">
-                    <img class="gfx-thumb-img" src="img/gfx/thumbnails/DeathNoteLightSide.png" alt="Death Note Intro Recreation" />
-                    <div class="gfx-thumb-info">
-                        <span class="gfx-thumb-title">Recreating Death Note Intro from Lights Perspective</span>
-                    </div>
-                </div>
-
-
-
-            </div>
-        </div>
+        <p class="section-label" style="margin-top: 32px;">Thumbnails &nbsp;1920 × 1080</p>
+        <div class="media-grid-wide" id="gfx-thumbs"></div>
     </div>
 
-    <div class="page-panel" id="page-ui">
-        <div class="ui-page-body">
-
-            <p class="ui-section-label">UI Work</p>
-
-            <div class="ui-grid">
-
-                <!--                <div class="ui-card">-->
-                <!--                    <img class="ui-card-preview" src="img/ui/example_ui.png" alt="Example UI" />-->
-                <!--                    <div class="ui-card-info">-->
-                <!--                        <div class="ui-card-title">Example UI</div>-->
-                <!--                        <div class="ui-card-desc">Description of UI</div>-->
-                <!--                    </div>-->
-                <!--                </div>-->
-
-            </div>
-
-        </div>
+    <div class="tab-panel" id="tab-ui">
+        <p class="section-label">UI Work</p>
+        <div class="media-grid-wide" id="ui-list"></div>
     </div>
 
-    <div class="page-panel" id="page-building">
-        <div class="gfx-page-body">
-
-            <p class="gfx-section-label">Buildings & Maps &nbsp; 1920 x 1080</p>
-
-            <div class="gfx-thumbs-grid">
-
-                                <div class="gfx-thumb-card">
-                                    <img class="gfx-thumb-img" src="img/building/FloatingIslands.png" alt="Floating Islands" />
-                                    <div class="gfx-thumb-info">
-                                        <span class="gfx-thumb-title">Floating Islands Map</span>
-                                    </div>
-                                </div>
-
-                                <div class="gfx-thumb-card">
-                                    <img class="gfx-thumb-img" src="img/building/Classics.png" alt="Classics" />
-                                    <div class="gfx-thumb-info">
-                                        <span class="gfx-thumb-title">Classics Map</span>
-                                    </div>
-                                </div>
-
-
-                                <div class="gfx-thumb-card">
-                                    <img class="gfx-thumb-img" src="img/building/Forest.png" alt="Forest" />
-                                    <div class="gfx-thumb-info">
-                                        <span class="gfx-thumb-title">Forest Map</span>
-                                    </div>
-                                </div>
-
-                                <div class="gfx-thumb-card">
-                                    <img class="gfx-thumb-img" src="img/building/Ocean.png" alt="Ocean" />
-                                    <div class="gfx-thumb-info">
-                                        <span class="gfx-thumb-title">Ocean Map</span>
-                                    </div>
-                                </div>
-
-                                <div class="gfx-thumb-card">
-                                    <img class="gfx-thumb-img" src="img/building/MilitaryBase.png" alt="Military Base" />
-                                    <div class="gfx-thumb-info">
-                                        <span class="gfx-thumb-title">Military Base Map</span>
-                                    </div>
-                                </div>
-
-            </div>
-
-        </div>
+    <div class="tab-panel" id="tab-building">
+        <p class="section-label">Buildings &amp; Maps</p>
+        <div class="media-grid-wide" id="builds-list"></div>
     </div>
 
-    <div class="page-panel" id="page-scripting">
-        <div class="gfx-page-body">
+    <div class="tab-panel" id="tab-scripting">
+        <p class="section-label">Scripting Work</p>
+        <div class="media-grid-wide" id="scripts-list"></div>
+    </div>
 
-            <p class="gfx-section-label">Scripting Work &nbsp;</p>
-
-            <div class="gfx-thumbs-grid">
-
-                <!--                <div class="gfx-thumb-card">-->
-                <!--                    <img class="gfx-thumb-img" src="img/scripting/script_example.png" alt="Example Script" />-->
-                <!--                    <div class="gfx-thumb-info">-->
-                <!--                        <span class="gfx-thumb-title">Example Script</span>-->
-                <!--                    </div>-->
-                <!--                </div>-->
-
-            </div>
-
-        </div>
+    <div class="tab-panel" id="tab-models">
+        <p class="section-label">3D Models &nbsp;Drag to rotate · Scroll to zoom</p>
+        <div class="models-grid" id="models-list"></div>
     </div>
 
     <footer>
-        <p>© 2025 Mattias15. All rights reserved. (pls don't steal my website 🥹🫰)</p>
+        <p>© <span id="year">2026</span> Mattias15. All rights reserved. (pls don't steal my website 🥹🫰)</p>
         <p>
-            <a href="https://www.curseforge.com/members/mattiasay68/projects" target="_blank" style="color:var(--muted);text-decoration:none;margin-right:1.2rem;">CurseForge</a>
-            <a href="https://modrinth.com/user/mattias15" target="_blank" style="color:var(--muted);text-decoration:none;margin-right:1.2rem;">Modrinth</a>
-            <a href="https://discord.gg/9XY62bv7AY" target="_blank" style="color:var(--muted);text-decoration:none;">Discord</a>
-            <a href="https://www.roblox.com/users/7412182837/profile" target="_blank" style="color:var(--muted);text-decoration:none;margin-left:1.2rem">Roblox Profile</a>
+            <a href="https://www.curseforge.com/members/mattiasay68/projects" target="_blank">CurseForge</a>
+            <a href="https://modrinth.com/user/mattias15" target="_blank">Modrinth</a>
+            <a href="https://discord.gg/9XY62bv7AY" target="_blank">Discord</a>
+            <a href="https://www.roblox.com/users/7412182837/profile" target="_blank">Roblox</a>
         </p>
     </footer>
 
 </div>
 
 <script>
-    const pageTabBtns = document.querySelectorAll('.page-tab-btn');
-    const pagePanels = document.querySelectorAll('.page-panel');
+    window.GAMES = [
+        {
+            thumb: "img/roblox/guessthelogo.png",
+            title: "Guess The Logo!",
+            desc: "Guess the logo! Different stages and categories like Youtubers, Foods, Movies look at the image, type the answer, and progress to the next stage!",
+            status: "live",
+            link: "https://www.roblox.com/games/89278874006767/Guess-The-Logo"
+        },
+        {
+            thumb: "img/roblox/rateothers.png",
+            title: "Rate Others",
+            desc: "Rate other Roblox users by typing their name and writing a review. Rate 1–5 stars and view the global leaderboard to see who is the most liked Roblox user!",
+            status: "live",
+            link: "https://www.roblox.com/games/94944750310659/Rate-Others"
+        },
+    ];
 
-    pageTabBtns.forEach(btn => {
-        btn.addEventListener('click', () => {
-            pageTabBtns.forEach(b => b.classList.remove('active'));
-            pagePanels.forEach(p => p.classList.remove('active'));
-            btn.classList.add('active');
-            document.getElementById('page-' + btn.dataset.page).classList.add('active');
+    window.GFX_ICONS = [
+        { src: "img/gfx/icons/OneShotLogo.png", title: "One Shot Logo" },
+    ];
+
+    window.GFX_THUMBS = [
+        { src: "img/gfx/thumbnails/MiningThumbnail.png",    title: "Mining Simulator Thumbnail" },
+        { src: "img/gfx/thumbnails/DeathNote.png",          title: "Death Note Recreation" },
+        { src: "img/gfx/thumbnails/OneShotThumbnail.png",   title: "One Shot Thumbnail" },
+        { src: "img/gfx/thumbnails/DeathNoteLSide.png",     title: "Recreating Death Note Intro L's Perspective" },
+        { src: "img/gfx/thumbnails/DeathNoteLightSide.png", title: "Recreating Death Note Intro Light's Perspective" },
+    ];
+
+    window.UI_ITEMS = [];
+    window.SCRIPTS  = [];
+
+    window.BUILDS = [
+        { src: "img/building/FloatingIslands.png", title: "Floating Islands Map" },
+        { src: "img/building/Classics.png",        title: "Classics Map" },
+        { src: "img/building/Forest.png",          title: "Forest Map" },
+        { src: "img/building/Ocean.png",           title: "Ocean Map" },
+        { src: "img/building/MilitaryBase.png",    title: "Military Base Map" },
+    ];
+
+    window.MODELS = [
+        { src: "img/models/chicken.obj", title: "Chicken" },
+        { src: "img/models/deathnotebook.obj", title: "Death Note Book" },
+        { src: "img/models/house.obj", title: "House" },
+
+    ];
+
+    var modelsInitialised = false;
+
+    var TABS = [
+        { id: "games",     label: "Games",     count: function() { return window.GAMES.length; } },
+        { id: "gfx",       label: "GFX",       count: function() { return window.GFX_ICONS.length + window.GFX_THUMBS.length; } },
+        { id: "ui",        label: "UI",        count: function() { return window.UI_ITEMS.length; } },
+        { id: "building",  label: "Building",  count: function() { return window.BUILDS.length; } },
+        { id: "scripting", label: "Scripting", count: function() { return window.SCRIPTS.length; } },
+        { id: "models",    label: "Models",    count: function() { return window.MODELS.length; } },
+    ];
+
+    function buildTabs() {
+        var nav = document.getElementById('tabNav');
+        TABS.forEach(function(t, i) {
+            var btn = document.createElement('button');
+            btn.className = 'tab-btn' + (i === 0 ? ' active' : '');
+            btn.dataset.tab = t.id;
+            btn.innerHTML = t.label + ' <span class="tab-count">' + t.count() + '</span>';
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.tab-btn').forEach(function(b) { b.classList.remove('active'); });
+                document.querySelectorAll('.tab-panel').forEach(function(p) { p.classList.remove('active'); });
+                btn.classList.add('active');
+                document.getElementById('tab-' + t.id).classList.add('active');
+
+                // Tell the 3D module to initialise now that the tab is visible
+                if (t.id === 'models' && !modelsInitialised) {
+                    modelsInitialised = true;
+                    document.dispatchEvent(new CustomEvent('models-tab-open'));
+                }
+            });
+            nav.appendChild(btn);
         });
-    });
+    }
+
+    function statusLabel(s) {
+        var map = { live: 'Released', wip: 'In Progress', paused: 'Paused' };
+        return map[s] || s;
+    }
+
+    function buildGames() {
+        var list = document.getElementById('games-list');
+        if (!window.GAMES.length) {
+            list.innerHTML = '<div class="empty-state">No games added yet.</div>';
+            return;
+        }
+        window.GAMES.forEach(function(g) {
+            var row = document.createElement('a');
+            row.className = 'game-row';
+            row.href = g.link;
+            row.target = '_blank';
+            row.innerHTML =
+                '<div class="game-thumb">' +
+                    (g.thumb ? '<img src="' + g.thumb + '" alt="' + g.title + '">' : '<span>' + (g.emoji || '') + '</span>') +
+                '</div>' +
+                '<div class="game-info">' +
+                    '<div class="game-tags"><span class="tag tag-game">Game</span></div>' +
+                    '<div class="game-title">' + g.title + '</div>' +
+                    '<p class="game-desc">' + g.desc + '</p>' +
+                '</div>' +
+                '<div class="game-meta">' +
+                    '<span class="status-pill"><span class="status-dot ' + g.status + '"></span>' + statusLabel(g.status) + '</span>' +
+                    '<span class="play-btn">Play →</span>' +
+                '</div>';
+            list.appendChild(row);
+        });
+    }
+
+    function buildMediaGrid(containerId, items, imgClass, titleKey, descKey) {
+        var el = document.getElementById(containerId);
+        if (!items.length) {
+            el.innerHTML = '<div class="empty-state">Nothing added yet check back soon.</div>';
+            return;
+        }
+        items.forEach(function(item) {
+            var card = document.createElement('div');
+            card.className = 'media-card';
+            card.innerHTML =
+                '<img class="' + imgClass + '" src="' + item.src + '" alt="' + item[titleKey] + '" loading="lazy">' +
+                '<div class="media-card-info">' +
+                    '<div class="media-card-title">' + item[titleKey] + '</div>' +
+                    (item[descKey] ? '<div style="font-size:12px;color:var(--text-subtle);margin-top:3px;">' + item[descKey] + '</div>' : '') +
+                '</div>';
+            el.appendChild(card);
+        });
+    }
+
+    buildTabs();
+    buildGames();
+    buildMediaGrid('gfx-icons',    window.GFX_ICONS,  'square', 'title', 'desc');
+    buildMediaGrid('gfx-thumbs',   window.GFX_THUMBS, 'wide',   'title', 'desc');
+    buildMediaGrid('ui-list',      window.UI_ITEMS,   'wide',   'title', 'desc');
+    buildMediaGrid('builds-list',  window.BUILDS,     'wide',   'title', 'desc');
+    buildMediaGrid('scripts-list', window.SCRIPTS,    'wide',   'title', 'desc');
+</script>
+
+<script type="importmap">
+    {
+        "imports": {
+            "three":         "https://cdn.jsdelivr.net/npm/three@0.163.0/build/three.module.js",
+            "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.163.0/examples/jsm/"
+        }
+    }
+</script>
+
+<script type="module">
+    import * as THREE          from 'three';
+    import { OBJLoader }       from 'three/addons/loaders/OBJLoader.js';
+    import { MTLLoader }       from 'three/addons/loaders/MTLLoader.js';
+    import { OrbitControls }   from 'three/addons/controls/OrbitControls.js';
+    import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
+
+    function initViewer(canvas, wrap, src) {
+        const W = canvas.clientWidth  || 300;
+        const H = canvas.clientHeight || 260;
+
+        const scene    = new THREE.Scene();
+        const camera   = new THREE.PerspectiveCamera(45, W / H, 0.001, 10000);
+        camera.position.set(0, 0, 5);
+
+        const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
+        renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+        renderer.setSize(W, H);
+        renderer.setClearColor(0x000000, 0);
+        renderer.shadowMap.enabled = true;
+        renderer.shadowMap.type     = THREE.PCFSoftShadowMap;
+        // Roblox-style colour management: physically-based lights, sRGB output
+        // and ACES tone mapping so colours read true instead of washed/tinted.
+        renderer.useLegacyLights    = false;
+        renderer.outputColorSpace   = THREE.SRGBColorSpace;
+        renderer.toneMapping        = THREE.ACESFilmicToneMapping;
+        renderer.toneMappingExposure = 1.05;
+
+        // Soft, even ambient from a baked room environment — mimics Roblox's
+        // global illumination and gives plastic surfaces a clean studio sheen.
+        const pmrem = new THREE.PMREMGenerator(renderer);
+        scene.environment = pmrem.fromScene(new RoomEnvironment(), 0.04).texture;
+
+        // Sky/ground hemisphere fill — the cool-sky / warm-ground gradient that
+        // gives Roblox its characteristic bright outdoor ambient.
+        const hemiLight = new THREE.HemisphereLight(0xbcd8ff, 0x97876f, 1.1);
+        scene.add(hemiLight);
+
+        // The "sun": a neutral, slightly warm key light from above.
+        const keyLight = new THREE.DirectionalLight(0xfff5e8, 2.4);
+        keyLight.position.set(5, 8, 6);
+        keyLight.castShadow = true;
+        keyLight.shadow.mapSize.set(1024, 1024);
+        keyLight.shadow.bias = -0.0005;
+        scene.add(keyLight);
+
+        const controls = new OrbitControls(camera, canvas);
+        controls.enableDamping   = true;
+        controls.dampingFactor   = 0.06;
+        controls.autoRotate      = true;
+        controls.autoRotateSpeed = 1.2;
+        controls.minDistance     = 0.5;
+        controls.maxDistance     = 50;
+        controls.enablePan       = false;
+
+        canvas.addEventListener('pointerdown', () => {
+            wrap.classList.add('interacting');
+            controls.autoRotate = false;
+        });
+
+        canvas.addEventListener('pointerup', () => {
+            wrap.classList.remove('interacting');
+            setTimeout(() => { controls.autoRotate = true; }, 2000);
+        });
+
+        const loadingEl = wrap.querySelector('.model-loading');
+        const lastSlash = src.lastIndexOf('/');
+        const basePath  = lastSlash !== -1 ? src.substring(0, lastSlash + 1) : './';
+        const objFile   = lastSlash !== -1 ? src.substring(lastSlash + 1) : src;
+        const mtlFile   = objFile.replace(/\.obj$/i, '.mtl');
+
+        function onLoad(obj) {
+            const box    = new THREE.Box3().setFromObject(obj);
+            const center = box.getCenter(new THREE.Vector3());
+            const size   = box.getSize(new THREE.Vector3());
+            const maxDim = Math.max(size.x, size.y, size.z);
+            const scale  = 3 / maxDim;
+
+            obj.scale.setScalar(scale);
+            obj.position.sub(center.multiplyScalar(scale));
+
+            // Convert every mesh to a matte-plastic PBR material so it reacts to
+            // the environment + sun the way Roblox plastic parts do. Any colour
+            // or texture map from an MTL file is preserved.
+            const toRobloxPlastic = src => {
+                const std = new THREE.MeshStandardMaterial({
+                    color:     0xdcdee2,
+                    roughness: 0.62,
+                    metalness: 0.0,
+                });
+                if (src) {
+                    if (src.color) std.color.copy(src.color);
+                    if (src.map)   { std.map = src.map; std.map.colorSpace = THREE.SRGBColorSpace; }
+                    if (src.transparent) { std.transparent = true; std.opacity = src.opacity; }
+                    if (src.side !== undefined) std.side = src.side;
+                }
+                return std;
+            };
+
+            obj.traverse(child => {
+                if (child.isMesh) {
+                    if (Array.isArray(child.material)) {
+                        child.material = child.material.map(m => toRobloxPlastic(m));
+                    } else {
+                        child.material = toRobloxPlastic(child.material);
+                    }
+                    child.castShadow    = true;
+                    child.receiveShadow = true;
+                }
+            });
+
+            scene.add(obj);
+            if (loadingEl) loadingEl.style.display = 'none';
+
+            const fitted    = new THREE.Box3().setFromObject(obj);
+            const fittedSz  = fitted.getSize(new THREE.Vector3());
+            const fittedMax = Math.max(fittedSz.x, fittedSz.y, fittedSz.z);
+            camera.position.set(0, fittedMax * 0.4, fittedMax * 1.6);
+            camera.lookAt(0, 0, 0);
+            controls.update();
+        }
+
+        function loadObjOnly() {
+            new OBJLoader().load(src, onLoad, null, () => {
+                if (loadingEl) {
+                    loadingEl.innerHTML = '<span style="color:var(--text-subtle);font-size:13px;">Could not load model</span>';
+                }
+            });
+        }
+
+        // Try MTL first for textures, fall back to plain OBJ load
+        const mtlLoader = new MTLLoader();
+        mtlLoader.setPath(basePath);
+        mtlLoader.load(
+            mtlFile,
+            materials => {
+                materials.preload();
+                const objLoader = new OBJLoader();
+                objLoader.setMaterials(materials);
+                objLoader.setPath(basePath);
+                objLoader.load(objFile, onLoad, null, loadObjOnly);
+            },
+            null,
+            () => loadObjOnly()
+        );
+
+        new ResizeObserver(() => {
+            const w = canvas.clientWidth;
+            const h = canvas.clientHeight;
+            if (!w || !h) return;
+            camera.aspect = w / h;
+            camera.updateProjectionMatrix();
+            renderer.setSize(w, h);
+        }).observe(canvas);
+
+        (function animate() {
+            requestAnimationFrame(animate);
+            controls.update();
+            renderer.render(scene, camera);
+        })();
+    }
+
+    function buildModels() {
+        const models = window.MODELS;
+        const grid   = document.getElementById('models-list');
+
+        if (!models || !models.length) {
+            grid.innerHTML = '<div class="empty-state">No models added yet check back soon.</div>';
+            return;
+        }
+
+        models.forEach(m => {
+            const card = document.createElement('div');
+            card.className = 'model-viewer-card';
+
+            const wrap = document.createElement('div');
+            wrap.className = 'model-canvas-wrap';
+
+            const canvas = document.createElement('canvas');
+            canvas.className = 'model-canvas';
+
+            const loadingEl = document.createElement('div');
+            loadingEl.className = 'model-loading';
+            loadingEl.innerHTML = '<div class="model-loading-spinner"></div><span>Loading model…</span>';
+
+            const hint = document.createElement('div');
+            hint.className   = 'model-hint';
+            hint.textContent = 'Drag to rotate · Scroll to zoom';
+
+            wrap.appendChild(canvas);
+            wrap.appendChild(loadingEl);
+            wrap.appendChild(hint);
+
+            const info = document.createElement('div');
+            info.className = 'media-card-info';
+            info.innerHTML = '<div class="media-card-title">' + m.title + '</div>';
+
+            card.appendChild(wrap);
+            card.appendChild(info);
+            grid.appendChild(card);
+
+            // Store src on the canvas so we can init later
+            canvas.dataset.src = m.src;
+        });
+
+        document.addEventListener('models-tab-open', () => {
+            document.querySelectorAll('.model-canvas[data-src]').forEach(canvas => {
+                const wrap = canvas.closest('.model-canvas-wrap');
+                initViewer(canvas, wrap, canvas.dataset.src);
+                delete canvas.dataset.src; // prevent double-init
+            });
+        });
+    }
+
+    buildModels();
+
+    document.getElementById('year').textContent = new Date().getFullYear();
 </script>
 
 </body>

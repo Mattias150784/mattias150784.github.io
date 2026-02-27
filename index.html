@@ -4,204 +4,244 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Mattias15 Mod Developer</title>
-    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Silkscreen:wght@400;700&display=swap" rel="stylesheet" />
     <style>
-        :root {
-          --bg: #0a0b0f;
-          --bg2: #0f1118;
-          --bg3: #161923;
-          --border: rgba(255,255,255,0.07);
-          --text: #e8ecf4;
-          --muted: #7a8499;
-          --mc: #5bdb8a;
-          --mc-dim: rgba(91,219,138,0.12);
-          --rb: #e8613c;
-          --rb-dim: rgba(232,97,60,0.12);
-          --accent: #4f8ef7;
-          --accent-dim: rgba(79,142,247,0.12);
-        }
-
         *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+          --bg: #101410;
+          --bg-2: #141a14;
+          --surface: #181f18;
+          --surface-2: #1e261e;
+          --border: #263026;
+          --border-2: #354235;
+          --text: #eef2ea;
+          --muted: #a3b0a0;
+          --subtle: #6e7d6c;
+          --green: #7cd97f;
+          --green-dark: #0c130c;
+          --green-dim: rgba(124, 217, 127, 0.12);
+          --orange: #ff8c42;
+          --orange-dim: rgba(255, 140, 66, 0.12);
+          --shadow: rgba(0, 0, 0, 0.45);
+          --pixel: 'Silkscreen', monospace;
+        }
 
         html { scroll-behavior: smooth; }
 
         body {
           background: var(--bg);
           color: var(--text);
-          font-family: 'DM Sans', sans-serif;
-          font-weight: 300;
+          font-family: 'Space Grotesk', system-ui, sans-serif;
+          font-size: 15.5px;
           line-height: 1.6;
-          min-height: 100vh;
+          -webkit-font-smoothing: antialiased;
         }
 
-        body::before {
-          content: '';
-          position: fixed;
-          inset: 0;
-          background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
-          pointer-events: none;
-          z-index: 999;
-          opacity: 0.4;
-        }
+        ::selection { background: rgba(124, 217, 127, 0.3); color: var(--text); }
 
         .wrapper {
-          max-width: 1100px;
+          max-width: 1060px;
           margin: 0 auto;
-          padding: 0 2rem;
+          padding: 0 24px;
+        }
+
+        /* Header */
+        .grass-strip {
+          height: 6px;
+          background: repeating-linear-gradient(90deg,
+            #57a64e 0 14px, #4c9245 14px 26px, #67b85a 26px 42px, #3f8c43 42px 54px);
         }
 
         header {
-          border-bottom: 1px solid var(--border);
           position: sticky;
           top: 0;
-          background: rgba(10, 11, 15, 0.92);
-          backdrop-filter: blur(16px);
-          z-index: 100;
+          z-index: 50;
+          border-bottom: 1px solid var(--border);
+          background: rgba(16, 20, 16, 0.85);
+          backdrop-filter: blur(12px);
+          -webkit-backdrop-filter: blur(12px);
         }
 
         .topbar {
           display: flex;
           align-items: center;
           justify-content: space-between;
-          height: 60px;
+          height: 62px;
         }
 
         .logo {
-          font-family: 'Syne', sans-serif;
-          font-weight: 800;
-          font-size: 1.1rem;
-          letter-spacing: -0.02em;
+          font-family: var(--pixel);
+          font-size: 15px;
+          font-weight: 400;
           color: var(--text);
           text-decoration: none;
         }
 
-        .logo span { color: var(--mc); }
+        .logo span { color: var(--green); }
 
-        nav { display: flex; gap: 2rem; align-items: center; }
-
-        nav a {
-          font-size: 0.85rem;
-          font-weight: 400;
-          color: var(--muted);
-          text-decoration: none;
-          letter-spacing: 0.03em;
-          transition: color 0.2s;
-        }
-
-        nav a:hover { color: var(--text); }
-
-        .hero {
-          padding: 5rem 0 4rem;
-          display: grid;
-          grid-template-columns: 1fr auto;
-          gap: 3rem;
-          align-items: end;
-          border-bottom: 1px solid var(--border);
-        }
-
-        .hero-label {
-          font-size: 0.72rem;
-          font-weight: 500;
-          letter-spacing: 0.14em;
-          text-transform: uppercase;
-          color: var(--muted);
-          margin-bottom: 1.2rem;
+        nav {
           display: flex;
           align-items: center;
-          gap: 0.6rem;
+          gap: 8px;
         }
 
-        .hero-label::before {
+        nav a {
+          font-size: 13.5px;
+          font-weight: 600;
+          color: var(--muted);
+          text-decoration: none;
+          padding: 7px 13px;
+          border-radius: 7px;
+          border: 1px solid var(--border);
+          background: var(--surface);
+          white-space: nowrap;
+          transition: color 0.15s, background 0.15s, border-color 0.15s, transform 0.1s;
+        }
+
+        nav a:hover {
+          color: var(--text);
+          background: var(--surface-2);
+          border-color: var(--border-2);
+        }
+
+        nav a.active {
+          color: var(--green);
+          background: var(--green-dim);
+          border-color: rgba(124, 217, 127, 0.35);
+        }
+
+        .nav-cta {
+          color: var(--green-dark) !important;
+          background: var(--green);
+          border-color: transparent;
+          margin-left: 4px;
+          box-shadow: 2px 2px 0 var(--shadow);
+        }
+
+        .nav-cta:hover {
+          background: #93e496;
+          border-color: transparent;
+        }
+
+        .nav-cta:active { transform: translate(1px, 1px); box-shadow: 1px 1px 0 var(--shadow); }
+
+        /* Hero */
+        .hero {
+          position: relative;
+          padding: 84px 0 56px;
+          display: grid;
+          grid-template-columns: 1fr auto;
+          align-items: center;
+          gap: 56px;
+        }
+
+        .hero::before {
           content: '';
-          display: inline-block;
-          width: 20px;
-          height: 1px;
-          background: var(--muted);
+          position: absolute;
+          inset: 0;
+          background-image:
+            linear-gradient(var(--border) 1px, transparent 1px),
+            linear-gradient(90deg, var(--border) 1px, transparent 1px);
+          background-size: 30px 30px;
+          opacity: 0.35;
+          -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,0.9), transparent 85%);
+          mask-image: linear-gradient(to bottom, rgba(0,0,0,0.9), transparent 85%);
+          pointer-events: none;
+        }
+
+        .hero > * { position: relative; }
+
+        .hero-eyebrow {
+          font-family: var(--pixel);
+          font-size: 11px;
+          color: var(--green);
+          letter-spacing: 0.5px;
+          margin-bottom: 20px;
         }
 
         h1 {
-          font-family: 'Syne', sans-serif;
-          font-weight: 800;
-          font-size: clamp(2.6rem, 6vw, 4.8rem);
-          line-height: 1.03;
-          letter-spacing: -0.03em;
+          font-size: clamp(36px, 5.6vw, 60px);
+          font-weight: 700;
+          line-height: 1.05;
+          letter-spacing: -0.02em;
           color: var(--text);
+          margin-bottom: 20px;
         }
 
         h1 em {
           font-style: normal;
-          color: var(--mc);
+          color: var(--green);
         }
 
         .hero-sub {
-          margin-top: 1.5rem;
-          font-size: 1rem;
+          font-size: 16.5px;
           color: var(--muted);
-          max-width: 460px;
-          line-height: 1.75;
+          max-width: 470px;
+          line-height: 1.65;
+          margin-bottom: 30px;
         }
 
         .hero-actions {
-          margin-top: 2.5rem;
           display: flex;
-          gap: 1rem;
+          gap: 12px;
           flex-wrap: wrap;
-          align-items: center;
         }
 
         .btn {
           display: inline-flex;
           align-items: center;
-          gap: 0.5rem;
-          padding: 0.65rem 1.4rem;
-          border-radius: 6px;
-          font-family: 'DM Sans', sans-serif;
-          font-size: 0.88rem;
-          font-weight: 500;
+          gap: 8px;
+          padding: 11px 20px;
+          border-radius: 7px;
+          font-size: 14.5px;
+          font-weight: 700;
+          font-family: inherit;
           text-decoration: none;
           cursor: pointer;
-          transition: all 0.2s;
           border: none;
+          box-shadow: 3px 3px 0 var(--shadow);
+          transition: transform 0.1s, box-shadow 0.1s, background 0.15s;
+          white-space: nowrap;
+          line-height: 1;
         }
+
+        .btn img { width: 17px; height: 17px; }
+
+        .btn:hover { transform: translate(-1px, -1px); box-shadow: 4px 4px 0 var(--shadow); }
+        .btn:active { transform: translate(2px, 2px); box-shadow: 1px 1px 0 var(--shadow); }
 
         .btn-primary {
-          background: var(--mc);
-          color: #071a0f;
+          background: var(--green);
+          color: var(--green-dark);
         }
 
-        .btn-primary:hover {
-          background: #76e8a0;
-          transform: translateY(-1px);
+        .btn-primary:hover { background: #93e496; }
+
+        .btn-orange {
+          background: var(--orange);
+          color: #1c0f05;
         }
 
-        .btn-outline {
-          background: transparent;
+        .btn-orange:hover { background: #ffa266; }
+
+        .btn-ghost {
+          background: var(--surface-2);
           color: var(--text);
-          border: 1px solid var(--border);
-        }
-
-        .btn-outline:hover {
-          border-color: rgba(255,255,255,0.2);
-          background: rgba(255,255,255,0.04);
-        }
-
-        .btn-cf {
-          background: var(--rb);
-          color: white;
-        }
-
-        .btn-cf:hover {
-          background: #f0784d;
-          transform: translateY(-1px);
+          border: 1px solid var(--border-2);
+          box-shadow: 3px 3px 0 var(--shadow);
         }
 
         .hero-avatar {
-          width: 130px;
-          height: 130px;
-          border-radius: 16px;
-          border: 1px solid var(--border);
+          width: 150px;
+          height: 150px;
+          border-radius: 12px;
           overflow: hidden;
-          background: var(--bg3);
+          background: var(--surface);
+          border: 3px solid var(--border-2);
+          box-shadow: 6px 6px 0 var(--shadow);
           flex-shrink: 0;
         }
 
@@ -209,277 +249,254 @@
           width: 100%;
           height: 100%;
           object-fit: cover;
+          display: block;
+          image-rendering: pixelated;
         }
 
+        /* Stats */
         .stats-row {
           display: grid;
           grid-template-columns: repeat(4, 1fr);
-          border-bottom: 1px solid var(--border);
+          gap: 12px;
+          padding: 0 0 8px;
         }
 
         .stat-item {
-          padding: 2rem 0;
-          border-right: 1px solid var(--border);
+          background: var(--surface);
+          border: 1px solid var(--border);
+          border-radius: 10px;
+          padding: 16px 18px;
         }
 
-        .stat-item:last-child { border-right: none; }
-
         .stat-num {
-          font-family: 'Syne', sans-serif;
-          font-size: 2rem;
-          font-weight: 800;
-          color: var(--text);
-          letter-spacing: -0.03em;
+          font-family: var(--pixel);
+          font-size: 20px;
+          color: var(--green);
+          line-height: 1.2;
+          margin-bottom: 4px;
         }
 
         .stat-label {
-          font-size: 0.78rem;
+          font-size: 12.5px;
           color: var(--muted);
-          margin-top: 0.2rem;
-          letter-spacing: 0.04em;
         }
 
+        /* Sections */
         .section-header {
           display: flex;
-          align-items: baseline;
+          align-items: flex-end;
           justify-content: space-between;
-          padding: 3rem 0 2rem;
+          padding: 52px 0 20px;
         }
 
-        .section-title {
-          font-family: 'Syne', sans-serif;
-          font-size: 0.72rem;
+        .section-tag {
+          font-family: var(--pixel);
+          font-size: 10px;
+          color: var(--green);
+          letter-spacing: 1px;
+          display: block;
+          margin-bottom: 6px;
+        }
+
+        .section-tag.orange { color: var(--orange); }
+
+        .section-header h2 {
+          font-size: 26px;
+          font-weight: 700;
+          letter-spacing: -0.01em;
+        }
+
+        .section-link {
+          font-size: 13.5px;
           font-weight: 600;
-          letter-spacing: 0.14em;
-          text-transform: uppercase;
           color: var(--muted);
+          text-decoration: none;
+          border-bottom: 2px solid var(--border-2);
+          padding-bottom: 1px;
+          transition: color 0.15s, border-color 0.15s;
         }
 
-        .platforms {
+        .section-link:hover { color: var(--green); border-color: var(--green); }
+
+        /* Mod grid */
+        .mod-grid {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 12px;
+        }
+
+        .mod-tile {
+          display: flex;
+          align-items: center;
+          gap: 14px;
+          background: var(--surface);
+          border: 1px solid var(--border);
+          border-radius: 10px;
+          padding: 14px 16px;
+          text-decoration: none;
+          color: inherit;
+          transition: transform 0.12s, box-shadow 0.12s, border-color 0.12s;
+        }
+
+        .mod-tile:hover {
+          transform: translate(-2px, -2px);
+          box-shadow: 4px 4px 0 var(--shadow);
+          border-color: var(--border-2);
+        }
+
+        .mod-tile img {
+          width: 48px;
+          height: 48px;
+          border-radius: 8px;
+          border: 1px solid var(--border);
+          background: var(--bg-2);
+          object-fit: cover;
+          flex-shrink: 0;
+        }
+
+        .mod-tile-name {
+          font-size: 15px;
+          font-weight: 600;
+          color: var(--text);
+          line-height: 1.3;
+        }
+
+        .mod-tile-sub {
+          font-size: 12px;
+          color: var(--subtle);
+          margin-top: 2px;
+        }
+
+        /* Roblox cards */
+        .game-grid {
           display: grid;
           grid-template-columns: 1fr 1fr;
-          gap: 1px;
-          background: var(--border);
+          gap: 14px;
+        }
+
+        .game-card {
+          background: var(--surface);
           border: 1px solid var(--border);
           border-radius: 12px;
           overflow: hidden;
-          margin-bottom: 4rem;
-        }
-
-        .platform-card {
-          background: var(--bg2);
-          padding: 2.5rem;
-          position: relative;
-          overflow: hidden;
-          transition: background 0.25s;
-          cursor: default;
-        }
-
-        .platform-card:hover { background: var(--bg3); }
-
-        .platform-card::before {
-          content: '';
-          position: absolute;
-          top: 0; left: 0; right: 0;
-          height: 3px;
-        }
-
-        .platform-card.mc::before { background: var(--mc); }
-        .platform-card.rb::before { background: var(--rb); }
-
-        .platform-tag {
-          display: inline-flex;
-          align-items: center;
-          gap: 0.4rem;
-          padding: 0.3rem 0.7rem;
-          border-radius: 4px;
-          font-size: 0.72rem;
-          font-weight: 500;
-          letter-spacing: 0.06em;
-          text-transform: uppercase;
-          margin-bottom: 1.5rem;
-        }
-
-        .platform-tag.mc { background: var(--mc-dim); color: var(--mc); }
-        .platform-tag.rb { background: var(--rb-dim); color: var(--rb); }
-
-        .platform-card h2 {
-          font-family: 'Syne', sans-serif;
-          font-size: 1.5rem;
-          font-weight: 700;
-          letter-spacing: -0.02em;
-          margin-bottom: 0.8rem;
-        }
-
-        .platform-card p {
-          font-size: 0.9rem;
-          color: var(--muted);
-          line-height: 1.7;
-          margin-bottom: 2rem;
-        }
-
-        .platform-links {
-          display: flex;
-          gap: 0.75rem;
-          flex-wrap: wrap;
-        }
-
-        .pill-link {
-          display: inline-flex;
-          align-items: center;
-          gap: 0.4rem;
-          padding: 0.45rem 1rem;
-          border-radius: 5px;
-          font-size: 0.82rem;
-          font-weight: 500;
-          text-decoration: none;
-          border: 1px solid var(--border);
-          color: var(--text);
-          transition: all 0.2s;
-        }
-
-        .pill-link:hover {
-          border-color: rgba(255,255,255,0.18);
-          background: rgba(255,255,255,0.05);
-        }
-
-        .pill-link svg { flex-shrink: 0; }
-
-        .featured-grid {
-          display: grid;
-          grid-template-columns: 1fr 1fr;
-          gap: 1rem;
-          margin-bottom: 4rem;
-        }
-
-        .project-card {
-          background: var(--bg2);
-          border: 1px solid var(--border);
-          border-radius: 10px;
-          padding: 2rem;
-          display: flex;
-          flex-direction: column;
-          gap: 1rem;
-          transition: all 0.25s;
           text-decoration: none;
           color: inherit;
-          position: relative;
-          overflow: hidden;
+          transition: transform 0.12s, box-shadow 0.12s, border-color 0.12s;
         }
 
-        .project-card::after {
-          content: '';
-          position: absolute;
-          inset: 0;
-          opacity: 0;
-          transition: opacity 0.25s;
-          pointer-events: none;
+        .game-card:hover {
+          transform: translate(-2px, -2px);
+          box-shadow: 5px 5px 0 var(--shadow);
+          border-color: var(--border-2);
         }
 
-        .project-card.mc-card::after { background: var(--mc-dim); }
-        .project-card.rb-card::after { background: var(--rb-dim); }
-
-        .project-card:hover { border-color: rgba(255,255,255,0.14); transform: translateY(-2px); }
-        .project-card:hover::after { opacity: 1; }
-
-        .project-card.featured {
-          grid-column: span 2;
-          display: grid;
-          grid-template-columns: 1fr auto;
-          align-items: start;
+        .game-card img {
+          width: 100%;
+          aspect-ratio: 16 / 9;
+          object-fit: cover;
+          display: block;
+          border-bottom: 1px solid var(--border);
         }
 
-        .project-meta {
-          display: flex;
-          align-items: center;
-          gap: 0.6rem;
-          margin-bottom: 0.5rem;
-        }
+        .game-card-body { padding: 16px 18px 18px; }
 
-        .project-type {
-          font-size: 0.68rem;
-          font-weight: 500;
-          letter-spacing: 0.08em;
-          text-transform: uppercase;
-          color: var(--muted);
-        }
-
-        .dot { color: var(--border); }
-
-        .project-card h3 {
-          font-family: 'Syne', sans-serif;
-          font-size: 1.1rem;
+        .game-card h3 {
+          font-size: 17px;
           font-weight: 700;
-          letter-spacing: -0.01em;
-          color: var(--text);
+          margin-bottom: 6px;
         }
 
-        .project-card.featured h3 { font-size: 1.6rem; }
-
-        .project-card p {
-          font-size: 0.88rem;
+        .game-card p {
+          font-size: 13.5px;
           color: var(--muted);
-          line-height: 1.65;
+          line-height: 1.6;
         }
 
-        .project-badge {
-          display: inline-flex;
-          padding: 0.25rem 0.6rem;
-          border-radius: 3px;
-          font-size: 0.68rem;
-          font-weight: 600;
-          letter-spacing: 0.06em;
-          text-transform: uppercase;
+        /* Featured */
+        .featured-card {
+          display: grid;
+          grid-template-columns: auto 1fr;
+          align-items: center;
+          gap: 28px;
+          background: var(--surface);
+          border: 1px solid var(--border);
+          border-radius: 12px;
+          padding: 28px;
+          text-decoration: none;
+          color: inherit;
+          transition: transform 0.12s, box-shadow 0.12s, border-color 0.12s;
         }
 
-        .badge-mc { background: var(--mc-dim); color: var(--mc); }
-        .badge-rb { background: var(--rb-dim); color: var(--rb); }
-        .badge-flagship { background: rgba(79,142,247,0.15); color: var(--accent); }
+        .featured-card:hover {
+          transform: translate(-2px, -2px);
+          box-shadow: 5px 5px 0 var(--shadow);
+          border-color: var(--border-2);
+        }
 
+        .featured-card > img {
+          width: 110px;
+          height: 110px;
+          border-radius: 12px;
+          border: 2px solid var(--border-2);
+          object-fit: cover;
+        }
+
+        .featured-card h3 {
+          font-size: 23px;
+          font-weight: 700;
+          margin-bottom: 6px;
+        }
+
+        .featured-card p {
+          font-size: 14.5px;
+          color: var(--muted);
+          line-height: 1.6;
+          max-width: 560px;
+        }
+
+        .featured-tag {
+          font-family: var(--pixel);
+          font-size: 10px;
+          color: var(--green);
+          display: inline-block;
+          margin-bottom: 8px;
+        }
+
+        /* Services */
         .services-grid {
           display: grid;
           grid-template-columns: repeat(3, 1fr);
-          gap: 1px;
-          background: var(--border);
-          border: 1px solid var(--border);
-          border-radius: 12px;
-          overflow: hidden;
-          margin-bottom: 4rem;
+          gap: 12px;
         }
 
         .service-card {
-          background: var(--bg2);
-          padding: 2rem;
-          transition: background 0.2s;
-        }
-
-        .service-card:hover { background: var(--bg3); }
-
-        .service-icon {
-          font-size: 1.5rem;
-          margin-bottom: 1rem;
+          background: var(--surface);
+          border: 1px solid var(--border);
+          border-radius: 10px;
+          padding: 22px;
         }
 
         .service-card h4 {
-          font-family: 'Syne', sans-serif;
-          font-size: 0.95rem;
+          font-size: 16px;
           font-weight: 700;
-          margin-bottom: 0.5rem;
+          margin-bottom: 8px;
+          color: var(--text);
         }
 
         .service-card p {
-          font-size: 0.83rem;
+          font-size: 13.5px;
           color: var(--muted);
           line-height: 1.65;
         }
 
+        /* CTA */
         .cta-section {
           border: 1px solid var(--border);
           border-radius: 12px;
-          padding: 3.5rem;
+          padding: 48px 36px;
           text-align: center;
-          background: var(--bg2);
-          margin-bottom: 4rem;
+          background: var(--surface);
+          margin: 48px 0 56px;
           position: relative;
           overflow: hidden;
         }
@@ -487,217 +504,270 @@
         .cta-section::before {
           content: '';
           position: absolute;
-          top: -60px; left: 50%;
-          transform: translateX(-50%);
-          width: 300px; height: 160px;
-          background: radial-gradient(ellipse, rgba(91,219,138,0.12), transparent 70%);
-          pointer-events: none;
+          top: 0; left: 0; right: 0;
+          height: 5px;
+          background: repeating-linear-gradient(90deg,
+            #57a64e 0 14px, #4c9245 14px 26px, #67b85a 26px 42px, #3f8c43 42px 54px);
         }
 
         .cta-section h2 {
-          font-family: 'Syne', sans-serif;
-          font-size: 2rem;
-          font-weight: 800;
-          letter-spacing: -0.03em;
-          margin-bottom: 0.8rem;
+          font-size: 28px;
+          font-weight: 700;
+          letter-spacing: -0.01em;
+          margin-bottom: 10px;
+          color: var(--text);
         }
 
-        .cta-section p {
+        .cta-section > p {
           color: var(--muted);
-          margin-bottom: 2rem;
-          font-size: 0.95rem;
+          font-size: 15px;
+          margin: 0 auto 28px;
+          max-width: 460px;
+          line-height: 1.6;
         }
 
-        .cta-links { display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap; }
+        .cta-links {
+          display: flex;
+          gap: 12px;
+          justify-content: center;
+          flex-wrap: wrap;
+        }
 
+        /* Footer */
         footer {
           border-top: 1px solid var(--border);
-          padding: 2rem 0;
+          padding: 26px 0;
           display: flex;
           justify-content: space-between;
           align-items: center;
         }
 
-        footer p { font-size: 0.8rem; color: var(--muted); }
+        footer p { font-size: 13px; color: var(--subtle); }
 
-        @keyframes fadeUp {
-          from { opacity: 0; transform: translateY(18px); }
-          to   { opacity: 1; transform: translateY(0); }
+        footer a {
+          color: var(--subtle);
+          text-decoration: none;
+          margin-left: 20px;
+          font-size: 13px;
+          font-weight: 600;
+          transition: color 0.15s;
         }
 
-        .hero { animation: fadeUp 0.7s ease both; }
-        .stats-row { animation: fadeUp 0.7s 0.1s ease both; }
+        footer a:hover { color: var(--green); }
 
-        @media (max-width: 700px) {
-          .hero { grid-template-columns: 1fr; }
-          .hero-avatar { width: 90px; height: 90px; }
+        /* Responsive */
+        @media (max-width: 860px) {
+          .mod-grid { grid-template-columns: 1fr 1fr; }
+        }
+
+        @media (max-width: 720px) {
+          .topbar { gap: 12px; }
+          nav { overflow-x: auto; min-width: 0; scrollbar-width: none; }
+          nav::-webkit-scrollbar { display: none; }
+          nav a { padding: 6px 10px; font-size: 12.5px; }
+          .hero { padding: 52px 0 40px; grid-template-columns: 1fr; gap: 32px; }
+          .hero-avatar { width: 96px; height: 96px; order: -1; }
           .stats-row { grid-template-columns: 1fr 1fr; }
-          .stat-item:nth-child(2) { border-right: none; }
-          .platforms { grid-template-columns: 1fr; }
-          .featured-grid { grid-template-columns: 1fr; }
-          .project-card.featured { grid-column: span 1; grid-template-columns: 1fr; }
+          .mod-grid { grid-template-columns: 1fr; }
+          .game-grid { grid-template-columns: 1fr; }
+          .featured-card { grid-template-columns: 1fr; }
           .services-grid { grid-template-columns: 1fr; }
-          nav { display: none; }
-          footer { flex-direction: column; gap: 0.5rem; text-align: center; }
+          .cta-section { padding: 36px 22px; }
+          footer { flex-direction: column; gap: 14px; text-align: center; }
         }
     </style>
 </head>
 <body>
 
+<div class="grass-strip"></div>
+
 <header>
     <div class="wrapper">
         <div class="topbar">
-            <a href="index.html" class="logo">Mattias<span>15</span></a>
+            <a href="index.html" class="logo">mattias<span>15</span></a>
             <nav>
-                <a href="work.html">Work</a>
+                <a href="mods.html">Mods</a>
+                <a href="roblox.html">Roblox</a>
                 <a href="commissions.html">Commissions</a>
                 <a href="bisecthosting.html">Server Hosting</a>
-                <a href="https://discord.gg/9XY62bv7AY" target="_blank" style="color: var(--text); border: 1px solid var(--border); padding: 0.4rem 0.9rem; border-radius: 5px; font-size:0.82rem;">Discord ↗</a>
+                <a href="https://discord.gg/9XY62bv7AY" target="_blank" rel="noopener" class="nav-cta">Discord</a>
             </nav>
         </div>
     </div>
 </header>
 
 <div class="wrapper">
-    <div class="hero">
-        <div>
-            <p class="hero-label">Mod Developer & Creator</p>
-            <h1>Modding your<br>favorite <em>games</em></h1>
+    <section class="hero">
+        <div class="hero-content">
+            <p class="hero-eyebrow">Mod Developer & Creator</p>
+            <h1>Making your<br>favorite <em>games</em></h1>
             <p class="hero-sub">
-                I create unique mods for Minecraft and unique games for Roblox! It varies from smaller projects to large projects!!            </p>
+                I create unique mods for Minecraft and unique games for Roblox! It varies from smaller projects to large projects!!
+            </p>
             <div class="hero-actions">
-                <a href="work.html" class="btn btn-primary">View My Work</a>
-                <a href="https://www.curseforge.com/members/mattiasay68/projects" target="_blank" class="btn btn-cf">CurseForge</a>
-                <a href="https://modrinth.com/user/mattias15" target="_blank" class="btn btn-outline">Modrinth</a>
+                <a href="https://www.curseforge.com/members/mattiasay68/projects" target="_blank" rel="noopener" class="btn btn-orange"><img src="img/platform/curse_forge.png" alt="" />CurseForge</a>
+                <a href="https://modrinth.com/user/mattias15" target="_blank" rel="noopener" class="btn btn-primary"><img src="img/platform/modrinth.png" alt="" />Modrinth</a>
             </div>
         </div>
         <div class="hero-avatar">
             <img src="img/mattias_head.png" alt="Mattias15" />
         </div>
-    </div>
+    </section>
 
     <div class="stats-row">
         <div class="stat-item">
             <div class="stat-num">30+</div>
             <div class="stat-label">Mods Published</div>
         </div>
-        <div class="stat-item" style="padding-left:2rem;">
+        <div class="stat-item">
+            <div class="stat-num">800k+</div>
+            <div class="stat-label">Downloads</div>
+        </div>
+        <div class="stat-item">
             <div class="stat-num">3</div>
             <div class="stat-label">Platforms</div>
         </div>
-        <div class="stat-item" style="padding-left:2rem;">
-            <div class="stat-num">600k+</div>
-            <div class="stat-label">Downloads</div>
-        </div>
-        <div class="stat-item" style="padding-left:2rem;">
+        <div class="stat-item">
             <div class="stat-num">Open</div>
             <div class="stat-label">For Commissions</div>
         </div>
     </div>
 
     <div class="section-header">
-        <span class="section-title">Platforms</span>
-    </div>
-
-    <div class="platforms">
-        <div class="platform-card mc">
-            <div class="platform-tag mc">
-                <svg width="12" height="12" viewBox="0 0 16 16" fill="none"><rect x="1" y="1" width="6" height="6" rx="1" fill="currentColor"/><rect x="9" y="1" width="6" height="6" rx="1" fill="currentColor" opacity=".6"/><rect x="1" y="9" width="6" height="6" rx="1" fill="currentColor" opacity=".6"/><rect x="9" y="9" width="6" height="6" rx="1" fill="currentColor"/></svg>
-                Minecraft
-            </div>
+        <div>
+            <span class="section-tag">MINECRAFT</span>
             <h2>Java Minecraft Mods</h2>
-            <p>Over 3 years of experience in Minecraft Mod Making around 750k downloads total. </p>
-            <div class="platform-links">
-                <a href="https://modrinth.com/user/mattias15" target="_blank" class="pill-link">
-                    <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 010 20M12 2a15.3 15.3 0 000 20"/></svg>
-                    Modrinth
-                </a>
-                <a href="https://www.curseforge.com/members/mattiasay68/projects" target="_blank" class="pill-link">
-                    <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
-                    CurseForge
-                </a>
-                <a href="mods.html" class="pill-link">All Mods →</a>
-            </div>
         </div>
-
-        <div class="platform-card rb">
-            <div class="platform-tag rb">
-                <svg width="12" height="12" viewBox="0 0 16 16" fill="none"><rect x="3" y="3" width="10" height="10" rx="2" fill="currentColor"/></svg>
-                Roblox
-            </div>
-            <h2>Roblox Game Making</h2>
-            <p>New Roblox Game Dev, roughly 10k visits </p>
-            <div class="platform-links">
-                <a href="roblox.html" class="pill-link">
-                    <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
-                    Projects
-                </a>
-                <a href="commissions.html" class="pill-link">Hire Me →</a>
-            </div>
-        </div>
+        <a href="mods.html" class="section-link">All Mods →</a>
     </div>
 
-    <div class="section-header">
-        <span class="section-title">Featured Projects</span>
-        <a href="work.html" style="font-size:0.8rem; color:var(--muted); text-decoration:none;">See all →</a>
-    </div>
-
-    <div class="featured-grid">
-        <div class="project-card featured mc-card">
+    <div class="mod-grid">
+        <a href="mods.html#scorching-desert" class="mod-tile">
+            <img src="img/mods/scorchingdesert.png" alt="Scorching Desert" />
             <div>
-                <div class="project-meta">
-                    <span class="project-badge badge-mc">Minecraft</span>
-                    <span class="project-badge badge-flagship">Mobs Cosmetic</span>
-                </div>
-                <h3>Capybaras+</h3>
-                <p style="margin-top:0.6rem;">Newly made mod that adds Capybaras from real life into Minecraft! Letting you tame then and add cosmetic hats to them!</p>
-                <div style="margin-top:1.5rem; display:flex; gap:0.75rem;">
-                    <a href="https://www.curseforge.com/minecraft/mc-mods/capybaras-mod" target="_blank" class="pill-link">Curseforge ↗</a>
-                    <a href="https://modrinth.com/mod/capybaras" target="_blank" class="pill-link">Modrinth ↗</a>
-                </div>
+                <div class="mod-tile-name">Scorching Desert</div>
+                <div class="mod-tile-sub">Biomes · Mobs · Structures</div>
             </div>
-            <div style="font-size:3.5rem; opacity:0.15; line-height:1; align-self:flex-start;">🐾</div>
-        </div>
-
-        <a href="mods.html" class="project-card mc-card">
-            <div class="project-meta">
-                <span class="project-badge badge-mc">Minecraft</span>
-                <span class="project-type dot">·</span>
-                <span class="project-type">Utility</span>
-            </div>
-            <h3>Custom Mods</h3>
-            <p>Browse the catalogue of mods I have published for Minecraft Java.</p>
         </a>
-
-        <a href="roblox.html" class="project-card rb-card">
-            <div class="project-meta">
-                <span class="project-badge badge-rb">Roblox</span>
-                <span class="project-type dot">·</span>
-                <span class="project-type">Game Dev</span>
+        <a href="mods.html#capybaras" class="mod-tile">
+            <img src="img/mods/capybaras.png" alt="Capybaras Mod" />
+            <div>
+                <div class="mod-tile-name">Capybaras Mod</div>
+                <div class="mod-tile-sub">Mobs · Cosmetics</div>
             </div>
-            <h3>Roblox Projects</h3>
-            <p>Browse the catalogue of Roblox games I have published.</p>
+        </a>
+        <a href="mods.html#cobble-blocks" class="mod-tile">
+            <img src="img/mods/cobbleblocks.png" alt="Cobble Blocks" />
+            <div>
+                <div class="mod-tile-name">Cobble Blocks</div>
+                <div class="mod-tile-sub">Blocks</div>
+            </div>
+        </a>
+        <a href="mods.html#color-expansion" class="mod-tile">
+            <img src="img/mods/colorexpansion.png" alt="Color Expansion" />
+            <div>
+                <div class="mod-tile-name">Color Expansion</div>
+                <div class="mod-tile-sub">Blocks · Decoration</div>
+            </div>
+        </a>
+        <a href="mods.html#miners-dream" class="mod-tile">
+            <img src="img/mods/minersdreamed.png" alt="Miners Dream" />
+            <div>
+                <div class="mod-tile-name">Miners Dream</div>
+                <div class="mod-tile-sub">Mining · Tools</div>
+            </div>
+        </a>
+        <a href="mods.html#mysti-grecia" class="mod-tile">
+            <img src="img/mods/mystigrecia.png" alt="Mysti Grecia" />
+            <div>
+                <div class="mod-tile-name">Mysti Grecia</div>
+                <div class="mod-tile-sub">Mythology · Mobs</div>
+            </div>
+        </a>
+        <a href="mods.html#pedestals" class="mod-tile">
+            <img src="img/mods/pedestals.png" alt="Pedestals" />
+            <div>
+                <div class="mod-tile-name">Pedestals</div>
+                <div class="mod-tile-sub">Decoration · Display</div>
+            </div>
+        </a>
+        <a href="mods.html#pixel-blocks" class="mod-tile">
+            <img src="img/mods/pixelblock.png" alt="Pixel Blocks" />
+            <div>
+                <div class="mod-tile-name">Pixel Blocks</div>
+                <div class="mod-tile-sub">Blocks · Building</div>
+            </div>
+        </a>
+        <a href="mods.html#random-items" class="mod-tile">
+            <img src="img/mods/randomitems.png" alt="Random Items" />
+            <div>
+                <div class="mod-tile-name">Random Items</div>
+                <div class="mod-tile-sub">Items · Fun</div>
+            </div>
         </a>
     </div>
 
     <div class="section-header">
-        <span class="section-title">What I Offer</span>
-        <a href="commissions.html" style="font-size:0.8rem; color:var(--muted); text-decoration:none;">Commissions →</a>
+        <div>
+            <span class="section-tag orange">ROBLOX</span>
+            <h2>Roblox Game Making</h2>
+        </div>
+        <a href="roblox.html" class="section-link">All Projects →</a>
+    </div>
+
+    <div class="game-grid">
+        <a href="https://www.roblox.com/games/89278874006767/Guess-The-Logo" target="_blank" rel="noopener" class="game-card">
+            <img src="img/roblox/guessthelogo.png" alt="Guess The Logo!" />
+            <div class="game-card-body">
+                <h3>Guess The Logo!</h3>
+                <p>Guess the logo! Different stages and categories like Youtubers, Foods, Movies look at the image, type the answer, and progress to the next stage!</p>
+            </div>
+        </a>
+        <a href="https://www.roblox.com/games/94944750310659/Rate-Others" target="_blank" rel="noopener" class="game-card">
+            <img src="img/roblox/rateothers.png" alt="Rate Others" />
+            <div class="game-card-body">
+                <h3>Rate Others</h3>
+                <p>Rate other Roblox users by typing their name and writing a review. Rate 1–5 stars and view the global leaderboard to see who is the most liked Roblox user!</p>
+            </div>
+        </a>
+    </div>
+
+    <div class="section-header">
+        <div>
+            <span class="section-tag">FEATURED</span>
+            <h2>Featured Project</h2>
+        </div>
+    </div>
+
+    <div class="featured">
+        <a href="https://modrinth.com/mod/capybaras" target="_blank" rel="noopener" class="featured-card">
+            <img src="img/mods/capybaras.png" alt="Capybaras+" />
+            <div>
+                <span class="featured-tag">MINECRAFT MOD</span>
+                <h3>Capybaras+</h3>
+                <p>Newly made mod that adds Capybaras from real life into Minecraft! Letting you tame then and add cosmetic hats to them!</p>
+            </div>
+        </a>
+    </div>
+
+    <div class="section-header">
+        <div>
+            <span class="section-tag">COMMISSIONS</span>
+            <h2>What I Offer</h2>
+        </div>
+        <a href="commissions.html" class="section-link">Commissions →</a>
     </div>
 
     <div class="services-grid">
         <div class="service-card">
-            <div class="service-icon">🧩</div>
             <h4>Minecraft Mods</h4>
             <p>Custom Minecraft mods for Java Edition that can be commissioned for private or public use!</p>
         </div>
         <div class="service-card">
-            <div class="service-icon">🎮</div>
             <h4>Roblox Game Making</h4>
             <p>Basic Lua Scripting, UIs and Interface making, Builds, and more!</p>
         </div>
         <div class="service-card">
-            <div class="service-icon">🖥️</div>
             <h4>Server Hosting</h4>
             <p>Need a Minecraft server? Reliable, Bisect Hosting has you covered buy a server from them use my code get 25% off your first month!</p>
         </div>
@@ -708,23 +778,24 @@
         <p>Open for commissions on both Minecraft mods and Roblox projects. Fast response time, high quality results.</p>
         <div class="cta-links">
             <a href="commissions.html" class="btn btn-primary">Commission Me</a>
-            <a href="https://discord.com/users/533087848493219851" target="_blank" class="btn btn-outline">
-                <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M13.545 2.907a13.227 13.227 0 0 0-3.257-1.011.05.05 0 0 0-.052.025c-.141.25-.297.577-.406.833a12.19 12.19 0 0 0-3.658 0 8.258 8.258 0 0 0-.412-.833.051.051 0 0 0-.052-.025c-1.125.194-2.22.534-3.257 1.011a.041.041 0 0 0-.021.018C.356 6.024-.213 9.047.066 12.032c.001.014.01.028.021.037a13.276 13.276 0 0 0 3.995 2.02.05.05 0 0 0 .056-.019c.308-.42.582-.863.818-1.329a.05.05 0 0 0-.01-.059.051.051 0 0 0-.018-.011 8.875 8.875 0 0 1-1.248-.595.05.05 0 0 1-.02-.066.051.051 0 0 1 .015-.019c.084-.063.168-.129.248-.195a.05.05 0 0 1 .051-.007c2.619 1.196 5.454 1.196 8.041 0a.052.052 0 0 1 .053.007c.08.066.164.132.248.195a.051.051 0 0 1-.004.085 8.254 8.254 0 0 1-1.249.594.05.05 0 0 0-.03.03.052.052 0 0 0 .003.041c.24.465.515.909.817 1.329a.05.05 0 0 0 .056.019 13.235 13.235 0 0 0 4.001-2.02.049.049 0 0 0 .021-.037c.334-3.451-.559-6.449-2.366-9.106a.034.034 0 0 0-.02-.019Zm-8.198 7.307c-.789 0-1.438-.724-1.438-1.612 0-.889.637-1.613 1.438-1.613.807 0 1.45.73 1.438 1.613 0 .888-.637 1.612-1.438 1.612Zm5.316 0c-.788 0-1.438-.724-1.438-1.612 0-.889.637-1.613 1.438-1.613.807 0 1.451.73 1.438 1.613 0 .888-.631 1.612-1.438 1.612Z"/></svg>
-                Discord
-            </a>
-            <a href="https://discord.gg/9XY62bv7AY" target="_blank" class="btn btn-outline">Join Community ↗</a>
+            <a href="https://discord.com/users/533087848493219851" target="_blank" rel="noopener" class="btn btn-ghost"><img src="img/platform/discord.png" alt="" />Discord</a>
+            <a href="https://discord.gg/9XY62bv7AY" target="_blank" rel="noopener" class="btn btn-ghost">Join Community</a>
         </div>
     </div>
 
     <footer>
-        <p>© 2025 Mattias15. All rights reserved.</p>
+        <p>© <span id="year">2026</span> Mattias15. All rights reserved.</p>
         <p>
-            <a href="https://www.curseforge.com/members/mattiasay68/projects" target="_blank" style="color:var(--muted); text-decoration:none; margin-right:1.2rem;">CurseForge</a>
-            <a href="https://modrinth.com/user/mattias15" target="_blank" style="color:var(--muted); text-decoration:none; margin-right:1.2rem;">Modrinth</a>
-            <a href="https://discord.gg/9XY62bv7AY" target="_blank" style="color:var(--muted); text-decoration:none;">Discord</a>
+            <a href="https://www.curseforge.com/members/mattiasay68/projects" target="_blank" rel="noopener">CurseForge</a>
+            <a href="https://modrinth.com/user/mattias15" target="_blank" rel="noopener">Modrinth</a>
+            <a href="https://discord.gg/9XY62bv7AY" target="_blank" rel="noopener">Discord</a>
         </p>
     </footer>
 </div>
+
+<script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+</script>
 
 </body>
 </html>

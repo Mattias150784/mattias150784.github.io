@@ -6,22 +6,20 @@
     <title>Mods | Mattias15</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Silkscreen:wght@400;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
     <style>
         :root {
-          --bg: #101410;
-          --bg2: #181f18;
-          --bg3: #1e261e;
-          --border: #263026;
-          --border-hover: #354235;
-          --text: #eef2ea;
-          --muted: #6e7d6c;
-          --muted2: #a3b0a0;
-          --mc: #7cd97f;
-          --mc-dim: rgba(124,217,127,0.12);
-          --shadow: rgba(0, 0, 0, 0.45);
-          --pixel: 'Silkscreen', monospace;
-          --mono: 'Silkscreen', monospace;
+          --bg: #0a0a0b;
+          --bg2: #111114;
+          --bg3: #161619;
+          --border: rgba(255,255,255,0.06);
+          --border-hover: rgba(255,255,255,0.1);
+          --text: #ededf0;
+          --muted: #56565f;
+          --muted2: #8a8a93;
+          --mc: #4ade80;
+          --mc-dim: rgba(74,222,128,0.1);
+          --mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, monospace;
         }
 
         *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
@@ -30,30 +28,24 @@
         body {
           background: var(--bg);
           color: var(--text);
-          font-family: 'Space Grotesk', system-ui, sans-serif;
-          font-size: 15.5px;
+          font-family: 'Inter', system-ui, -apple-system, sans-serif;
+          font-size: 15px;
           font-weight: 400;
           line-height: 1.6;
+          font-feature-settings: 'cv11', 'ss01', 'ss03';
           -webkit-font-smoothing: antialiased;
+          text-rendering: optimizeLegibility;
           min-height: 100vh;
         }
 
-        body::before {
-          content: '';
-          display: block;
-          height: 6px;
-          background: repeating-linear-gradient(90deg,
-            #57a64e 0 14px, #4c9245 14px 26px, #67b85a 26px 42px, #3f8c43 42px 54px);
-        }
+        ::selection { background: rgba(74, 222, 128, 0.25); color: var(--text); }
 
-        ::selection { background: rgba(124, 217, 127, 0.3); color: var(--text); }
-
-        /* Header */
+        /* ── HEADER ── */
         header {
           position: sticky; top: 0; z-index: 200;
-          background: rgba(16, 20, 16, 0.85);
-          backdrop-filter: blur(12px);
-          -webkit-backdrop-filter: blur(12px);
+          background: rgba(10, 10, 11, 0.72);
+          backdrop-filter: saturate(180%) blur(14px);
+          -webkit-backdrop-filter: saturate(180%) blur(14px);
           border-bottom: 1px solid var(--border);
           height: 60px;
           display: flex; align-items: center;
@@ -93,15 +85,14 @@
         }
         .nav-discord {
           margin-left: 4px;
-          color: #0c130c !important;
+          color: #052010 !important;
           background: var(--mc) !important;
           border: 1px solid transparent !important;
           font-weight: 600;
-          box-shadow: 2px 2px 0 var(--shadow);
         }
-        .nav-discord:hover { background: #93e496 !important; }
+        .nav-discord:hover { background: #6ee89a !important; }
 
-        /* Layout */
+        /* ── LAYOUT ── */
         .page-layout { display: flex; min-height: calc(100vh - 56px); }
 
         .sidebar {
@@ -152,7 +143,7 @@
         .sidebar-item.active .sidebar-name { color: var(--text); }
         .sidebar-badge { font-size: 0.6rem; }
 
-        /* Content */
+        /* ── CONTENT ── */
         .content { flex: 1; min-width: 0; }
 
         .mod-section {
@@ -162,7 +153,7 @@
         .mod-section:last-of-type { border-bottom: none; }
         .mod-section-content { max-width: 1040px; padding: 0 2rem; margin: 0 auto; }
 
-        /* Mod hero */
+        /* ── MOD HERO ── */
         .mod-hero {
           display: grid; grid-template-columns: 1fr 270px;
           gap: 0;
@@ -194,16 +185,16 @@
           letter-spacing: 0.06em; text-transform: uppercase;
           margin-bottom: 0.9rem;
         }
-        .status-active   { background: rgba(124,217,127,0.12);  color: #7cd97f; border: 1px solid rgba(124,217,127,0.25); }
+        .status-active   { background: rgba(74,222,128,0.1);  color: #4ade80; border: 1px solid rgba(74,222,128,0.2); }
         .status-paused   { background: rgba(251,191,36,0.1);  color: #fbbf24; border: 1px solid rgba(251,191,36,0.2); }
         .status-discontinued { background: rgba(232,92,92,0.1); color: #e85c5c; border: 1px solid rgba(232,92,92,0.2); }
         .status-dot { width: 5px; height: 5px; border-radius: 50%; }
-        .status-active .status-dot { background: #7cd97f; box-shadow: 0 0 0 3px rgba(124,217,127,0.18); }
+        .status-active .status-dot { background: #4ade80; box-shadow: 0 0 0 3px rgba(74,222,128,0.15); }
         .status-paused .status-dot { background: #fbbf24; }
         .status-discontinued .status-dot { background: #e85c5c; }
 
         h1 {
-          font-family: 'Space Grotesk', system-ui, sans-serif;
+          font-family: 'Inter', system-ui, sans-serif;
           font-weight: 600; font-size: clamp(1.85rem, 3.8vw, 2.75rem);
           line-height: 1.04; letter-spacing: -0.03em;
           margin-bottom: 0.75rem;
@@ -229,24 +220,21 @@
         .dl-btns { display: flex; gap: 0.5rem; flex-wrap: wrap; }
         .dl-btn {
           display: inline-flex; align-items: center; gap: 0.4rem;
-          padding: 0.6rem 1.1rem; border-radius: 7px;
-          font-size: 0.87rem; font-weight: 700;
-          text-decoration: none; font-family: 'Space Grotesk', system-ui, sans-serif;
-          box-shadow: 2px 2px 0 var(--shadow);
-          transition: all 0.12s;
+          padding: 0.55rem 1.1rem; border-radius: 7px;
+          font-size: 0.85rem; font-weight: 500;
+          text-decoration: none; font-family: 'Inter', system-ui, sans-serif;
+          transition: all 0.15s;
         }
-        .dl-btn:hover { transform: translate(-1px, -1px); box-shadow: 3px 3px 0 var(--shadow); }
-        .dl-btn:active { transform: translate(1px, 1px); box-shadow: 1px 1px 0 var(--shadow); }
         .btn-primary {
           background: var(--accent, var(--mc));
-          color: #0c130c;
+          color: #0c0c0e;
         }
         .btn-primary:hover { filter: brightness(1.08); }
         .btn-ghost {
-          background: var(--bg3); color: var(--text);
+          background: transparent; color: var(--text);
           border: 1px solid var(--border-hover);
         }
-        .btn-ghost:hover { border-color: #48584a; background: var(--bg3); }
+        .btn-ghost:hover { border-color: rgba(255,255,255,0.18); background: var(--bg2); }
 
         .mod-icon {
           width: 96px; height: 96px; border-radius: 14px;
@@ -274,7 +262,7 @@
         .bar-paused      { background: rgba(244,185,66,0.08);  border: 1px solid rgba(244,185,66,0.18); color: #f4b942; }
         .bar-discontinued { background: rgba(232,92,92,0.08);  border: 1px solid rgba(232,92,92,0.18); color: #e85c5c; }
 
-        /* Wiki body */
+        /* ── WIKI BODY ── */
         .wiki-body { padding: 2rem 0 3.5rem; }
 
         .tab-nav {
@@ -286,7 +274,7 @@
         .tab-btn {
           padding: 0.6rem 1rem;
           font-size: 0.78rem; font-weight: 400;
-          font-family: 'Space Grotesk', system-ui, sans-serif;
+          font-family: 'Inter', system-ui, sans-serif;
           color: var(--muted); background: transparent; border: none;
           border-bottom: 2px solid transparent;
           cursor: pointer; white-space: nowrap;
@@ -302,16 +290,15 @@
 
         .section-h2,
         .wiki-section h2 {
-          font-family: var(--pixel);
-          font-size: 0.68rem; font-weight: 400;
-          letter-spacing: 1px; text-transform: uppercase;
-          color: var(--accent, var(--mc));
+          font-size: 0.72rem; font-weight: 600;
+          letter-spacing: 0.08em; text-transform: uppercase;
+          color: var(--muted);
           margin-bottom: 1.25rem;
           display: block;
         }
 
         .section-h3 {
-          font-family: 'Space Grotesk', system-ui, sans-serif;
+          font-family: 'Inter', system-ui, sans-serif;
           font-size: 0.95rem; font-weight: 600;
           color: var(--text); margin: 1.85rem 0 0.7rem;
           letter-spacing: -0.015em;
@@ -329,7 +316,7 @@
         ul li { font-size: 0.85rem; color: var(--muted2); line-height: 1.7; margin-bottom: 0.3rem; }
         ul li strong { color: var(--text); font-weight: 500; }
 
-        /* Cat list */
+        /* ── CAT LIST ── */
         .cat-list {
           background: var(--bg2); border: 1px solid var(--border);
           border-radius: 8px; padding: 1rem 1.25rem; margin-top: 0.75rem;
@@ -347,7 +334,7 @@
         .cat-list li:last-child { border-bottom: none; }
         .cat-list li strong { color: var(--text); }
 
-        /* Mobs */
+        /* ── MOBS ── */
         .mob-entry { margin-bottom: 2.25rem; padding-bottom: 2.25rem; border-bottom: 1px solid var(--border); }
         .mob-entry:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
         .mob-images { display: flex; gap: 1rem; margin-bottom: 1rem; flex-wrap: wrap; }
@@ -383,7 +370,7 @@
         }
         .mob-stat-val { font-size: 0.82rem; font-weight: 500; color: var(--text); }
 
-        /* Block list */
+        /* ── BLOCK LIST ── */
         .block-list { display: flex; flex-direction: column; gap: 0.5rem; margin: 0.75rem 0; }
         .block-entry {
           display: flex; align-items: center; gap: 1rem;
@@ -402,7 +389,7 @@
         .block-entry-body p { font-size: 0.8rem; margin: 0; color: var(--muted2); }
         .item-sm img { width: 44px; height: 44px; }
 
-        /* Daggers */
+        /* ── DAGGERS ── */
         .dagger-entry {
           display: flex; gap: 1.25rem; align-items: flex-start;
           background: var(--bg2); border: 1px solid var(--border);
@@ -425,7 +412,7 @@
         .dagger-enchants { font-size: 0.75rem; color: var(--muted2); line-height: 1.6; }
         .dagger-enchants strong { color: var(--text); }
 
-        /* Structures */
+        /* ── STRUCTURES ── */
         .structure-entry { margin-bottom: 2.25rem; padding-bottom: 2.25rem; border-bottom: 1px solid var(--border); }
         .structure-entry:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
         .slideshow-wrap { display: grid; grid-template-columns: 1fr 240px; gap: 1.25rem; align-items: flex-start; }
@@ -438,7 +425,7 @@
         .slide:not(:first-child) { opacity: 0; }
         .structure-info ul { margin-top: 0.4rem; }
 
-        /* Feature entries */
+        /* ── FEATURE ENTRIES ── */
         .feature-entry { display: flex; gap: 1.25rem; align-items: flex-start; margin-bottom: 1.25rem; flex-wrap: wrap; }
         .feature-entry img {
           width: 160px; height: 110px; object-fit: cover;
@@ -447,7 +434,7 @@
         .feature-entry h4 { font-size: 0.87rem; font-weight: 600; margin-bottom: 0.35rem; color: var(--text); }
         .feature-entry p { margin: 0; }
 
-        /* Feat cards */
+        /* ── FEAT CARDS ── */
         .feat-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.75rem; }
         .feat-card {
           background: var(--bg2); border: 1px solid var(--border);
@@ -476,7 +463,7 @@
           font-family: var(--mono);
         }
 
-        /* Steps */
+        /* ── STEPS ── */
         .steps { display: flex; flex-direction: column; gap: 0.4rem; }
         .step-item {
           display: flex; gap: 1rem; align-items: flex-start;
@@ -492,7 +479,7 @@
         .step-item h4 { font-size: 0.83rem; font-weight: 600; margin-bottom: 0.15rem; color: var(--text); }
         .step-item p { font-size: 0.78rem; color: var(--muted2); line-height: 1.6; margin: 0; }
 
-        /* Variants */
+        /* ── VARIANTS ── */
         .variants-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 0.5rem; margin-top: 0.75rem; }
         .variant-card {
           background: var(--bg2); border: 1px solid var(--border);
@@ -507,7 +494,7 @@
         }
         .variant-card .vname { font-size: 0.76rem; font-weight: 500; color: var(--muted2); }
 
-        /* Armor table */
+        /* ── ARMOR TABLE ── */
         .armor-table { width: 100%; border-collapse: collapse; margin-top: 0.75rem; }
         .armor-table th {
           font-family: var(--mono);
@@ -527,7 +514,7 @@
         .tier-gold   { background: rgba(212,160,23,0.1);  color: #d4a017; border: 1px solid rgba(212,160,23,0.18); }
         .tier-diamond { background: rgba(79,200,220,0.1); color: #4fc8dc; border: 1px solid rgba(79,200,220,0.18); }
 
-        /* Tag cloud */
+        /* ── TAG CLOUD ── */
         .tag-cloud { display: flex; flex-wrap: wrap; gap: 0.35rem; }
         .tag {
           padding: 0.25rem 0.6rem;
@@ -537,7 +524,7 @@
           font-size: 0.7rem; font-weight: 400; color: var(--accent, var(--mc));
         }
 
-        /* Code block */
+        /* ── CODE BLOCK ── */
         .code-block {
           background: var(--bg3); border: 1px solid var(--border);
           border-radius: 5px; padding: 0.65rem 0.9rem;
@@ -545,7 +532,7 @@
           font-size: 0.82rem; color: var(--accent, var(--mc)); margin: 0.65rem 0;
         }
 
-        /* Footer */
+        /* ── FOOTER ── */
         footer {
           border-top: 1px solid var(--border);
           padding: 1.75rem 2rem;
@@ -558,7 +545,7 @@
           to   { opacity: 1; transform: translateY(0); }
         }
 
-        /* Responsive */
+        /* ── RESPONSIVE ── */
         @media (max-width: 960px) {
           .sidebar { display: none; }
           .mod-hero { grid-template-columns: 1fr; }
@@ -616,7 +603,7 @@
                         <div class="stat-row"><span class="stat-key">Focus</span><span class="stat-val">Desert Expansion</span></div>
                         <div class="stat-row"><span class="stat-key">Version</span><span class="stat-val">1.20.1</span></div>
                         <div class="stat-row"><span class="stat-key">Type</span><span class="stat-val">Biomes + Mobs</span></div>
-                        <div class="stat-row"><span class="stat-key">Status</span><span class="stat-val" style="color:#7cd97f">Active</span></div>
+                        <div class="stat-row"><span class="stat-key">Status</span><span class="stat-val" style="color:#4ade80">Active</span></div>
                     </div>
                 </div>
                 <div class="wiki-body">
@@ -846,7 +833,7 @@
                         <div class="stat-row"><span class="stat-key">Tamed With</span><span class="stat-val">Sugar Cane</span></div>
                         <div class="stat-row"><span class="stat-key">Variants</span><span class="stat-val">10+</span></div>
                         <div class="stat-row"><span class="stat-key">Version</span><span class="stat-val">Forge 1.20.1</span></div>
-                        <div class="stat-row"><span class="stat-key">Status</span><span class="stat-val" style="color:#7cd97f">Active</span></div>
+                        <div class="stat-row"><span class="stat-key">Status</span><span class="stat-val" style="color:#4ade80">Active</span></div>
                     </div>
                 </div>
                 <div class="wiki-body">
@@ -1265,7 +1252,7 @@
         </section>
 
         <footer>
-            <p>© <span id="year">2026</span> Mattias15. All rights reserved. (pls don't steal my website 🥹🫰)</p>
+            <p>© 2025 Mattias15. All rights reserved. (pls don't steal my website 🥹🫰)</p>
             <p>
                 <a href="https://www.curseforge.com/members/mattiasay68/projects" target="_blank" style="color:var(--muted);text-decoration:none;margin-right:1.2rem;">CurseForge</a>
                 <a href="https://modrinth.com/user/mattias15" target="_blank" style="color:var(--muted);text-decoration:none;margin-right:1.2rem;">Modrinth</a>
@@ -1402,23 +1389,18 @@
       }, 5000);
     }
 
-    function makeSlideshow(id, interval) {
-      const el = document.getElementById(id);
-      if (!el) return;
-      const slides = el.querySelectorAll('.slide');
-      if (slides.length < 2) return;
-      let si = 0;
+    function makeSlideshow(id) {
+      const slides = document.querySelectorAll('#' + id + ' .slide');
+      if (!slides.length) return;
+      let cur = 0;
       setInterval(() => {
-        slides[si].style.opacity = 0;
-        si = (si + 1) % slides.length;
-        slides[si].style.opacity = 1;
-      }, interval || 4000);
+        slides[cur].style.opacity = 0;
+        cur = (cur + 1) % slides.length;
+        slides[cur].style.opacity = 1;
+      }, 3000);
     }
-
     makeSlideshow('ss-temple');
     makeSlideshow('ss-red-temple');
-
-    document.getElementById('year').textContent = new Date().getFullYear();
 </script>
 
 </body>
